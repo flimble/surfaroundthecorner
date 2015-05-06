@@ -9,17 +9,17 @@ angular.module('waves').config(['$stateProvider',
 			url: '/waves',
 			templateUrl: 'modules/waves/views/list-waves.client.view.html'
 		}).
-		state('createWafe', {
+		state('createWave', {
 			url: '/waves/create',
-			templateUrl: 'modules/waves/views/create-wafe.client.view.html'
+			templateUrl: 'modules/waves/views/create-wave.client.view.html'
 		}).
-		state('viewWafe', {
-			url: '/waves/:wafeId',
-			templateUrl: 'modules/waves/views/view-wafe.client.view.html'
+		state('viewWave', {
+			url: '/waves/:waveId',
+			templateUrl: 'modules/waves/views/view-wave.client.view.html'
 		}).
-		state('editWafe', {
-			url: '/waves/:wafeId/edit',
-			templateUrl: 'modules/waves/views/edit-wafe.client.view.html'
+		state('editWave', {
+			url: '/waves/:waveId/edit',
+			templateUrl: 'modules/waves/views/edit-wave.client.view.html'
 		});
 	}
 ]);

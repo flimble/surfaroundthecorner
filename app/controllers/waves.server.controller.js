@@ -5,7 +5,7 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
-	wave = mongoose.model('Wave'),
+	Wave = mongoose.model('Wave'),
 	_ = require('lodash');
 
 /**
@@ -13,8 +13,6 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
 	var wave = new Wave(req.body);
-	wave.user = req.user;
-
 	wave.save(function(err) {
 		if (err) {
 			return res.status(400).send({
