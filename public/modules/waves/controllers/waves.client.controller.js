@@ -5,15 +5,15 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
 	function($scope, $stateParams, $location, Authentication, Waves) {
 		$scope.authentication = Authentication;
 
-		// Create new Wafe
+		// Create new Wave
 		$scope.create = function() {
-			// Create new Wafe object
-			var wafe = new Waves ({
+			// Create new Wave object
+			var wave = new Waves ({
 				name: this.name
 			});
 
 			// Redirect after save
-			wafe.$save(function(response) {
+			wave.$save(function(response) {
 				$location.path('waves/' + response._id);
 
 				// Clear form fields
@@ -23,29 +23,29 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
 			});
 		};
 
-		// Remove existing Wafe
-		$scope.remove = function(wafe) {
-			if ( wafe ) { 
-				wafe.$remove();
+		// Remove existing Wave
+		$scope.remove = function(wave) {
+			if ( wave ) { 
+				wave.$remove();
 
 				for (var i in $scope.waves) {
-					if ($scope.waves [i] === wafe) {
+					if ($scope.waves [i] === wave) {
 						$scope.waves.splice(i, 1);
 					}
 				}
 			} else {
-				$scope.wafe.$remove(function() {
+				$scope.wave.$remove(function() {
 					$location.path('waves');
 				});
 			}
 		};
 
-		// Update existing Wafe
+		// Update existing Wave
 		$scope.update = function() {
-			var wafe = $scope.wafe;
+			var wave = $scope.wave;
 
-			wafe.$update(function() {
-				$location.path('waves/' + wafe._id);
+			wave.$update(function() {
+				$location.path('waves/' + wave._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -56,10 +56,10 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
 			$scope.waves = Waves.query();
 		};
 
-		// Find existing Wafe
+		// Find existing Wave
 		$scope.findOne = function() {
-			$scope.wafe = Waves.get({ 
-				wafeId: $stateParams.wafeId
+			$scope.wave = Waves.get({ 
+				waveId: $stateParams.waveId
 			});
 		};
 	}

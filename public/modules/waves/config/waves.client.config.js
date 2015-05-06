@@ -6,6 +6,6 @@ angular.module('waves').run(['Menus',
 		// Set top bar menu items
 		Menus.addMenuItem('topbar', 'Waves', 'waves', 'dropdown', '/waves(/create)?');
 		Menus.addSubMenuItem('topbar', 'waves', 'List Waves', 'waves');
-		Menus.addSubMenuItem('topbar', 'waves', 'New Wafe', 'waves/create');
+		Menus.addSubMenuItem('topbar', 'waves', 'New Wave', 'waves/create');
 	}
 ]);
