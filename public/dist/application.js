@@ -55,6 +55,10 @@ ApplicationConfiguration.registerModule('core');
 ApplicationConfiguration.registerModule('users');
 'use strict';
 
+// Use application configuration module to register a new module
+ApplicationConfiguration.registerModule('waves');
+'use strict';
+
 // Configuring the Articles module
 angular.module('articles').run(['Menus',
 	function(Menus) {
@@ -614,6 +618,120 @@ angular.module('users').factory('Authentication', [
 angular.module('users').factory('Users', ['$resource',
 	function($resource) {
 		return $resource('users', {}, {
+			update: {
+				method: 'PUT'
+			}
+		});
+	}
+]);
+'use strict';
+
+// Configuring the Articles module
+angular.module('waves').run(['Menus',
+	function(Menus) {
+		// Set top bar menu items
+		Menus.addMenuItem('topbar', 'Waves', 'waves', 'dropdown', '/waves(/create)?');
+		Menus.addSubMenuItem('topbar', 'waves', 'List Waves', 'waves');
+		Menus.addSubMenuItem('topbar', 'waves', 'New Wave', 'waves/create');
+	}
+]);
+'use strict';
+
+//Setting up route
+angular.module('waves').config(['$stateProvider',
+	function($stateProvider) {
+		// Waves state routing
+		$stateProvider.
+		state('listWaves', {
+			url: '/waves',
+			templateUrl: 'modules/waves/views/list-waves.client.view.html'
+		}).
+		state('createWave', {
+			url: '/waves/create',
+			templateUrl: 'modules/waves/views/create-wave.client.view.html'
+		}).
+		state('viewWave', {
+			url: '/waves/:waveId',
+			templateUrl: 'modules/waves/views/view-wave.client.view.html'
+		}).
+		state('editWave', {
+			url: '/waves/:waveId/edit',
+			templateUrl: 'modules/waves/views/edit-wave.client.view.html'
+		});
+	}
+]);
+'use strict';
+
+// Waves controller
+angular.module('waves').controller('WavesController', ['$scope', '$stateParams', '$location', 'Waves',
+	function($scope, $stateParams, $location, Waves) {
+
+		// Create new Wave
+		$scope.create = function() {
+			// Create new Wave object
+			var wave = new Waves ({
+				name: this.name
+			});
+
+			// Redirect after save
+			wave.$save(function(response) {
+				$location.path('waves/' + response._id);
+
+				// Clear form fields
+				$scope.name = '';
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		// Remove existing Wave
+		$scope.remove = function(wave) {
+			if ( wave ) { 
+				wave.$remove();
+
+				for (var i in $scope.waves) {
+					if ($scope.waves [i] === wave) {
+						$scope.waves.splice(i, 1);
+					}
+				}
+			} else {
+				$scope.wave.$remove(function() {
+					$location.path('waves');
+				});
+			}
+		};
+
+		// Update existing Wave
+		$scope.update = function() {
+			var wave = $scope.wave;
+
+			wave.$update(function() {
+				$location.path('waves/' + wave._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		// Find a list of Waves
+		$scope.find = function() {
+			$scope.waves = Waves.query();
+		};
+
+		// Find existing Wave
+		$scope.findOne = function() {
+			$scope.wave = Waves.get({ 
+				waveId: $stateParams.waveId
+			});
+		};
+	}
+]);
+'use strict';
+
+//Waves service used to communicate Waves REST endpoints
+angular.module('waves').factory('Waves', ['$resource',
+	function($resource) {
+		return $resource('waves/:waveId', { waveId: '@_id'
+		}, {
 			update: {
 				method: 'PUT'
 			}

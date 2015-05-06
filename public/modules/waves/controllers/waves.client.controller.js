@@ -1,9 +1,8 @@
 'use strict';
 
 // Waves controller
-angular.module('waves').controller('WavesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Waves',
-	function($scope, $stateParams, $location, Authentication, Waves) {
-		$scope.authentication = Authentication;
+angular.module('waves').controller('WavesController', ['$scope', '$stateParams', '$location', 'Waves',
+	function($scope, $stateParams, $location, Waves) {
 
 		// Create new Wave
 		$scope.create = function() {

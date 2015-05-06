@@ -6,17 +6,17 @@
 var should = require('should'),
 	mongoose = require('mongoose'),
 	User = mongoose.model('User'),
-	Wafe = mongoose.model('Wafe');
+	Wave = mongoose.model('Wave');
 
 /**
  * Globals
  */
-var user, wafe;
+var user, wave;
 
 /**
  * Unit tests
  */
-describe('Wafe Model Unit Tests:', function() {
+describe('Wave Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		user = new User({
 			firstName: 'Full',
@@ -28,8 +28,8 @@ describe('Wafe Model Unit Tests:', function() {
 		});
 
 		user.save(function() { 
-			wafe = new Wafe({
-				name: 'Wafe Name',
+			wave = new Wave({
+				name: 'Wave Name',
 				user: user
 			});
 
@@ -39,16 +39,16 @@ describe('Wafe Model Unit Tests:', function() {
 
 	describe('Method Save', function() {
 		it('should be able to save without problems', function(done) {
-			return wafe.save(function(err) {
+			return wave.save(function(err) {
 				should.not.exist(err);
 				done();
 			});
 		});
 
 		it('should be able to show an error when try to save without name', function(done) { 
-			wafe.name = '';
+			wave.name = '';
 
-			return wafe.save(function(err) {
+			return wave.save(function(err) {
 				should.exist(err);
 				done();
 			});
@@ -56,7 +56,7 @@ describe('Wafe Model Unit Tests:', function() {
 	});
 
 	afterEach(function(done) { 
-		Wafe.remove().exec();
+		Wave.remove().exec();
 		User.remove().exec();
 
 		done();

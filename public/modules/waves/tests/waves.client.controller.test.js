@@ -50,14 +50,14 @@
 			});
 		}));
 
-		it('$scope.find() should create an array with at least one Wafe object fetched from XHR', inject(function(Waves) {
-			// Create sample Wafe using the Waves service
-			var sampleWafe = new Waves({
-				name: 'New Wafe'
+		it('$scope.find() should create an array with at least one Wave object fetched from XHR', inject(function(Waves) {
+			// Create sample Wave using the Waves service
+			var sampleWave = new Waves({
+				name: 'New Wave'
 			});
 
-			// Create a sample Waves array that includes the new Wafe
-			var sampleWaves = [sampleWafe];
+			// Create a sample Waves array that includes the new Wave
+			var sampleWaves = [sampleWave];
 
 			// Set GET response
 			$httpBackend.expectGET('waves').respond(sampleWaves);
@@ -70,43 +70,43 @@
 			expect(scope.waves).toEqualData(sampleWaves);
 		}));
 
-		it('$scope.findOne() should create an array with one Wafe object fetched from XHR using a wafeId URL parameter', inject(function(Waves) {
-			// Define a sample Wafe object
-			var sampleWafe = new Waves({
-				name: 'New Wafe'
+		it('$scope.findOne() should create an array with one Wave object fetched from XHR using a waveId URL parameter', inject(function(Waves) {
+			// Define a sample Wave object
+			var sampleWave = new Waves({
+				name: 'New Wave'
 			});
 
 			// Set the URL parameter
-			$stateParams.wafeId = '525a8422f6d0f87f0e407a33';
+			$stateParams.waveId = '525a8422f6d0f87f0e407a33';
 
 			// Set GET response
-			$httpBackend.expectGET(/waves\/([0-9a-fA-F]{24})$/).respond(sampleWafe);
+			$httpBackend.expectGET(/waves\/([0-9a-fA-F]{24})$/).respond(sampleWave);
 
 			// Run controller functionality
 			scope.findOne();
 			$httpBackend.flush();
 
 			// Test scope value
-			expect(scope.wafe).toEqualData(sampleWafe);
+			expect(scope.wave).toEqualData(sampleWave);
 		}));
 
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Waves) {
-			// Create a sample Wafe object
-			var sampleWafePostData = new Waves({
-				name: 'New Wafe'
+			// Create a sample Wave object
+			var sampleWavePostData = new Waves({
+				name: 'New Wave'
 			});
 
-			// Create a sample Wafe response
-			var sampleWafeResponse = new Waves({
+			// Create a sample Wave response
+			var sampleWaveResponse = new Waves({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Wafe'
+				name: 'New Wave'
 			});
 
 			// Fixture mock form input values
-			scope.name = 'New Wafe';
+			scope.name = 'New Wave';
 
 			// Set POST response
-			$httpBackend.expectPOST('waves', sampleWafePostData).respond(sampleWafeResponse);
+			$httpBackend.expectPOST('waves', sampleWavePostData).respond(sampleWaveResponse);
 
 			// Run controller functionality
 			scope.create();
@@ -115,19 +115,19 @@
 			// Test form inputs are reset
 			expect(scope.name).toEqual('');
 
-			// Test URL redirection after the Wafe was created
-			expect($location.path()).toBe('/waves/' + sampleWafeResponse._id);
+			// Test URL redirection after the Wave was created
+			expect($location.path()).toBe('/waves/' + sampleWaveResponse._id);
 		}));
 
-		it('$scope.update() should update a valid Wafe', inject(function(Waves) {
-			// Define a sample Wafe put data
-			var sampleWafePutData = new Waves({
+		it('$scope.update() should update a valid Wave', inject(function(Waves) {
+			// Define a sample Wave put data
+			var sampleWavePutData = new Waves({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Wafe'
+				name: 'New Wave'
 			});
 
-			// Mock Wafe in scope
-			scope.wafe = sampleWafePutData;
+			// Mock Wave in scope
+			scope.wave = sampleWavePutData;
 
 			// Set PUT response
 			$httpBackend.expectPUT(/waves\/([0-9a-fA-F]{24})$/).respond();
@@ -137,23 +137,23 @@
 			$httpBackend.flush();
 
 			// Test URL location to new object
-			expect($location.path()).toBe('/waves/' + sampleWafePutData._id);
+			expect($location.path()).toBe('/waves/' + sampleWavePutData._id);
 		}));
 
-		it('$scope.remove() should send a DELETE request with a valid wafeId and remove the Wafe from the scope', inject(function(Waves) {
-			// Create new Wafe object
-			var sampleWafe = new Waves({
+		it('$scope.remove() should send a DELETE request with a valid waveId and remove the Wave from the scope', inject(function(Waves) {
+			// Create new Wave object
+			var sampleWave = new Waves({
 				_id: '525a8422f6d0f87f0e407a33'
 			});
 
-			// Create new Waves array and include the Wafe
-			scope.waves = [sampleWafe];
+			// Create new Waves array and include the Wave
+			scope.waves = [sampleWave];
 
 			// Set expected DELETE response
 			$httpBackend.expectDELETE(/waves\/([0-9a-fA-F]{24})$/).respond(204);
 
 			// Run controller functionality
-			scope.remove(sampleWafe);
+			scope.remove(sampleWave);
 			$httpBackend.flush();
 
 			// Test array after successful delete

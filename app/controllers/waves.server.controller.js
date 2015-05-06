@@ -70,8 +70,9 @@ exports.delete = function(req, res) {
 /**
  * List of Waves
  */
-exports.list = function(req, res) { 
-	wave.find().sort('Name').exec(function(err, waves) {
+exports.list = function(req, res) {
+
+	Wave.find().sort('Name').exec(function(err, waves) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -86,7 +87,7 @@ exports.list = function(req, res) {
  * wave middleware
  */
 exports.waveByID = function(req, res, next, id) { 
-	wave.findById(id).populate('user', 'displayName').exec(function(err, wave) {
+	Wave.findById(id).populate('user', 'displayName').exec(function(err, wave) {
 		if (err) return next(err);
 		if (! wave) return next(new Error('Failed to load wave ' + id));
 		req.wave = wave ;
