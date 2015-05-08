@@ -20,6 +20,10 @@ angular.module('waves').config(['$stateProvider',
 		state('editWave', {
 			url: '/waves/:waveId/edit',
 			templateUrl: 'modules/waves/views/edit-wave.client.view.html'
+		}).
+		state('listWaves', {
+				url: '/waves/findmynearest',
+				templateUrl: 'modules/waves/views/findmynearest-waves.client.view.html'
 		});
 	}
 ]);

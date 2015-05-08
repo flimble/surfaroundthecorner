@@ -4,14 +4,14 @@
     </div>
     <div class="list-group">
         <a data-ng-repeat="wave in waves" data-ng-href="#!/waves/{{wave._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				<span data-ng-bind="wave.Name"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="wave.Name"></h4>
+            <small class="list-group-item-text">
+                <span data-ng-bind="wave.Name"></span>
+            </small>
+            <h4 class="list-group-item-heading" data-ng-bind="wave.Name"></h4>
         </a>
         hello world
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!waves.$resolved || waves.length">
-    	No Waves yet, why don't you <a href="/#!/waves/create">create one</a>?
+        No Waves yet, why don't you <a href="/#!/waves/create">create one</a>?
     </div>
 </section>
