@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/surfaroundthecorner',
+	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://app:app@ds037387.mongolab.com:37387/surfaroundthecorner',
 	assets: {
 		lib: {
 			css: [
