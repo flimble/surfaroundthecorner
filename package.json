@@ -9,9 +9,8 @@
   },
   "scripts": {
     "start": "node server.js",
-    "build": "HOME=$HOME/app-root/runtime bower install --config.interactive=false && grunt build",
     "test": "grunt test",
-    "postinstall": "bower install --config.interactive=false"
+    "postinstall": "HOME=$HOME/app-root/runtime bower install --config.interactive=false && grunt build"
   },
   "dependencies": {
     "async": "~0.9.0",
