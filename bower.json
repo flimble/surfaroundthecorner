@@ -1,6 +1,9 @@
 {
 	"name": "surfaroundthecorner",
 	"version": "0.0.1",
+  	"engines": {
+		"npm": "2.9.x"
+ 	 },
 	"description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js",
 	"dependencies": {
 		"bootstrap": "~3",
