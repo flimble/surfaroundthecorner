@@ -633,8 +633,10 @@ angular.module('waves').run(['Menus',
 		Menus.addMenuItem('topbar', 'Waves', 'waves', 'dropdown', '/waves(/create)?');
 		Menus.addSubMenuItem('topbar', 'waves', 'List Waves', 'waves');
 		Menus.addSubMenuItem('topbar', 'waves', 'New Wave', 'waves/create');
+		Menus.addSubMenuItem('topbar', 'waves', 'Find My Nearest', 'waves/findmynearest');
 	}
 ]);
+
 'use strict';
 
 //Setting up route
@@ -657,9 +659,14 @@ angular.module('waves').config(['$stateProvider',
 		state('editWave', {
 			url: '/waves/:waveId/edit',
 			templateUrl: 'modules/waves/views/edit-wave.client.view.html'
+		}).
+		state('listWaves', {
+				url: '/waves/findmynearest',
+				templateUrl: 'modules/waves/views/findmynearest-waves.client.view.html'
 		});
 	}
 ]);
+
 'use strict';
 
 // Waves controller

@@ -21,8 +21,8 @@ angular.module('waves').config(['$stateProvider',
 			url: '/waves/:waveId/edit',
 			templateUrl: 'modules/waves/views/edit-wave.client.view.html'
 		}).
-		state('listWaves', {
-				url: '/waves/findmynearest',
+		state('green', {
+				url: '/wavesgreen',
 				templateUrl: 'modules/waves/views/findmynearest-waves.client.view.html'
 		});
 	}

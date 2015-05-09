@@ -7,6 +7,6 @@ angular.module('waves').run(['Menus',
 		Menus.addMenuItem('topbar', 'Waves', 'waves', 'dropdown', '/waves(/create)?');
 		Menus.addSubMenuItem('topbar', 'waves', 'List Waves', 'waves');
 		Menus.addSubMenuItem('topbar', 'waves', 'New Wave', 'waves/create');
-		Menus.addSubMenuItem('topbar', 'waves', 'Find My Nearest', 'waves/findmynearest');
+		Menus.addSubMenuItem('topbar', 'waves', 'green', 'wavesgreen');
 	}
 ]);
