@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/surfaroundthecorner',
+	db: 'mongodb://app:app@ds037387.mongolab.com:37387/surfaroundthecorner',
 	app: {
 		title: 'surfaroundthecorner - Development Environment'
 	},
