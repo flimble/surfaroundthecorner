@@ -5,10 +5,10 @@ angular.module('waves').config(['$stateProvider',
 	function($stateProvider) {
 		// Waves state routing
 		$stateProvider.
-		/*state('listWaves', {
+		state('listWaves', {
 			url: '/waves',
 			templateUrl: 'modules/waves/views/list-waves.client.view.html'
-		}).*/
+		}).
 		state('createWave', {
 			url: '/waves/create',
 			templateUrl: 'modules/waves/views/create-wave.client.view.html'

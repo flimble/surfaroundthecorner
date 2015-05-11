@@ -177,12 +177,13 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 
 		// Home state routing
 		$stateProvider.
-		state('home', {
+		state('byregionWave', {
 			url: '/',
-			templateUrl: 'modules/core/views/home.client.view.html'
+			templateUrl: 'modules/waves/views/findmynearest-waves.client.view.html'
 		});
 	}
 ]);
+
 'use strict';
 
 angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus',
@@ -633,6 +634,7 @@ angular.module('waves').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
 		Menus.addMenuItem('topbar', 'Waves', 'waves', 'dropdown', '/waves(/create)?');
+		Menus.addSubMenuItem('topbar', 'waves', 'All', 'waves');
 		Menus.addSubMenuItem('topbar', 'waves', 'By Region', 'waves-by-region');
 		Menus.addSubMenuItem('topbar', 'waves', 'Create New', 'waves/create');
 	}
@@ -645,10 +647,10 @@ angular.module('waves').config(['$stateProvider',
 	function($stateProvider) {
 		// Waves state routing
 		$stateProvider.
-		/*state('listWaves', {
+		state('listWaves', {
 			url: '/waves',
 			templateUrl: 'modules/waves/views/list-waves.client.view.html'
-		}).*/
+		}).
 		state('createWave', {
 			url: '/waves/create',
 			templateUrl: 'modules/waves/views/create-wave.client.view.html'

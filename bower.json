@@ -19,6 +19,8 @@
     "angular-ui-router": "~0.2.11",
     "ng-lodash": "~0.2.3",
     "angular-ui-select": "~0.11.2",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "simple-line-icons": "~1.0.0",
+    "animate.css": "~3.2.6"
   }
 }
