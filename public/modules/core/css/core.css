@@ -13,3 +13,88 @@
 .ng-valid.ng-dirty {
 	border-color: #78FA89;
 }
+
+/**** FONTS ****/
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Playfair Display'
+}
+p, div {
+	font-family: 'Open Sans'
+}
+
+/*section.container {
+	background-image: url('/modules/core/img/background/background-pattern-2.png');
+	background-repeat: repeat;
+}*/
+
+html {
+	background: url('/modules/core/img/background/background-image.jpg') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+header .container {
+	background-image: none;
+	background-color: transparent;
+}
+
+section.container {
+	background-image: none;
+	background-color: transparent;
+}
+
+body{
+	background-color: transparent;
+}
+
+.container-fluid {
+	text-align: center;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	/* bring your own prefixes */
+	transform: translate(-50%, -50%);
+}
+
+header.navbar {
+	background: transparent;
+	border: transparent;
+}
+
+.navbar-brand {
+	font-family: 'Dancing Script'
+}
+
+.register-btn, .signin-btn {
+	background: #0099cc;
+	color: #ffffff;
+}
+
+/*.signin-btn:hover {
+	border-color: #C0C0C0;
+	background-color: #C0C0C0;
+}
+
+
+.signin-btn:hover {
+	border-color: #000000;
+	background-color: #000000;
+}
+
+
+
+.btn-xlarge {
+	padding: 18px 28px;
+	font-size: 22px;
+	line-height: normal;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+}
+
+.btn-xlarge {
+	background-color: transparent;
+}*/
+

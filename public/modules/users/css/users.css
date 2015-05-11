@@ -24,6 +24,8 @@
 	text-align: center;
 }
 
+
+
 .fa.form-control-feedback {
 	line-height: 34px; /* @input-height-base; */
 }
@@ -33,10 +35,6 @@
 .input-lg ~ .fa.form-control-feedback {
 	line-height: 46px; /* @input-height-base; */
 }
-
-
-
-
 
 .has-feedback-left input.form-control {
 	padding-left: 38px; /* @input-height-base; */

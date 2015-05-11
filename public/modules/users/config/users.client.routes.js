@@ -17,9 +17,9 @@ angular.module('users').config(['$stateProvider',
 			url: '/settings/accounts',
 			templateUrl: 'modules/users/views/settings/social-accounts.client.view.html'
 		}).
-		state('signup', {
-			url: '/signup',
-			templateUrl: 'modules/users/views/authentication/signup.client.view.html'
+		state('register', {
+			url: '/register',
+			templateUrl: 'modules/users/views/authentication/register.client.view.html'
 		}).
 		state('signin', {
 			url: '/signin',

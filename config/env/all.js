@@ -16,7 +16,12 @@ module.exports = {
 				'public/lib/components-font-awesome/css/font-awesome.css',
 				'public/lib/bootstrap/dist/css/bootstrap.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-				'public/lib/angular-ui-select/dist/select.css'//,
+				'public/lib/angular-ui-select/dist/select.css',
+				'http://fonts.googleapis.com/css?family=Bree+Serif',
+				'http://fonts.googleapis.com/css?family=Open+Sans',
+				'http://fonts.googleapis.com/css?family=Playfair+Display',
+				'http://fonts.googleapis.com/css?family=Dancing+Script'
+
 				//'http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css'
 
 			],
@@ -32,7 +37,8 @@ module.exports = {
 				'public/lib/jquery/dist/jquery.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/angular-ui-select/dist/select.js',
-				'public/lib/ng-lodash/build/ng-lodash.js'
+				'public/lib/ng-lodash/build/ng-lodash.js',
+				'public/lib/ng-backstretch/dist/ng-backstretch.js'
 			]
 		},
 		css: [
