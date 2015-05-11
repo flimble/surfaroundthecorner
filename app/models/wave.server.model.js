@@ -10,48 +10,58 @@ var mongoose = require('mongoose'),
  * Wave Schema
  */
 var WaveSchema = new Schema({
-	_id: {
-		type: Schema.ObjectId
-	},
-
 	Name: {
 		type: String,
 		default: '',
 		required: 'Please fill Wave name',
-		trim: true
+		trim: true,
+		unique: true
 	},
 	CountryCode: {
-		type: String
+		type: String,
+		default:''
 	},
 	Experience: {
-		type: String
+		type: String,
+		default: ''
+
 	},
 	Quality: {
-		type: String
+		type: String,
+		default: ''
 	},
 	State: {
-		type: String
+		type: String,
+		default: ''
+
 	},
 	SwellSize: {
-		type: String
+		type: String,
+		default: ''
 	},
 	TideMovement: {
-		type: String
+		type: String,
+		default: ''
 	},
 	TidePosition: {
-		type: String
+		type: String,
+		default: ''
 	},
 	WaveDirection: {
-		type: String
+		type: String,
+		default: ''
 	},
 	WaveType: {
-		type: String
+		type: String,
+		default: ''
 	},
 	SwellDirection: {
-		type: Array
+		type: Array,
+		default: []
 	},
 	WindDirection: {
-		type: Array
+		type: Array,
+		default: []
 	}
 });
 

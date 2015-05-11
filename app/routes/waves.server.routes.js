@@ -11,7 +11,7 @@ module.exports = function(app) {
 
 	app.route('/waves/:waveId')
 		.get(waves.read)
-		.put(users.requiresLogin, waves.hasAuthorization, waves.update)
+		.put(users.requiresLogin, waves.update)//passed true for waves.hasAuthorization
 		.delete(users.requiresLogin, waves.hasAuthorization, waves.delete);
 
 	// Finish by binding the Wave middleware

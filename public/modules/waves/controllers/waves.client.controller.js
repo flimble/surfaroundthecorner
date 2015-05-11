@@ -20,18 +20,34 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
 			{name: 'SouthCoast', state: 'New South Wales'},
 			{name: 'Somewhere', state: 'Queensland'}
 		];
-		$scope.location.selected = {name: 'SydneyNorth', state: 'New South Wales'};
+		$scope.location.selected = {};
 
 
 		$scope.location.availableLocationsStateGroupBy = function (item) {
 			return item.state;
 		};
 
+		$scope.createWave = {};
+		$scope.createWave.SwellDirection = [];
+		$scope.createWave.WindDirection = [];
+
 		// Create new Wave
 		$scope.create = function () {
 			// Create new Wave object
 			var wave = new Waves({
-				name: this.name
+				Name: this.Name,
+				CountryCode: this.CountryCode,
+				Experience: this.Experience,
+				Quality: this.Quality,
+				Region: this.Region,
+				State: this.State,
+				SwellDirection: $scope.createWave.SwellDirection,
+				SwellSize: this.SwellSize,
+				TideMovement: this.TideMovement,
+				TidePosition: this.TidePosition,
+				WaveDirection: $scope.createWave.WaveDirection,
+				WaveType: this.WaveType,
+				WindDirection: this.WindDirection
 			});
 
 			// Redirect after save
@@ -44,6 +60,7 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
 				$scope.error = errorResponse.data.message;
 			});
 		};
+
 
 		// Remove existing Wave
 		$scope.remove = function (wave) {

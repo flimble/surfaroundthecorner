@@ -5,10 +5,10 @@ angular.module('waves').config(['$stateProvider',
 	function($stateProvider) {
 		// Waves state routing
 		$stateProvider.
-		state('listWaves', {
+		/*state('listWaves', {
 			url: '/waves',
 			templateUrl: 'modules/waves/views/list-waves.client.view.html'
-		}).
+		}).*/
 		state('createWave', {
 			url: '/waves/create',
 			templateUrl: 'modules/waves/views/create-wave.client.view.html'
@@ -21,8 +21,8 @@ angular.module('waves').config(['$stateProvider',
 			url: '/waves/:waveId/edit',
 			templateUrl: 'modules/waves/views/edit-wave.client.view.html'
 		}).
-		state('green', {
-				url: '/wavesgreen',
+		state('byregionWave', {
+				url: '/waves-by-region',
 				templateUrl: 'modules/waves/views/findmynearest-waves.client.view.html'
 		});
 	}

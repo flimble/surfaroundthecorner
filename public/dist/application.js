@@ -64,11 +64,12 @@ ApplicationConfiguration.registerModule('waves');
 angular.module('articles').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
-		Menus.addMenuItem('topbar', 'Articles', 'articles', 'dropdown', '/articles(/create)?');
+		/*Menus.addMenuItem('topbar', 'Articles', 'articles', 'dropdown', '/articles(/create)?');
 		Menus.addSubMenuItem('topbar', 'articles', 'List Articles', 'articles');
-		Menus.addSubMenuItem('topbar', 'articles', 'New Article', 'articles/create');
+		Menus.addSubMenuItem('topbar', 'articles', 'New Article', 'articles/create');*/
 	}
 ]);
+
 'use strict';
 
 // Setting up route
@@ -632,9 +633,8 @@ angular.module('waves').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
 		Menus.addMenuItem('topbar', 'Waves', 'waves', 'dropdown', '/waves(/create)?');
-		Menus.addSubMenuItem('topbar', 'waves', 'List Waves', 'waves');
-		Menus.addSubMenuItem('topbar', 'waves', 'New Wave', 'waves/create');
-		Menus.addSubMenuItem('topbar', 'waves', 'green', 'wavesgreen');
+		Menus.addSubMenuItem('topbar', 'waves', 'By Region', 'waves');
+		Menus.addSubMenuItem('topbar', 'waves', 'Create New', 'waves/create');
 	}
 ]);
 
@@ -645,10 +645,10 @@ angular.module('waves').config(['$stateProvider',
 	function($stateProvider) {
 		// Waves state routing
 		$stateProvider.
-		state('listWaves', {
+		/*state('listWaves', {
 			url: '/waves',
 			templateUrl: 'modules/waves/views/list-waves.client.view.html'
-		}).
+		}).*/
 		state('createWave', {
 			url: '/waves/create',
 			templateUrl: 'modules/waves/views/create-wave.client.view.html'
@@ -661,8 +661,8 @@ angular.module('waves').config(['$stateProvider',
 			url: '/waves/:waveId/edit',
 			templateUrl: 'modules/waves/views/edit-wave.client.view.html'
 		}).
-		state('green', {
-				url: '/wavesgreen',
+		state('listWaves', {
+				url: '/waves/byregion',
 				templateUrl: 'modules/waves/views/findmynearest-waves.client.view.html'
 		});
 	}
@@ -697,11 +697,27 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
 			return item.state;
 		};
 
+		$scope.createWave = {};
+		$scope.createWave.SwellDirection = [];
+		$scope.createWave.WindDirection = [];
+
 		// Create new Wave
 		$scope.create = function () {
 			// Create new Wave object
 			var wave = new Waves({
-				name: this.name
+				Name: this.Name,
+				CountryCode: this.CountryCode,
+				Experience: this.Experience,
+				Quality: this.Quality,
+				Region: this.Region,
+				State: this.State,
+				SwellDirection: $scope.createWave.SwellDirection,
+				SwellSize: this.SwellSize,
+				TideMovement: this.TideMovement,
+				TidePosition: this.TidePosition,
+				WaveDirection: $scope.createWave.WaveDirection,
+				WaveType: this.WaveType,
+				WindDirection: this.WindDirection
 			});
 
 			// Redirect after save
@@ -770,6 +786,9 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
 					}
 					selectedWaves.push(item);
 				});
+				if(region.name.length > 0) {
+					$location.search('region',region.name);
+				}
 				$scope.waves = selectedWaves;
 			});
 		};
