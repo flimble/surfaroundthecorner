@@ -633,7 +633,7 @@ angular.module('waves').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
 		Menus.addMenuItem('topbar', 'Waves', 'waves', 'dropdown', '/waves(/create)?');
-		Menus.addSubMenuItem('topbar', 'waves', 'By Region', 'waves');
+		Menus.addSubMenuItem('topbar', 'waves', 'By Region', 'waves-by-region');
 		Menus.addSubMenuItem('topbar', 'waves', 'Create New', 'waves/create');
 	}
 ]);
@@ -661,8 +661,8 @@ angular.module('waves').config(['$stateProvider',
 			url: '/waves/:waveId/edit',
 			templateUrl: 'modules/waves/views/edit-wave.client.view.html'
 		}).
-		state('listWaves', {
-				url: '/waves/byregion',
+		state('byregionWave', {
+				url: '/waves-by-region',
 				templateUrl: 'modules/waves/views/findmynearest-waves.client.view.html'
 		});
 	}
@@ -690,7 +690,7 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
 			{name: 'SouthCoast', state: 'New South Wales'},
 			{name: 'Somewhere', state: 'Queensland'}
 		];
-		$scope.location.selected = {name: 'SydneyNorth', state: 'New South Wales'};
+		$scope.location.selected = {};
 
 
 		$scope.location.availableLocationsStateGroupBy = function (item) {
@@ -730,6 +730,7 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
 				$scope.error = errorResponse.data.message;
 			});
 		};
+
 
 		// Remove existing Wave
 		$scope.remove = function (wave) {
@@ -786,9 +787,6 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
 					}
 					selectedWaves.push(item);
 				});
-				if(region.name.length > 0) {
-					$location.search('region',region.name);
-				}
 				$scope.waves = selectedWaves;
 			});
 		};
