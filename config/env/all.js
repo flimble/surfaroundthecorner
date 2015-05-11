@@ -13,10 +13,12 @@ module.exports = {
 	assets: {
 		lib: {
 			css: [
+				'public/lib/components-font-awesome/css/font-awesome.css',
 				'public/lib/bootstrap/dist/css/bootstrap.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-				'public/lib/angular-ui-select/dist/select.css',
-				'public/lib/components-font-awesome/css/font-awesome.css'
+				'public/lib/angular-ui-select/dist/select.css'//,
+				//'http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css'
+
 			],
 			js: [
 				'public/lib/angular/angular.js',
