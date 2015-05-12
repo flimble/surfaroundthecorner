@@ -27,11 +27,13 @@ p, div {
 	font-size: 3em;
 	font-weight: bold;
 	color: whitesmoke;
+	text-shadow: 1px 1px 1px #ccc;
 }
 
 h1.serious {
 	font-family: 'Nunito';
 	color: ghostwhite;
+	text-shadow: 1px 1px 1px #ccc;
 }
 
 
