@@ -53,6 +53,7 @@ div.main-content.container-fluid:after {
 	height: 100%;
 	opacity : 0.6;
 	z-index: -1;
+	box-shadow: 0 0 0.2em 0.2em #5890AD;
 }
 
 
