@@ -44,7 +44,7 @@ h1.serious {
 }*/
 
 
-div.main-content.container-fluid:after {
+/*div.main-content.container-fluid:after {
 	content : "";
 	display: block;
 	position: absolute;
@@ -56,7 +56,7 @@ div.main-content.container-fluid:after {
 	opacity : 0.6;
 	z-index: -1;
 	box-shadow: 0 0 0.2em 0.2em #5890AD;
-}
+}*/
 
 
 /*section.container {
