@@ -21,7 +21,13 @@ module.exports = {
 				'public/lib/jquery/dist/jquery.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
 				'public/lib/angular-ui-select/dist/select.min.js',
-				'public/lib/ng-lodash/build/ng-lodash.js'
+				'public/lib/ng-lodash/build/ng-lodash.js',
+				'http://fonts.googleapis.com/css?family=Bree+Serif',
+				'http://fonts.googleapis.com/css?family=Open+Sans',
+				'http://fonts.googleapis.com/css?family=Playfair+Display',
+				'http://fonts.googleapis.com/css?family=Dancing+Script',
+				'http://fonts.googleapis.com/css?family=Nunito'
+
 			]
 		},
 		css: 'public/dist/application.min.css',
