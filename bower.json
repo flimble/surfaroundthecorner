@@ -23,6 +23,7 @@
     "simple-line-icons": "~1.0.0",
     "animate.css": "~3.2.6",
     "angular-backstretch": "*",
-    "ng-backstretch": "~0.1.2-beta"
+    "ng-backstretch": "~0.1.2-beta",
+    "grunt-contrib-less": "~1.0.1"
   }
 }

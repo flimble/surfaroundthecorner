@@ -3,8 +3,8 @@
 // Init the application configuration module for AngularJS application
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
-	var applicationModuleName = 'surfaroundthecorner';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils','ui.select','ngLodash'];
+	var applicationModuleName = 'SurfAroundTheCorner';
+	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils','ui.select','ngLodash','ng-backstretch'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {
@@ -48,8 +48,9 @@ angular.element(document).ready(function() {
 ApplicationConfiguration.registerModule('articles');
 'use strict';
 
-// Use Applicaion configuration module to register a new module
+// Use Application configuration module to register a new module
 ApplicationConfiguration.registerModule('core');
+
 'use strict';
 
 // Use Applicaion configuration module to register a new module
@@ -177,9 +178,9 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 
 		// Home state routing
 		$stateProvider.
-		state('byregionWave', {
+		state('home', {
 			url: '/',
-			templateUrl: 'modules/waves/views/findmynearest-waves.client.view.html'
+			templateUrl: 'modules/core/views/home.client.view.html'
 		});
 	}
 ]);
@@ -426,9 +427,9 @@ angular.module('users').config(['$stateProvider',
 			url: '/settings/accounts',
 			templateUrl: 'modules/users/views/settings/social-accounts.client.view.html'
 		}).
-		state('signup', {
-			url: '/signup',
-			templateUrl: 'modules/users/views/authentication/signup.client.view.html'
+		state('register', {
+			url: '/register',
+			templateUrl: 'modules/users/views/authentication/register.client.view.html'
 		}).
 		state('signin', {
 			url: '/signin',
@@ -452,6 +453,7 @@ angular.module('users').config(['$stateProvider',
 		});
 	}
 ]);
+
 'use strict';
 
 angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication',

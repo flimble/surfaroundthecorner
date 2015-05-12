@@ -1,4 +1,4 @@
-@media (min-width: 992px) {
+/*@media (min-width: 992px) {
 	.nav-users {
 		position: fixed;
 	}
@@ -27,25 +27,25 @@
 
 
 .fa.form-control-feedback {
-	line-height: 34px; /* @input-height-base; */
+	line-height: 34px;
 }
 .input-sm ~ .fa.form-control-feedback {
-	line-height: 30px; /* @input-height-base; */
+	line-height: 30px;
 }
 .input-lg ~ .fa.form-control-feedback {
-	line-height: 46px; /* @input-height-base; */
+	line-height: 46px;
 }
 
 .has-feedback-left input.form-control {
-	padding-left: 38px; /* @input-height-base; */
-	padding-right: 12px; /* @padding-base-horizontal */
+	padding-left: 38px;
+	padding-right: 12px;
 }
 
 .has-feedback-left .form-control-feedback {
 	left: 0;
 }
 .form-horizontal .has-feedback-left .form-control-feedback {
-	left: 8px; /* @grid-gutter-width / 2 */
+	left: 8px;
 }
 
 .has-feedback-left input.input-sm {
@@ -53,7 +53,6 @@
 }
 .has-feedback-left input.input-lg {
 	padding-left: 46px;  @input-height-large;
-}
-
+}*/
 
 

@@ -2,7 +2,7 @@
 
 module.exports = {
 	app: {
-		title: 'surfaroundthecorner',
+		title: 'Surf Around The Corner',
 		description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
 		keywords: 'MongoDB, Express, AngularJS, Node.js'
 	},
@@ -20,7 +20,8 @@ module.exports = {
 				'http://fonts.googleapis.com/css?family=Bree+Serif',
 				'http://fonts.googleapis.com/css?family=Open+Sans',
 				'http://fonts.googleapis.com/css?family=Playfair+Display',
-				'http://fonts.googleapis.com/css?family=Dancing+Script'
+				'http://fonts.googleapis.com/css?family=Dancing+Script',
+				'http://fonts.googleapis.com/css?family=Nunito'
 
 				//'http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css'
 
@@ -42,7 +43,8 @@ module.exports = {
 			]
 		},
 		css: [
-			'public/modules/**/css/*.css'
+			'public/modules/**/css/*.css',
+			'public/less/*.css'
 		],
 		js: [
 			'public/config.js',
