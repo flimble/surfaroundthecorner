@@ -27,7 +27,6 @@ module.exports = {
 				'http://fonts.googleapis.com/css?family=Playfair+Display',
 				'http://fonts.googleapis.com/css?family=Dancing+Script',
 				'http://fonts.googleapis.com/css?family=Nunito'
-
 			]
 		},
 		css: 'public/dist/application.min.css',
