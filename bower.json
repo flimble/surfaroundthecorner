@@ -25,5 +25,8 @@
     "angular-backstretch": "*",
     "ng-backstretch": "~0.1.2-beta",
     "grunt-contrib-less": "~1.0.1"
+  },
+  "resolutions": {
+    "jquery": ">= 1.9.1"
   }
 }
