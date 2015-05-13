@@ -26,7 +26,9 @@ module.exports = {
 				'public/lib/jquery/dist/jquery.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
 				'public/lib/angular-ui-select/dist/select.min.js',
-				'public/lib/ng-lodash/build/ng-lodash.js'
+				'public/lib/ng-lodash/build/ng-lodash.js',
+				'public/lib/ng-backstretch/dist/ng-backstretch.js',
+				'public/lib/ngFitText/src/ng-FitText.js'
 			]
 		},
 		css: 'public/dist/application.min.css',
