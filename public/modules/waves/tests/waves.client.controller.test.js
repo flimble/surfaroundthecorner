@@ -53,7 +53,7 @@
 		it('$scope.find() should create an array with at least one Wave object fetched from XHR', inject(function(Waves) {
 			// Create sample Wave using the Waves service
 			var sampleWave = new Waves({
-				name: 'New Wave'
+				Name: 'New Wave'
 			});
 
 			// Create a sample Waves array that includes the new Wave
@@ -73,7 +73,7 @@
 		it('$scope.findOne() should create an array with one Wave object fetched from XHR using a waveId URL parameter', inject(function(Waves) {
 			// Define a sample Wave object
 			var sampleWave = new Waves({
-				name: 'New Wave'
+				Name: 'New Wave'
 			});
 
 			// Set the URL parameter
@@ -92,28 +92,34 @@
 
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Waves) {
 			// Create a sample Wave object
-			var sampleWavePostData = new Waves({
-				name: 'New Wave'
+			var expectedWavePostData = new Waves({
+				Name: 'New Wave',
+				SwellDirection: ['South'],
+				WindDirection: ['SouthWest']
 			});
 
 			// Create a sample Wave response
 			var sampleWaveResponse = new Waves({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Wave'
+				Name: 'New Wave'
 			});
 
 			// Fixture mock form input values
-			scope.name = 'New Wave';
+			scope.Name = 'New Wave';
+			scope.createWave.SwellDirection = ['South'];
+			scope.createWave.WindDirection = ['SouthWest'];
 
 			// Set POST response
-			$httpBackend.expectPOST('waves', sampleWavePostData).respond(sampleWaveResponse);
+			$httpBackend.expectPOST('waves', expectedWavePostData).respond(sampleWaveResponse);
 
 			// Run controller functionality
 			scope.create();
 			$httpBackend.flush();
 
 			// Test form inputs are reset
-			expect(scope.name).toEqual('');
+			expect(scope.createWave.SwellDirection).toEqual([]);
+			expect(scope.createWave.WindDirection).toEqual([]);
+
 
 			// Test URL redirection after the Wave was created
 			expect($location.path()).toBe('/waves/' + sampleWaveResponse._id);
@@ -123,7 +129,7 @@
 			// Define a sample Wave put data
 			var sampleWavePutData = new Waves({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Wave'
+				Name: 'New Wave'
 			});
 
 			// Mock Wave in scope
