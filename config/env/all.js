@@ -39,12 +39,13 @@ module.exports = {
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/angular-ui-select/dist/select.js',
 				'public/lib/ng-lodash/build/ng-lodash.js',
-				'public/lib/ng-backstretch/dist/ng-backstretch.js'
+				'public/lib/ng-backstretch/dist/ng-backstretch.js',
+				'public/lib/ngFitText/src/ng-FitText.js'
 			]
 		},
 		css: [
-			'public/modules/**/css/*.css',
-			'public/less/*.css'
+			'public/modules/**/css/*.css'
+			//'public/less/*.css'
 		],
 		js: [
 			'public/config.js',
