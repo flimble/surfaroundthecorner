@@ -92,9 +92,10 @@
 
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Waves) {
 			// Create a sample Wave object
-			var sampleWavePostData = new Waves({
+			var expectedWavePostData = new Waves({
 				Name: 'New Wave',
-				SwellDirection: []
+				SwellDirection: ['South'],
+				WindDirection: ['SouthWest']
 			});
 
 			// Create a sample Wave response
@@ -105,16 +106,20 @@
 
 			// Fixture mock form input values
 			scope.Name = 'New Wave';
+			scope.createWave.SwellDirection = ['South'];
+			scope.createWave.WindDirection = ['SouthWest'];
 
 			// Set POST response
-			$httpBackend.expectPOST('waves', sampleWavePostData).respond(sampleWaveResponse);
+			$httpBackend.expectPOST('waves', expectedWavePostData).respond(sampleWaveResponse);
 
 			// Run controller functionality
 			scope.create();
 			$httpBackend.flush();
 
 			// Test form inputs are reset
-			expect(scope.Name).toEqual('');
+			expect(scope.createWave.SwellDirection).toEqual([]);
+			expect(scope.createWave.WindDirection).toEqual([]);
+
 
 			// Test URL redirection after the Wave was created
 			expect($location.path()).toBe('/waves/' + sampleWaveResponse._id);
