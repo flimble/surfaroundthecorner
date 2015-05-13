@@ -55,7 +55,7 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
 				$location.path('waves/' + response._id);
 
 				// Clear form fields
-				$scope.name = '';
+				$scope.Name = '';
 			}, function (errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

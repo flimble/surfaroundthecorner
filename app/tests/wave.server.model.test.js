@@ -18,23 +18,11 @@ var user, wave;
  */
 describe('Wave Model Unit Tests:', function() {
 	beforeEach(function(done) {
-		user = new User({
-			firstName: 'Full',
-			lastName: 'Name',
-			displayName: 'Full Name',
-			email: 'test@test.com',
-			username: 'username',
-			password: 'password'
-		});
 
-		user.save(function() { 
 			wave = new Wave({
-				name: 'Wave Name',
-				user: user
+				Name: 'Wave Name'
 			});
-
 			done();
-		});
 	});
 
 	describe('Method Save', function() {
@@ -46,7 +34,7 @@ describe('Wave Model Unit Tests:', function() {
 		});
 
 		it('should be able to show an error when try to save without name', function(done) { 
-			wave.name = '';
+			wave.Name = '';
 
 			return wave.save(function(err) {
 				should.exist(err);
@@ -57,7 +45,6 @@ describe('Wave Model Unit Tests:', function() {
 
 	afterEach(function(done) { 
 		Wave.remove().exec();
-		User.remove().exec();
 
 		done();
 	});
