@@ -165,5 +165,6 @@
 			// Test array after successful delete
 			expect(scope.waves.length).toBe(0);
 		}));
+
 	});
 }());

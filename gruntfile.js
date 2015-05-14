@@ -158,6 +158,14 @@ module.exports = function(grunt) {
 			unit: {
 				configFile: 'karma.conf.js'
 			}
+		},
+		protractor: {
+			options: {
+				keepAlive: true,
+				configFile: 'protractor.conf.js',
+				require: 'server.js'
+			},
+			run: {}
 		}
 	});
 
@@ -195,4 +203,7 @@ module.exports = function(grunt) {
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+
+	grunt.registerTask('test-e2e', ['env:test', 'protractor:run']);
+
 };
