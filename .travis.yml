@@ -5,3 +5,10 @@ env:
   - NODE_ENV=travis
 services:
   - mongodb
+env: 
+	global: 
+		- NODE_ENV=travisci
+before_script:
+  - npm install -g grunt-cli
+  - npm install -g bower
+  - bower install
