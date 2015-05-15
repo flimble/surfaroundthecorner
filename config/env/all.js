@@ -14,9 +14,6 @@ module.exports = {
 		lib: {
 			css: [
 				'public/lib/components-font-awesome/css/font-awesome.css',
-				//'public/lib/bootstrap/dist/css/bootstrap.css',
-				//'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
 				'public/lib/angular-ui-select/dist/select.css',
 				'http://fonts.googleapis.com/css?family=Bree+Serif',
 				'http://fonts.googleapis.com/css?family=Open+Sans',
