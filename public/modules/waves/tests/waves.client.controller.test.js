@@ -278,14 +278,14 @@
 
 		it('first google api test', inject(function (Waves) {
 
-			$httpBackend.expect('GET', 'https://maps.googleapis.com/maps/api/distancematrix/json?API_KEY=AIzaSyCSBGw0kiu_Nv3dPOBxxanMjuDyjEVA3aY&destinations=Vancouver+BC%7CSeattle&origins=San+Francisco', null)
+			/*.expect('GET', 'https://maps.googleapis.com/maps/api/distancematrix/json?API_KEY=AIzaSyCSBGw0kiu_Nv3dPOBxxanMjuDyjEVA3aY&destinations=Vancouver+BC%7CSeattle&origins=San+Francisco', null)
 				.respond({
 					Name: 'One'
 				});
 
 			scope.locations();
 			$httpBackend.flush();
-
+			*/
 
 			// Test scope value
 			//expect(scope.waves.length).toBe(1);
