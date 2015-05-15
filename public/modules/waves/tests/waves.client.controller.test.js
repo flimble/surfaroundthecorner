@@ -248,5 +248,32 @@
 			// Test scope value
 			expect(scope.waves.length).toBe(0);
 		}));
+
+		it('findByConditions complex scenario', inject(function (Waves) {
+
+			scope.waves = [];
+
+			var mockedQueryData = [
+				{ Name: 'One', Region: 'SydneyNorth', SwellDirection: ['SouthEast','NorthEast','SouthWest'], WindDirection: ['NorthEast']}, //multiple
+				{ Name: 'Two', Region: 'SydneyNorth', SwellDirection: ['SouthEast','SouthWest'], WindDirection: ['NorthEast']},
+				{ Name: 'Three', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']},
+				{ Name: 'Four', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']},
+				{ Name: 'Five', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']},
+				{ Name: 'Six', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']},
+				{ Name: 'Seven', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']},
+				{ Name: 'Eight', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']},
+				{ Name: 'Nine', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']},
+				{ Name: 'Ten', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']},
+				{ Name: 'Eleven', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']}
+			];
+
+			$httpBackend.expectGET('waves')
+				.respond(mockedQueryData);
+
+			scope.findByConditions({name: 'SydneyNorth' }, ['SouthEast','SouthWest'], ['NorthEast']);
+			$httpBackend.flush();
+			// Test scope value
+			expect(scope.waves).toEqualData(mockedQueryData);
+		}));
 	});
 }());

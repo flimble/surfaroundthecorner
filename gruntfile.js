@@ -159,6 +159,14 @@ module.exports = function(grunt) {
 				configFile: 'karma.conf.js'
 			}
 		},
+		connect: {
+			server: {
+				options: {
+					port: 9001,
+					base: 'www-root'
+				}
+			}
+		},
 		protractor: {
 			options: {
 				keepAlive: true,
@@ -185,6 +193,13 @@ module.exports = function(grunt) {
 		grunt.config.set('applicationLESSFiles', config.assets.less);
 	});
 
+	//A Task for starting the web server for testing purposes
+	grunt.registerTask('start:server', 'Start the web server', function() {
+		grunt.log.writeln('Starting web server on port 9001.');
+		require('./server.js').listen(9001);
+	});
+
+
 	// Default task(s).
 	grunt.registerTask('default', ['lint','concurrent:default','less']);
 
@@ -201,9 +216,11 @@ module.exports = function(grunt) {
 	// Build task(s).
 	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin','less']);
 
-	// Test task.
-	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+	// Test tasks
+	grunt.registerTask('test', ['test:server', 'test:client', 'test:e2e']);
+	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
+	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
+	grunt.registerTask('test:e2e', ['env:test', 'start:server', 'protractor:run']);
 
-	grunt.registerTask('test-e2e', ['env:test', 'protractor:run']);
 
 };

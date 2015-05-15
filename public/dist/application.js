@@ -719,9 +719,9 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
 				SwellSize: this.SwellSize,
 				TideMovement: this.TideMovement,
 				TidePosition: this.TidePosition,
-				WaveDirection: $scope.createWave.WaveDirection,
+				WindDirection: $scope.createWave.WindDirection,
 				WaveType: this.WaveType,
-				WindDirection: this.WindDirection
+				WaveDirection: this.WaveDirection
 			});
 
 			// Redirect after save
@@ -729,7 +729,9 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
 				$location.path('waves/' + response._id);
 
 				// Clear form fields
-				$scope.name = '';
+				$scope.createWave.SwellDirection = [];
+				$scope.createWave.WindDirection = [];
+
 			}, function (errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -772,6 +774,7 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
 		$scope.findByConditions = function (region, swellDirection, windDirection) {
 			Waves.query().$promise.then(function (data) {
 				var selectedWaves = [];
+
 				data.forEach(function (item) {
 					if (region.name.length > 0 && region.name !== item.Region) {
 						return;
