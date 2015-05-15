@@ -165,5 +165,130 @@
 			// Test array after successful delete
 			expect(scope.waves.length).toBe(0);
 		}));
+
+
+		it('single matching condition returns single result', inject(function (Waves) {
+
+			scope.waves = [];
+
+			$httpBackend.expectGET('waves')
+				.respond([{
+					Name: 'Hello',
+					Region: 'SydneyNorth',
+					SwellDirection: ['SouthEast'],
+					WindDirection: ['NorthEast']
+				}]);
+
+			scope.findByConditions({name: 'SydneyNorth' }, ['SouthEast'], ['NorthEast']);
+			$httpBackend.flush();
+
+
+			// Test scope value
+			expect(scope.waves.length).toBe(1);
+		}));
+
+
+
+		it('findByConditions is filtered by region', inject(function (Waves) {
+
+			scope.waves = [];
+
+			$httpBackend.expectGET('waves')
+				.respond([{
+					Name: 'Hello',
+					Region: 'SydneyNorth',
+					SwellDirection: ['SouthEast'],
+					WindDirection: ['NorthEast']
+				}]);
+
+			scope.findByConditions({name: 'SydneySouth' }, ['SouthEast'], ['NorthEast']);
+			$httpBackend.flush();
+
+
+			// Test scope value
+			expect(scope.waves.length).toBe(0);
+		}));
+
+		it('findByConditions is filtered by swelldirection', inject(function (Waves) {
+
+			scope.waves = [];
+
+			$httpBackend.expectGET('waves')
+				.respond([{
+					Name: 'Hello',
+					Region: 'SydneyNorth',
+					SwellDirection: ['SouthEast'],
+					WindDirection: ['NorthEast']
+				}]);
+
+			scope.findByConditions({name: 'SydneyNorth' }, ['SouthWest'], ['NorthEast']);
+			$httpBackend.flush();
+
+
+			// Test scope value
+			expect(scope.waves.length).toBe(0);
+		}));
+
+		it('findByConditions is filtered by winddirection', inject(function (Waves) {
+
+			scope.waves = [];
+
+			$httpBackend.expectGET('waves')
+				.respond([{
+					Name: 'Hello',
+					Region: 'SydneyNorth',
+					SwellDirection: ['SouthEast'],
+					WindDirection: ['NorthEast']
+				}]);
+
+			scope.findByConditions({name: 'SydneyNorth' }, ['SouthEast'], ['NorthWest']);
+			$httpBackend.flush();
+
+
+			// Test scope value
+			expect(scope.waves.length).toBe(0);
+		}));
+
+		it('findByConditions complex scenario', inject(function (Waves) {
+
+			scope.waves = [];
+
+			var mockedQueryData = [
+				{ Name: 'One', Region: 'SydneyNorth', SwellDirection: ['SouthEast','NorthEast','SouthWest'], WindDirection: ['NorthEast']}, //multiple
+				{ Name: 'Two', Region: 'SydneyNorth', SwellDirection: ['SouthEast','SouthWest'], WindDirection: ['NorthEast']},
+				{ Name: 'Three', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']},
+				{ Name: 'Four', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']},
+				{ Name: 'Five', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']},
+				{ Name: 'Six', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']},
+				{ Name: 'Seven', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']},
+				{ Name: 'Eight', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']},
+				{ Name: 'Nine', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']},
+				{ Name: 'Ten', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']},
+				{ Name: 'Eleven', Region: 'SydneyNorth', SwellDirection: ['SouthEast'], WindDirection: ['NorthEast']}
+			];
+
+			$httpBackend.expectGET('waves')
+				.respond(mockedQueryData);
+
+			scope.findByConditions({name: 'SydneyNorth' }, ['SouthEast','SouthWest'], ['NorthEast']);
+			$httpBackend.flush();
+			// Test scope value
+			expect(scope.waves).toEqualData(mockedQueryData);
+		}));
+
+		it('first google api test', inject(function (Waves) {
+
+			$httpBackend.expect('GET', 'https://maps.googleapis.com/maps/api/distancematrix/json?API_KEY=AIzaSyCSBGw0kiu_Nv3dPOBxxanMjuDyjEVA3aY&destinations=Vancouver+BC%7CSeattle&origins=San+Francisco', null)
+				.respond({
+					Name: 'One'
+				});
+
+			scope.locations();
+			$httpBackend.flush();
+
+
+			// Test scope value
+			//expect(scope.waves.length).toBe(1);
+		}));
 	});
 }());

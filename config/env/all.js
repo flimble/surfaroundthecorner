@@ -14,9 +14,6 @@ module.exports = {
 		lib: {
 			css: [
 				'public/lib/components-font-awesome/css/font-awesome.css',
-				//'public/lib/bootstrap/dist/css/bootstrap.css',
-				//'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
 				'public/lib/angular-ui-select/dist/select.css',
 				'http://fonts.googleapis.com/css?family=Bree+Serif',
 				'http://fonts.googleapis.com/css?family=Open+Sans',
@@ -36,7 +33,7 @@ module.exports = {
 				'public/lib/angular-sanitize/angular-sanitize.js', 
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
-				'public/lib/jquery/jquery.js',
+				'public/lib/jquery/dist/jquery.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/angular-ui-select/dist/select.js',
 				'public/lib/ng-lodash/build/ng-lodash.js',

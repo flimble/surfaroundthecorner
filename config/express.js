@@ -7,6 +7,7 @@ var fs = require('fs'),
 	http = require('http'),
 	https = require('https'),
 	express = require('express'),
+	proxy = require('express-http-proxy'),
 	morgan = require('morgan'),
 	bodyParser = require('body-parser'),
 	session = require('express-session'),
@@ -47,6 +48,15 @@ module.exports = function(db) {
 		next();
 	});
 
+	// Enable CORS on the server
+	app.all('*',function(req, res, next) {
+		res.header('Access-Control-Allow-Origin', '*');
+		res.header('Access-Control-Allow-Headers', 'Content-Type,X-Requested-With');
+		res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+		res.header('Access-Control-Allow-Credentials', 'true');
+		next();
+	});
+
 	// Should be placed before express.static
 	app.use(compress({
 		filter: function(req, res) {
@@ -54,6 +64,13 @@ module.exports = function(db) {
 		},
 		level: 9
 	}));
+
+	/*app.use('/maps', proxy('maps.googleapis.com/maps/api/distancematrix/json?API_KEY=AIzaSyCSBGw0kiu_Nv3dPOBxxanMjuDyjEVA3aY', {
+		forwardPath: function(req, res) {
+			return require('url').parse(req.url).path;
+		},
+		preserveHostDr: true
+	}));*/
 
 	// Showing stack errors
 	app.set('showStackError', true);

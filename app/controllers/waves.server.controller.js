@@ -96,6 +96,7 @@ exports.waveByID = function(req, res, next, id) {
 	});
 };
 
+
 /**
  * wave authorization middleware
  */

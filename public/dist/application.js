@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'SurfAroundTheCorner';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils','ui.select','ngLodash','ngFitText'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils','ui.select','ngLodash','ngFitText','GoogleDistance'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {
@@ -14,6 +14,8 @@ var ApplicationConfiguration = (function() {
 		// Add the module to the AngularJS configuration file
 		angular.module(applicationModuleName).requires.push(moduleName);
 	};
+
+
 
 	return {
 		applicationModuleName: applicationModuleName,
@@ -168,6 +170,16 @@ angular.module('articles').factory('Articles', ['$resource',
 		});
 	}
 ]);
+'use strict';
+
+// Config HTTP Error Handling
+angular.module('core').config(['$httpProvider',
+    function($httpProvider) {
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    }
+]);
+
 'use strict';
 
 // Setting up route
@@ -383,6 +395,10 @@ angular.module('core').service('Menus', [
 // Config HTTP Error Handling
 angular.module('users').config(['$httpProvider',
 	function($httpProvider) {
+
+		$httpProvider.defaults.useXDomain = true;
+		delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
 		// Set the httpProvider "not authorized" interceptor
 		$httpProvider.interceptors.push(['$q', '$location', 'Authentication',
 			function($q, $location, Authentication) {
@@ -408,6 +424,7 @@ angular.module('users').config(['$httpProvider',
 		]);
 	}
 ]);
+
 'use strict';
 
 // Setting up route
@@ -675,145 +692,235 @@ angular.module('waves').config(['$stateProvider',
 'use strict';
 
 // Waves controller
-angular.module('waves').controller('WavesController', ['$scope', '$stateParams', '$location', 'Waves', 'lodash',
-	function($scope, $stateParams, $location, Waves, lodash) {
+angular.module('waves').controller('WavesController', ['$scope', '$stateParams', '$location', 'Waves', 'lodash', 'googleApiProvider',
+    function ($scope, $stateParams, $location, Waves, lodash, googleApiProvider) {
 
-		$scope.swell = {};
-		$scope.swell.availableCompassDirections = ['NorthEast', 'East', 'SouthEast', 'South'];
-		$scope.swell.compassDirectionsSelected = [];
+        $scope.swell = {};
+        $scope.swell.availableCompassDirections = ['NorthEast', 'East', 'SouthEast', 'South'];
+        $scope.swell.compassDirectionsSelected = [];
 
-		$scope.wind = {};
-		$scope.wind.availableCompassDirections = ['North', 'NorthEast', 'East', 'SouthEast', 'South', 'SouthWest', 'West', 'NorthWest'];
-		$scope.wind.compassDirectionsSelected = [];
+        $scope.wind = {};
+        $scope.wind.availableCompassDirections = ['North', 'NorthEast', 'East', 'SouthEast', 'South', 'SouthWest', 'West', 'NorthWest'];
+        $scope.wind.compassDirectionsSelected = [];
 
-		$scope.location = {};
-		$scope.location.availableLocations = [
-			{name: 'CentralCoast', state: 'New South Wales'},
-			{name: 'SydneyNorth', state: 'New South Wales'},
-			{name: 'SydneySouth', state: 'New South Wales'},
-			{name: 'SouthCoast', state: 'New South Wales'},
-			{name: 'Somewhere', state: 'Queensland'}
-		];
-		$scope.location.selected = {};
-
-
-		$scope.location.availableLocationsStateGroupBy = function (item) {
-			return item.state;
-		};
-
-		$scope.createWave = {};
-		$scope.createWave.SwellDirection = [];
-		$scope.createWave.WindDirection = [];
-
-		// Create new Wave
-		$scope.create = function () {
-			// Create new Wave object
-			var wave = new Waves({
-				Name: this.Name,
-				CountryCode: this.CountryCode,
-				Experience: this.Experience,
-				Quality: this.Quality,
-				Region: this.Region,
-				State: this.State,
-				SwellDirection: $scope.createWave.SwellDirection,
-				SwellSize: this.SwellSize,
-				TideMovement: this.TideMovement,
-				TidePosition: this.TidePosition,
-				WaveDirection: $scope.createWave.WaveDirection,
-				WaveType: this.WaveType,
-				WindDirection: this.WindDirection
-			});
-
-			// Redirect after save
-			wave.$save(function (response) {
-				$location.path('waves/' + response._id);
-
-				// Clear form fields
-				$scope.name = '';
-			}, function (errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
+        $scope.location = {};
+        $scope.location.availableLocations = [
+            {name: 'CentralCoast', state: 'New South Wales'},
+            {name: 'SydneyNorth', state: 'New South Wales'},
+            {name: 'SydneySouth', state: 'New South Wales'},
+            {name: 'SouthCoast', state: 'New South Wales'},
+            {name: 'Somewhere', state: 'Queensland'}
+        ];
+        $scope.location.selected = {};
 
 
-		// Remove existing Wave
-		$scope.remove = function (wave) {
-			if (wave) {
-				wave.$remove();
+        $scope.location.availableLocationsStateGroupBy = function (item) {
+            return item.state;
+        };
 
-				for (var i in $scope.waves) {
-					if ($scope.waves [i] === wave) {
-						$scope.waves.splice(i, 1);
-					}
-				}
-			} else {
-				$scope.wave.$remove(function () {
-					$location.path('waves');
-				});
-			}
-		};
+        $scope.createWave = {};
+        $scope.createWave.SwellDirection = [];
+        $scope.createWave.WindDirection = [];
 
-		// Update existing Wave
-		$scope.update = function () {
-			var wave = $scope.wave;
+        // Create new Wave
+        $scope.create = function () {
+            // Create new Wave object
+            var wave = new Waves({
+                Name: this.Name,
+                CountryCode: this.CountryCode,
+                Experience: this.Experience,
+                Quality: this.Quality,
+                Region: this.Region,
+                State: this.State,
+                SwellDirection: $scope.createWave.SwellDirection,
+                SwellSize: this.SwellSize,
+                TideMovement: this.TideMovement,
+                TidePosition: this.TidePosition,
+                WindDirection: $scope.createWave.WindDirection,
+                WaveType: this.WaveType,
+                WaveDirection: this.WaveDirection
+            });
 
-			wave.$update(function () {
-				$location.path('waves/' + wave._id);
-			}, function (errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
+            // Redirect after save
+            wave.$save(function (response) {
+                $location.path('waves/' + response._id);
 
-		// Find a list of Waves
-		$scope.find = function () {
-			$scope.waves = Waves.query();
-		};
+                // Clear form fields
+                $scope.createWave.SwellDirection = [];
+                $scope.createWave.WindDirection = [];
 
-		$scope.findByConditions = function (region, swellDirection, windDirection) {
-			Waves.query().$promise.then(function (data) {
-				var selectedWaves = [];
-				data.forEach(function (item) {
-					if (region.name.length > 0 && region.name !== item.Region) {
-						return;
-					}
-					if(item.SwellDirection.length == 0 || item.SwellDirection.length == 0)
-					{
-						return;
-					}
-					if (swellDirection.length > 0 && (lodash.intersection(swellDirection, item.SwellDirection) == 0)) {
-						return;
-					}
-					if(item.WindDirection.length == 0 || item.WindDirection[0].length == 0) {
-						return;
-					}
-					if (windDirection.length > 0 && (lodash.intersection(windDirection, item.WindDirection) == 0)) {
-						return;
-					}
-					selectedWaves.push(item);
-				});
-				$scope.waves = selectedWaves;
-			});
-		};
-
-		$scope.join = function (a) {
-			return a.join(',');
-		};
+            }, function (errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
+        };
 
 
+        // Remove existing Wave
+        $scope.remove = function (wave) {
+            if (wave) {
+                wave.$remove();
 
-		$scope.splitCamelCaseToString = function (s) {
-			return s.split(/(?=[A-Z])/).map(function (p) {
-				return p.charAt(0).toUpperCase() + p.slice(1);
-			}).join(' ');
-		};
+                for (var i in $scope.waves) {
+                    if ($scope.waves [i] === wave) {
+                        $scope.waves.splice(i, 1);
+                    }
+                }
+            } else {
+                $scope.wave.$remove(function () {
+                    $location.path('waves');
+                });
+            }
+        };
 
-		// Find existing Wave
-		$scope.findOne = function () {
-			$scope.wave = Waves.get({
-				waveId: $stateParams.waveId
-			});
-		};
-	}
+        // Update existing Wave
+        $scope.update = function () {
+            var wave = $scope.wave;
+
+            wave.$update(function () {
+                $location.path('waves/' + wave._id);
+            }, function (errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
+        };
+
+        // Find a list of Waves
+        $scope.find = function () {
+            $scope.waves = Waves.query();
+        };
+
+
+        $scope.findByConditions = function (region, swellDirection, windDirection) {
+            Waves.query().$promise.then(function (data) {
+                var selectedWaves = [];
+
+                data.forEach(function (item) {
+                    if (region.name.length > 0 && region.name !== item.Region) {
+                        return;
+                    }
+                    if (item.SwellDirection.length == 0 || item.SwellDirection.length == 0) {
+                        return;
+                    }
+                    if (swellDirection.length > 0 && (lodash.intersection(swellDirection, item.SwellDirection) == 0)) {
+                        return;
+                    }
+                    if (item.WindDirection.length == 0 || item.WindDirection[0].length == 0) {
+                        return;
+                    }
+                    if (windDirection.length > 0 && (lodash.intersection(windDirection, item.WindDirection) == 0)) {
+                        return;
+                    }
+                    selectedWaves.push(item);
+                });
+                $scope.waves = selectedWaves;
+            });
+        };
+
+        $scope.join = function (a) {
+            return a.join(',');
+        };
+
+        $scope.locations = function () {
+            var destinations = ['Vancouver BC','Seattle'];
+            var destinationsToParam = destinations.join('|');
+
+            var response = googleApiProvider.distanceMatrix.bla();
+            /*var response = $.getJSON(result, function(data) {
+                console.log(data);
+            })*/
+        };
+
+
+
+        $scope.splitCamelCaseToString = function (s) {
+            return s.split(/(?=[A-Z])/).map(function (p) {
+                return p.charAt(0).toUpperCase() + p.slice(1);
+            }).join(' ');
+        };
+
+        // Find existing Wave
+        $scope.findOne = function () {
+            $scope.wave = Waves.get({
+                waveId: $stateParams.waveId
+            });
+        };
+    }
+]);
+
+'use strict';
+
+//Waves service used to communicate Waves REST endpoints
+angular.module('waves').factory('googleApiProvider', ['$resource', '$http','GoogleDistance',
+    function ($resource, $http, distance) {
+
+        //  Wraps the callback function to convert the output to a javascript object
+        var returnObjectFromJSON = function(callback) {
+            if (typeof callback === 'function') {
+                return function(err, jsonString) {
+
+                    if (err){
+                        callback(err);
+                        return;
+                    }
+
+                    try {
+                        callback(err, JSON.parse(jsonString));
+                    } catch (e) {
+                        callback(e);
+                    }
+                };
+            }
+            return false;
+        };
+
+
+
+        var gapiBaseUrl = 'https://maps.googleapis.com/maps/api';
+        var apiKey = 'AIzaSyCSBGw0kiu_Nv3dPOBxxanMjuDyjEVA3aY';
+        distance.apiKey = apiKey;
+
+        return {
+            distanceMatrix: $resource('maps/distancematrix', {}, {
+                query: {
+                    method: 'GET', params: {API_KEY: apiKey}, isArray: false, headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Credentials': true
+                    }
+                }
+            }),
+            bla: function() {
+                distance.get(
+                    {
+                        origin: 'San Francisco, CA',
+                        destination: 'Los Angeles, CA',
+                        mode: 'bicycling',
+                        units: 'imperial'
+                    },
+                    function(err, data) {
+                        if (err) return console.log(err);
+                        console.log(data);
+                    });
+            },
+            distanceGet: function () {
+                var dat;
+                $http.jsonp(gapiBaseUrl + '/distancematrix/json?origins=Seattle&destinations=Sydney&callback=angular.callbacks._0').
+                    success(function (data) {
+                        console.log('1');
+                        console.log(data);
+                        dat = data;
+                    }).
+                    error(function (data) {
+                        alert('ERROR: Could not get data.');
+                    });
+                console.log('2');
+                console.log(dat);
+                return dat;
+            }
+            /*,
+             countries: $resource('../data/countries.json', {}, {
+             query: {method: 'GET', params: {}, isArray: false}
+             })*/
+        };
+    }
 ]);
 
 'use strict';
