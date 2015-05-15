@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'SurfAroundTheCorner';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils','ui.select','ngLodash','ngFitText'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils','ui.select','ngLodash','ngFitText','GoogleDistance'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {
@@ -14,6 +14,8 @@ var ApplicationConfiguration = (function() {
 		// Add the module to the AngularJS configuration file
 		angular.module(applicationModuleName).requires.push(moduleName);
 	};
+
+
 
 	return {
 		applicationModuleName: applicationModuleName,
@@ -168,6 +170,16 @@ angular.module('articles').factory('Articles', ['$resource',
 		});
 	}
 ]);
+'use strict';
+
+// Config HTTP Error Handling
+angular.module('core').config(['$httpProvider',
+    function($httpProvider) {
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    }
+]);
+
 'use strict';
 
 // Setting up route
@@ -383,6 +395,10 @@ angular.module('core').service('Menus', [
 // Config HTTP Error Handling
 angular.module('users').config(['$httpProvider',
 	function($httpProvider) {
+
+		$httpProvider.defaults.useXDomain = true;
+		delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
 		// Set the httpProvider "not authorized" interceptor
 		$httpProvider.interceptors.push(['$q', '$location', 'Authentication',
 			function($q, $location, Authentication) {
@@ -408,6 +424,7 @@ angular.module('users').config(['$httpProvider',
 		]);
 	}
 ]);
+
 'use strict';
 
 // Setting up route
@@ -771,6 +788,7 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
             $scope.waves = Waves.query();
         };
 
+
         $scope.findByConditions = function (region, swellDirection, windDirection) {
             Waves.query().$promise.then(function (data) {
                 var selectedWaves = [];
@@ -802,16 +820,16 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
         };
 
         $scope.locations = function () {
-            var destinations = ['Vancouver BC','Seattle']
+            var destinations = ['Vancouver BC','Seattle'];
             var destinationsToParam = destinations.join('|');
 
-            googleApiProvider.distanceMatrix.query({
-                origins: 'San Francisco',
-                destinations: destinationsToParam
-            }).$promise.then(function (data) {
-                    console.log(data);
-                });
-        }
+            var response = googleApiProvider.distanceMatrix.bla();
+            /*var response = $.getJSON(result, function(data) {
+                console.log(data);
+            })*/
+        };
+
+
 
         $scope.splitCamelCaseToString = function (s) {
             return s.split(/(?=[A-Z])/).map(function (p) {
@@ -831,21 +849,77 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
 'use strict';
 
 //Waves service used to communicate Waves REST endpoints
-angular.module('waves').factory('googleApiProvider', ['$resource',
-    function($resource) {
+angular.module('waves').factory('googleApiProvider', ['$resource', '$http','GoogleDistance',
+    function ($resource, $http, distance) {
+
+        //  Wraps the callback function to convert the output to a javascript object
+        var returnObjectFromJSON = function(callback) {
+            if (typeof callback === 'function') {
+                return function(err, jsonString) {
+
+                    if (err){
+                        callback(err);
+                        return;
+                    }
+
+                    try {
+                        callback(err, JSON.parse(jsonString));
+                    } catch (e) {
+                        callback(e);
+                    }
+                };
+            }
+            return false;
+        };
+
+
+
         var gapiBaseUrl = 'https://maps.googleapis.com/maps/api';
         var apiKey = 'AIzaSyCSBGw0kiu_Nv3dPOBxxanMjuDyjEVA3aY';
+        distance.apiKey = apiKey;
 
         return {
-            distanceMatrix: $resource(gapiBaseUrl + '/distancematrix/json', {}, {
+            distanceMatrix: $resource('maps/distancematrix', {}, {
                 query: {
-                    method: 'GET', params: { API_KEY: apiKey}, isArray: false
+                    method: 'GET', params: {API_KEY: apiKey}, isArray: false, headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Credentials': true
+                    }
                 }
-            })/*,
-            countries: $resource('../data/countries.json', {}, {
-                query: {method: 'GET', params: {}, isArray: false}
-            })*/
-        }
+            }),
+            bla: function() {
+                distance.get(
+                    {
+                        origin: 'San Francisco, CA',
+                        destination: 'Los Angeles, CA',
+                        mode: 'bicycling',
+                        units: 'imperial'
+                    },
+                    function(err, data) {
+                        if (err) return console.log(err);
+                        console.log(data);
+                    });
+            },
+            distanceGet: function () {
+                var dat;
+                $http.jsonp(gapiBaseUrl + '/distancematrix/json?origins=Seattle&destinations=Sydney&callback=angular.callbacks._0').
+                    success(function (data) {
+                        console.log('1');
+                        console.log(data);
+                        dat = data;
+                    }).
+                    error(function (data) {
+                        alert('ERROR: Could not get data.');
+                    });
+                console.log('2');
+                console.log(dat);
+                return dat;
+            }
+            /*,
+             countries: $resource('../data/countries.json', {}, {
+             query: {method: 'GET', params: {}, isArray: false}
+             })*/
+        };
     }
 ]);
 

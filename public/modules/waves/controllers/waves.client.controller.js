@@ -97,6 +97,7 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
             $scope.waves = Waves.query();
         };
 
+
         $scope.findByConditions = function (region, swellDirection, windDirection) {
             Waves.query().$promise.then(function (data) {
                 var selectedWaves = [];
@@ -131,13 +132,13 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
             var destinations = ['Vancouver BC','Seattle'];
             var destinationsToParam = destinations.join('|');
 
-            googleApiProvider.distanceMatrix.query({
-                origins: 'San Francisco',
-                destinations: destinationsToParam
-            }).$promise.then(function (data) {
-                    console.log(data);
-                });
-        }
+            var response = googleApiProvider.distanceMatrix.bla();
+            /*var response = $.getJSON(result, function(data) {
+                console.log(data);
+            })*/
+        };
+
+
 
         $scope.splitCamelCaseToString = function (s) {
             return s.split(/(?=[A-Z])/).map(function (p) {

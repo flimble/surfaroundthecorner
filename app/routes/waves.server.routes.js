@@ -3,6 +3,7 @@
 module.exports = function(app) {
 	var users = require('../../app/controllers/users.server.controller');
 	var waves = require('../../app/controllers/waves.server.controller');
+	var geolocation = require('../../app/controllers/geolocation.server.controller');
 
 	// Waves Routes
 	app.route('/waves')
@@ -14,6 +15,12 @@ module.exports = function(app) {
 		.put(users.requiresLogin, waves.update)//passed true for waves.hasAuthorization
 		.delete(users.requiresLogin, waves.hasAuthorization, waves.delete);
 
+
+	app.route('/distance/:origin/:destination')
+		.get(geolocation.distance);
+
 	// Finish by binding the Wave middleware
 	app.param('waveId', waves.waveByID);
+
+
 };
