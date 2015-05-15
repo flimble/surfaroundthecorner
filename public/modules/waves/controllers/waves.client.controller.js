@@ -100,6 +100,7 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
 		$scope.findByConditions = function (region, swellDirection, windDirection) {
 			Waves.query().$promise.then(function (data) {
 				var selectedWaves = [];
+
 				data.forEach(function (item) {
 					if (region.name.length > 0 && region.name !== item.Region) {
 						return;

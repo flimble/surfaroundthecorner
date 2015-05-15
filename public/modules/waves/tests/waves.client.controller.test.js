@@ -166,5 +166,87 @@
 			expect(scope.waves.length).toBe(0);
 		}));
 
+
+		it('single matching condition returns single result', inject(function (Waves) {
+
+			scope.waves = [];
+
+			$httpBackend.expectGET('waves')
+				.respond([{
+					Name: 'Hello',
+					Region: 'SydneyNorth',
+					SwellDirection: ['SouthEast'],
+					WindDirection: ['NorthEast']
+				}]);
+
+			scope.findByConditions({name: 'SydneyNorth' }, ['SouthEast'], ['NorthEast']);
+			$httpBackend.flush();
+
+
+			// Test scope value
+			expect(scope.waves.length).toBe(1);
+		}));
+
+
+
+		it('findByConditions is filtered by region', inject(function (Waves) {
+
+			scope.waves = [];
+
+			$httpBackend.expectGET('waves')
+				.respond([{
+					Name: 'Hello',
+					Region: 'SydneyNorth',
+					SwellDirection: ['SouthEast'],
+					WindDirection: ['NorthEast']
+				}]);
+
+			scope.findByConditions({name: 'SydneySouth' }, ['SouthEast'], ['NorthEast']);
+			$httpBackend.flush();
+
+
+			// Test scope value
+			expect(scope.waves.length).toBe(0);
+		}));
+
+		it('findByConditions is filtered by swelldirection', inject(function (Waves) {
+
+			scope.waves = [];
+
+			$httpBackend.expectGET('waves')
+				.respond([{
+					Name: 'Hello',
+					Region: 'SydneyNorth',
+					SwellDirection: ['SouthEast'],
+					WindDirection: ['NorthEast']
+				}]);
+
+			scope.findByConditions({name: 'SydneyNorth' }, ['SouthWest'], ['NorthEast']);
+			$httpBackend.flush();
+
+
+			// Test scope value
+			expect(scope.waves.length).toBe(0);
+		}));
+
+		it('findByConditions is filtered by winddirection', inject(function (Waves) {
+
+			scope.waves = [];
+
+			$httpBackend.expectGET('waves')
+				.respond([{
+					Name: 'Hello',
+					Region: 'SydneyNorth',
+					SwellDirection: ['SouthEast'],
+					WindDirection: ['NorthEast']
+				}]);
+
+			scope.findByConditions({name: 'SydneyNorth' }, ['SouthEast'], ['NorthWest']);
+			$httpBackend.flush();
+
+
+			// Test scope value
+			expect(scope.waves.length).toBe(0);
+		}));
 	});
 }());
