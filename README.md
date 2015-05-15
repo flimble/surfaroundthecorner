@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/flimble/surfaroundthecorner.svg?branch=master)](https://travis-ci.org/flimble/surfaroundthecorner)
 
 [![Dependency Status](https://david-dm.org/flimble/surfaroundthecorner.svg)](https://david-dm.org/flimble/surfaroundthecorner)
+
 [![devDependency Status](https://david-dm.org/flimble/surfaroundthecorner/dev-status.svg)](https://david-dm.org/flimble/surfaroundthecorner#info=devDependencies)
 
 
