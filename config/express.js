@@ -7,6 +7,7 @@ var fs = require('fs'),
 	http = require('http'),
 	https = require('https'),
 	express = require('express'),
+	request = require('request'),
 	proxy = require('express-http-proxy'),
 	morgan = require('morgan'),
 	bodyParser = require('body-parser'),
@@ -23,7 +24,8 @@ var fs = require('fs'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
 	path = require('path'),
-	seo = require('mean-seo');
+	seo = require('mean-seo'),
+	_ = require('lodash');
 
 module.exports = function(db) {
 	// Initialize express app

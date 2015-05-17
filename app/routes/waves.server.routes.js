@@ -16,7 +16,7 @@ module.exports = function(app) {
 		.delete(users.requiresLogin, waves.hasAuthorization, waves.delete);
 
 
-	app.route('/distance/:origin/:destination')
+	app.route('/distance')
 		.get(geolocation.distance);
 
 	// Finish by binding the Wave middleware
