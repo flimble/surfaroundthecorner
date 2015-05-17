@@ -21,7 +21,7 @@ module.exports = function (config) {
         // Test results reporter to use
         // Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
         //reporters: ['progress'],
-        reporters: ['progress', 'coverage','coveralls'],
+        reporters: ['progress', 'coverage'],
 
         // Web server port
         port: 9876,
@@ -64,6 +64,11 @@ module.exports = function (config) {
             'app/(!tests)/**/*.js': ['coverage']
         },
 
-        coverageReporter: {type: 'lcov', dir: 'coverage/'}
+        coverageReporter: {
+            dir: 'coverage',
+            reporters: [
+                { type: 'lcovonly', subdir: '.', file: 'karma-unittest.lcov' }
+            ]
+        }
     });
 };
