@@ -181,6 +181,15 @@ module.exports = function(grunt) {
 					update: true
 				}
 			}
+		},
+		coveralls: {
+			options: {
+				debug: true,
+				coverageDir: 'coverage',
+				dryRun: true,
+				force: true,
+				recursive: true
+			}
 		}
 	});
 
