@@ -147,12 +147,12 @@ module.exports = function(grunt) {
 				NODE_ENV: 'secure'
 			}
 		},
-		mochaTest: {
-			src: watchFiles.mochaTests,
+		mochacov: {
 			options: {
 				reporter: 'spec',
-				require: 'server.js'
-			}
+				require: ['should','server.js']
+			},
+			all: watchFiles.mochaTests//watchFiles.mochaTests
 		},
 		karma: {
 			unit: {
@@ -234,7 +234,7 @@ module.exports = function(grunt) {
 
 	// Test tasks
 	grunt.registerTask('test', ['test:server', 'test:client', 'test:e2e']);
-	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
+	grunt.registerTask('test:server', ['env:test', 'mochacov']);
 	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
 	grunt.registerTask('test:e2e', ['env:test', 'start:server', 'protractor:run']);
 
