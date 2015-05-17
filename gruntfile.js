@@ -174,6 +174,13 @@ module.exports = function(grunt) {
 				require: 'server.js'
 			},
 			run: {}
+		},
+		david: {
+			all: {
+				options: {
+					update: true
+				}
+			}
 		}
 	});
 
@@ -214,7 +221,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin','less']);
+	grunt.registerTask('build', ['david','lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin','less']);
 
 	// Test tasks
 	grunt.registerTask('test', ['test:server', 'test:client', 'test:e2e']);
