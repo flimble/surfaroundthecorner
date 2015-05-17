@@ -67,7 +67,8 @@ module.exports = function (config) {
         coverageReporter: {
             dir: 'coverage',
             reporters: [
-                { type: 'lcovonly', subdir: '.', file: 'karma-unittest.lcov' }
+                { type: 'lcovonly', subdir: 'karma' },
+                { type: 'html', subdir: 'karma/lcov-report' }
             ]
         }
     });

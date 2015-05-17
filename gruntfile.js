@@ -155,6 +155,17 @@ module.exports = function (grunt) {
                 require: ['server.js']
             }
         },
+        mocha_istanbul: {
+            coverage: {
+                src: 'app/tests',
+                options: {
+                    mask: '*.test.js',
+                    coverageFolder: 'coverage/mocha',
+                    require: 'server.js',
+                    reportFormat: 'lcovonly'
+                }
+            }
+        },
         mochacov: {
             /*lcov: {
              options: {
@@ -262,7 +273,7 @@ module.exports = function (grunt) {
 
     // Test tasks
     grunt.registerTask('test', ['test:server', 'test:client', 'test:e2e']);
-    grunt.registerTask('test:server', ['env:test', 'mochacov:default','mochacov:lcov']);
+    grunt.registerTask('test:server', ['env:test', 'mocha_istanbul:coverage']);
     grunt.registerTask('test:client', ['env:test', 'karma:unit']);
     grunt.registerTask('test:e2e', ['env:test', 'start:server', 'protractor:run']);
 
