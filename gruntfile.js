@@ -148,6 +148,11 @@ module.exports = function(grunt) {
 			}
 		},
 		mochacov: {
+			coverage: {
+				options: {
+					coveralls: true
+				}
+			},
 			options: {
 				reporter: 'spec',
 				require: ['should','server.js']
