@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'SurfAroundTheCorner';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils','ui.select','ngLodash','ngFitText','GoogleDistance'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils','ui.select','ngLodash','ngFitText'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {
@@ -849,8 +849,8 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
 'use strict';
 
 //Waves service used to communicate Waves REST endpoints
-angular.module('waves').factory('googleApiProvider', ['$resource', '$http','GoogleDistance',
-    function ($resource, $http, distance) {
+angular.module('waves').factory('googleApiProvider', ['$resource', '$http',
+    function ($resource, $http) {
 
         //  Wraps the callback function to convert the output to a javascript object
         var returnObjectFromJSON = function(callback) {
@@ -876,7 +876,7 @@ angular.module('waves').factory('googleApiProvider', ['$resource', '$http','Goog
 
         var gapiBaseUrl = 'https://maps.googleapis.com/maps/api';
         var apiKey = 'AIzaSyCSBGw0kiu_Nv3dPOBxxanMjuDyjEVA3aY';
-        distance.apiKey = apiKey;
+
 
         return {
             distanceMatrix: $resource('maps/distancematrix', {}, {
@@ -887,19 +887,6 @@ angular.module('waves').factory('googleApiProvider', ['$resource', '$http','Goog
                     }
                 }
             }),
-            bla: function() {
-                distance.get(
-                    {
-                        origin: 'San Francisco, CA',
-                        destination: 'Los Angeles, CA',
-                        mode: 'bicycling',
-                        units: 'imperial'
-                    },
-                    function(err, data) {
-                        if (err) return console.log(err);
-                        console.log(data);
-                    });
-            },
             distanceGet: function () {
                 var dat;
                 $http.jsonp(gapiBaseUrl + '/distancematrix/json?origins=Seattle&destinations=Sydney&callback=angular.callbacks._0').
