@@ -147,17 +147,13 @@ module.exports = function(grunt) {
 				NODE_ENV: 'secure'
 			}
 		},
-		mochacov: {
-			coverage: {
-				options: {
-					coveralls: true
-				}
-			},
+		mochaTest: {
+
+			src: watchFiles.mochaTests,
 			options: {
 				reporter: 'spec',
-				require: ['should','server.js']
-			},
-			all: watchFiles.mochaTests//watchFiles.mochaTests
+				require: ['server.js','coverage/blanket']
+			}
 		},
 		karma: {
 			unit: {
@@ -239,7 +235,7 @@ module.exports = function(grunt) {
 
 	// Test tasks
 	grunt.registerTask('test', ['test:server', 'test:client', 'test:e2e']);
-	grunt.registerTask('test:server', ['env:test', 'mochacov']);
+	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
 	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
 	grunt.registerTask('test:e2e', ['env:test', 'start:server', 'protractor:run']);
 
