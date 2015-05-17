@@ -4,7 +4,7 @@ exports.config = {
 
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
-    'browserName': 'firefox'
+    browserName: process.env.TRAVIS ? 'firefox' : 'chrome'
   },
 
   baseUrl: 'http://localhost:9001',

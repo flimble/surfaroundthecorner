@@ -13,6 +13,7 @@ module.exports = function (config) {
 
         // List of files / patterns to load in the browser
         files: applicationConfiguration.assets.lib.js.concat(
+            //'./jasmine-core/lib/jasmine-core/jasmine.js',
             applicationConfiguration.assets.js,
             applicationConfiguration.assets.tests
         ),
@@ -63,11 +64,6 @@ module.exports = function (config) {
             'app/(!tests)/**/*.js': ['coverage']
         },
 
-        coverageReporter: {type: 'lcov', dir: 'coverage/'},
-
-        plugins: [
-            'karma-coverage',
-        ]
-
+        coverageReporter: {type: 'lcov', dir: 'coverage/'}
     });
 };
