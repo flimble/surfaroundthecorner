@@ -16,10 +16,7 @@
   "config": {
     "blanket": {
       "pattern": [
-        "app/**/*.js",
-        "gruntfile.js",
-        "server.js",
-        "config/**/*.js"
+        "app"
       ]
     }
   },

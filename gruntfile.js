@@ -166,6 +166,7 @@ module.exports = function (grunt) {
             default: {
                 options: {
                     reporter: 'spec',
+                    coveralls: true,
                     require: ['should', 'server.js']
                 }
             },
@@ -173,7 +174,8 @@ module.exports = function (grunt) {
                 options: {
                     reporter: 'mocha-lcov-reporter',
                     require: ['should', 'server.js'],
-                    output: 'coverage/mocha-servertest.lcov'
+                    output: 'coverage/mocha-servertest.lcov',
+                    files: 'app/tests/**/*.js'
                 }
             },
             options: {
