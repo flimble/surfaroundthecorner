@@ -148,7 +148,6 @@ module.exports = function (grunt) {
             }
         },
         mochaTest: {
-
             src: watchFiles.mochaTests,
             options: {
                 reporter: 'spec',
@@ -164,33 +163,6 @@ module.exports = function (grunt) {
                     require: 'server.js',
                     reportFormat: 'lcovonly'
                 }
-            }
-        },
-        mochacov: {
-            /*lcov: {
-             options: {
-             reporter: 'mocha-lcov-reporter',
-             require: ['should', 'server.js'],
-             output: 'coverage/mocha-servertest.lcov'
-             }
-             },*/
-            default: {
-                options: {
-                    reporter: 'spec',
-                    coveralls: true,
-                    require: ['should', 'server.js']
-                }
-            },
-            lcov: {
-                options: {
-                    reporter: 'mocha-lcov-reporter',
-                    require: ['should', 'server.js'],
-                    output: 'coverage/mocha-servertest.lcov',
-                    files: 'app/tests/**/*.js'
-                }
-            },
-            options: {
-                files: 'app/tests/**/*.js'
             }
         },
         karma: {
