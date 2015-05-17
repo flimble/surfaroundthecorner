@@ -201,6 +201,13 @@ module.exports = function (grunt) {
                 force: true,
                 recursive: true
             }
+        },
+        'mongo-migrate': {
+            up: '',
+            options: {
+                config: 'migrations/default-config.json',
+                dbPropName: 'mongoAppDb'
+            }
         }
     });
 
@@ -242,6 +249,9 @@ module.exports = function (grunt) {
 
     // Build task(s).
     grunt.registerTask('build', ['david', 'lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin', 'less']);
+
+    // Migrate database using mongo-migrate
+    grunt.registerTask('migrate', ['env:test','mongo-migrate']);
 
     // Test tasks
     grunt.registerTask('test', ['test:server', 'test:client', 'test:e2e']);
