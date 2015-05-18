@@ -7,6 +7,7 @@ Surf Around The Corner
 ======================
 
 ### Issues  [![Stories in Ready](https://badge.waffle.io/flimble/surfaroundthecorner.png?label=ready&title=Ready)](https://waffle.io/flimble/surfaroundthecorner)
+[![Stories in Progress](https://badge.waffle.io/flimble/surfaroundthecorner.png?label=in progress&title=In Progress)](https://waffle.io/flimble/surfaroundthecorner)
 
 Issues are tracked using github and are tracked using [waffle.io](https://waffle.io/flimble/surfaroundthecorner)
 
