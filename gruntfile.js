@@ -228,7 +228,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('migrate:database', 'Start the database migration', function () {
-        var mm = require('./node_modules/mongodb-migrations/lib/mongodb-migrations.js');
+        var mm = require('mongodb-migrations');
         var migrator = new mm.Migrator({
             host: 'localhost',
             port: 27017,
@@ -237,16 +237,19 @@ module.exports = function (grunt) {
         }, function(level, message) {
             grunt.log.writeln(message);
         });
-        grunt.log.writeln(migrator.host);
 
-        migrator.migrate(
+        migrator.runFromDir('migrations',
             function (error, results) {
+                grunt.log.writeln('something');
                 this.log('error: ' + error + ' results: ' + results);
             }, function (id, result) {
+                grunt.log.writeln('something');
                 this.log('id: ' + id + ' result: ' + result);
             }
         );
-
+        migrator.dispose(function(error){
+            grunt.log.writeln('disposed');
+        });
     })
 
     //A Task for starting the web server for testing purposes
