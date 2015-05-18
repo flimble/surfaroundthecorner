@@ -1,0 +1,6 @@
+{
+  "host": "localhost",
+  "db": "surfaroundthecorner-test",
+  "port": 27017,
+  "collection": "migrations"
+}

@@ -227,6 +227,28 @@ module.exports = function (grunt) {
         grunt.config.set('applicationLESSFiles', config.assets.less);
     });
 
+    grunt.registerTask('migrate:database', 'Start the database migration', function () {
+        var mm = require('./node_modules/mongodb-migrations/lib/mongodb-migrations.js');
+        var migrator = new mm.Migrator({
+            host: 'localhost',
+            port: 27017,
+            db: 'surfaroundthecorner-test',
+            collection: 'migrations'
+        }, function(level, message) {
+            grunt.log.writeln(message);
+        });
+        grunt.log.writeln(migrator.host);
+
+        migrator.migrate(
+            function (error, results) {
+                this.log('error: ' + error + ' results: ' + results);
+            }, function (id, result) {
+                this.log('id: ' + id + ' result: ' + result);
+            }
+        );
+
+    })
+
     //A Task for starting the web server for testing purposes
     grunt.registerTask('start:server', 'Start the web server', function () {
         grunt.log.writeln('Starting web server on port 9001.');
@@ -251,7 +273,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', ['david', 'lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin', 'less']);
 
     // Migrate database using mongo-migrate
-    grunt.registerTask('migrate', ['env:test','mongo-migrate']);
+    grunt.registerTask('migrate', ['env:test', 'migrate:database']);
 
     // Test tasks
     grunt.registerTask('test', ['test:server', 'test:client', 'test:e2e']);
