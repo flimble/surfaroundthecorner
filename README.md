@@ -4,10 +4,9 @@
 [![Coverage Status](https://coveralls.io/repos/flimble/surfaroundthecorner/badge.svg)](https://coveralls.io/r/flimble/surfaroundthecorner)
 
 Surf Around The Corner
+======================
 
+### Issues  [![Stories in Ready](https://badge.waffle.io/flimble/surfaroundthecorner.png?label=ready&title=Ready)](https://waffle.io/flimble/surfaroundthecorner)
 
-Issues
--------------
+Issues are tracked using github and are tracked using [waffle.io](https://waffle.io/flimble/surfaroundthecorner)
 
-Issues are tracked using github and can be found at [waffle.io](https://waffle.io/flimble/surfaroundthecorner)
-[![Stories in Ready](https://badge.waffle.io/flimble/surfaroundthecorner.png?label=ready&title=Ready)](https://waffle.io/flimble/surfaroundthecorner)
