@@ -1,156 +1,166 @@
 'use strict';
 
 // Waves controller
-angular.module('waves').controller('WavesController', ['$scope', '$stateParams', '$location', 'Waves', 'lodash', 'googleApiProvider',
-    function ($scope, $stateParams, $location, Waves, lodash, googleApiProvider) {
+angular.module('waves')
 
-        $scope.swell = {};
-        $scope.swell.availableCompassDirections = ['NorthEast', 'East', 'SouthEast', 'South'];
-        $scope.swell.compassDirectionsSelected = [];
-
-        $scope.wind = {};
-        $scope.wind.availableCompassDirections = ['North', 'NorthEast', 'East', 'SouthEast', 'South', 'SouthWest', 'West', 'NorthWest'];
-        $scope.wind.compassDirectionsSelected = [];
-
-        $scope.location = {};
-        $scope.location.availableLocations = [
-            {name: 'CentralCoast', state: 'New South Wales'},
-            {name: 'SydneyNorth', state: 'New South Wales'},
-            {name: 'SydneySouth', state: 'New South Wales'},
-            {name: 'SouthCoast', state: 'New South Wales'},
-            {name: 'Somewhere', state: 'Queensland'}
-        ];
-        $scope.location.selected = {};
+    .controller('WavesController', ['$scope', '$stateParams', '$location', 'Waves', 'lodash',
+        function ($scope, $stateParams, $location, Waves, lodash) {
 
 
-        $scope.location.availableLocationsStateGroupBy = function (item) {
-            return item.state;
-        };
+            $scope.$on('mapInitialized', function (event, map) {
+                //map.setCenter( .... )
 
-        $scope.createWave = {};
-        $scope.createWave.SwellDirection = [];
-        $scope.createWave.WindDirection = [];
-
-        // Create new Wave
-        $scope.create = function () {
-            // Create new Wave object
-            var wave = new Waves({
-                Name: this.Name,
-                CountryCode: this.CountryCode,
-                Experience: this.Experience,
-                Quality: this.Quality,
-                Region: this.Region,
-                State: this.State,
-                SwellDirection: $scope.createWave.SwellDirection,
-                SwellSize: this.SwellSize,
-                TideMovement: this.TideMovement,
-                TidePosition: this.TidePosition,
-                WindDirection: $scope.createWave.WindDirection,
-                WaveType: this.WaveType,
-                WaveDirection: this.WaveDirection
             });
 
-            // Redirect after save
-            wave.$save(function (response) {
-                $location.path('waves/' + response._id);
+            $scope.wave = {};
+            $scope.swell = {};
+            $scope.swell.availableCompassDirections = ['NorthEast', 'East', 'SouthEast', 'South'];
+            $scope.swell.compassDirectionsSelected = [];
 
-                // Clear form fields
-                $scope.createWave.SwellDirection = [];
-                $scope.createWave.WindDirection = [];
+            $scope.wind = {};
+            $scope.wind.availableCompassDirections = ['North', 'NorthEast', 'East', 'SouthEast', 'South', 'SouthWest', 'West', 'NorthWest'];
+            $scope.wind.compassDirectionsSelected = [];
 
-            }, function (errorResponse) {
-                $scope.error = errorResponse.data.message;
-            });
-        };
+            $scope.location = {};
+            $scope.location.availableLocations = [
+                {name: 'CentralCoast', state: 'New South Wales'},
+                {name: 'SydneyNorth', state: 'New South Wales'},
+                {name: 'SydneySouth', state: 'New South Wales'},
+                {name: 'SouthCoast', state: 'New South Wales'},
+                {name: 'Somewhere', state: 'Queensland'}
+            ];
+            $scope.location.selected = {};
 
 
-        // Remove existing Wave
-        $scope.remove = function (wave) {
-            if (wave) {
-                wave.$remove();
+            $scope.location.availableLocationsStateGroupBy = function (item) {
+                return item.state;
+            };
 
-                for (var i in $scope.waves) {
-                    if ($scope.waves [i] === wave) {
-                        $scope.waves.splice(i, 1);
+            $scope.createWave = {};
+            $scope.createWave.SwellDirection = [];
+            $scope.createWave.WindDirection = [];
+
+            // Create new Wave
+            $scope.create = function () {
+                // Create new Wave object
+                var wave = new Waves({
+                    Name: this.Name,
+                    CountryCode: this.CountryCode,
+                    Experience: this.Experience,
+                    Quality: this.Quality,
+                    Region: this.Region,
+                    State: this.State,
+                    SwellDirection: $scope.createWave.SwellDirection,
+                    SwellSize: this.SwellSize,
+                    TideMovement: this.TideMovement,
+                    TidePosition: this.TidePosition,
+                    WindDirection: $scope.createWave.WindDirection,
+                    WaveType: this.WaveType,
+                    WaveDirection: this.WaveDirection
+                });
+
+                $scope.map = {};
+
+                // Redirect after save
+                wave.$save(function (response) {
+                    $location.path('waves/' + response._id);
+
+                    // Clear form fields
+                    $scope.createWave.SwellDirection = [];
+                    $scope.createWave.WindDirection = [];
+
+                }, function (errorResponse) {
+                    $scope.error = errorResponse.data.message;
+                });
+            };
+
+
+            // Remove existing Wave
+            $scope.remove = function (wave) {
+                if (wave) {
+                    wave.$remove();
+
+                    for (var i in $scope.waves) {
+                        if ($scope.waves [i] === wave) {
+                            $scope.waves.splice(i, 1);
+                        }
                     }
+                } else {
+                    $scope.wave.$remove(function () {
+                        $location.path('waves');
+                    });
                 }
-            } else {
-                $scope.wave.$remove(function () {
-                    $location.path('waves');
+            };
+
+            // Update existing Wave
+            $scope.update = function () {
+                var wave = $scope.wave;
+
+                wave.$update(function () {
+                    $location.path('waves/' + wave._id);
+                }, function (errorResponse) {
+                    $scope.error = errorResponse.data.message;
                 });
-            }
-        };
+            };
 
-        // Update existing Wave
-        $scope.update = function () {
-            var wave = $scope.wave;
-
-            wave.$update(function () {
-                $location.path('waves/' + wave._id);
-            }, function (errorResponse) {
-                $scope.error = errorResponse.data.message;
-            });
-        };
-
-        // Find a list of Waves
-        $scope.find = function () {
-            $scope.waves = Waves.query();
-        };
+            // Find a list of Waves
+            $scope.find = function () {
+                $scope.waves = Waves.query();
+            };
 
 
-        $scope.findByConditions = function (region, swellDirection, windDirection) {
-            Waves.query().$promise.then(function (data) {
-                var selectedWaves = [];
+            $scope.findByConditions = function (region, swellDirection, windDirection) {
+                Waves.query().$promise.then(function (data) {
+                    var selectedWaves = [];
 
-                data.forEach(function (item) {
-                    if (region.name.length > 0 && region.name !== item.Region) {
-                        return;
-                    }
-                    if (item.SwellDirection.length == 0 || item.SwellDirection.length == 0) {
-                        return;
-                    }
-                    if (swellDirection.length > 0 && (lodash.intersection(swellDirection, item.SwellDirection) == 0)) {
-                        return;
-                    }
-                    if (item.WindDirection.length == 0 || item.WindDirection[0].length == 0) {
-                        return;
-                    }
-                    if (windDirection.length > 0 && (lodash.intersection(windDirection, item.WindDirection) == 0)) {
-                        return;
-                    }
-                    selectedWaves.push(item);
+                    data.forEach(function (item) {
+                        if (region.name.length > 0 && region.name !== item.Region) {
+                            return;
+                        }
+                        if (item.SwellDirection.length == 0 || item.SwellDirection.length == 0) {
+                            return;
+                        }
+                        if (swellDirection.length > 0 && (lodash.intersection(swellDirection, item.SwellDirection) == 0)) {
+                            return;
+                        }
+                        if (item.WindDirection.length == 0 || item.WindDirection[0].length == 0) {
+                            return;
+                        }
+                        if (windDirection.length > 0 && (lodash.intersection(windDirection, item.WindDirection) == 0)) {
+                            return;
+                        }
+                        selectedWaves.push(item);
+                    });
+                    $scope.waves = selectedWaves;
                 });
-                $scope.waves = selectedWaves;
-            });
-        };
+            };
 
-        $scope.join = function (a) {
-            return a.join(',');
-        };
+            $scope.join = function (a) {
+                return a.join(',');
+            };
 
-        $scope.locations = function () {
-            var destinations = ['Vancouver BC','Seattle'];
-            var destinationsToParam = destinations.join('|');
+            $scope.locations = function () {
+                var destinations = ['Vancouver BC', 'Seattle'];
+                var destinationsToParam = destinations.join('|');
 
-            var response = googleApiProvider.distanceMatrix.bla();
-            /*var response = $.getJSON(result, function(data) {
-                console.log(data);
-            })*/
-        };
+            };
 
 
+            $scope.splitCamelCaseToString = function (s) {
+                return s.split(/(?=[A-Z])/).map(function (p) {
+                    return p.charAt(0).toUpperCase() + p.slice(1);
+                }).join(' ');
+            };
 
-        $scope.splitCamelCaseToString = function (s) {
-            return s.split(/(?=[A-Z])/).map(function (p) {
-                return p.charAt(0).toUpperCase() + p.slice(1);
-            }).join(' ');
-        };
+            // Find existing Wave
+            $scope.findOne = function () {
+                Waves.get({
+                    waveId: $stateParams.waveId
+                }).$promise.then(function (data) {
+                        $scope.wave = data;
+                    });
+            };
 
-        // Find existing Wave
-        $scope.findOne = function () {
-            $scope.wave = Waves.get({
-                waveId: $stateParams.waveId
-            });
-        };
-    }
-]);
+
+        }
+    ]);
