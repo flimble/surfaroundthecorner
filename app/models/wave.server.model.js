@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+	decimalCalc = require('./../lib/DecimalDegreeCalculator.js'),
 	Schema = mongoose.Schema;
 
 /**
@@ -62,6 +63,14 @@ var WaveSchema = new Schema({
 	WindDirection: {
 		type: Array,
 		default: []
+	},
+	LatitudeDecimal: {
+		type: Number,
+		default: 0
+	},
+	LongitudeDecimal: {
+		type: Number,
+		default: 0
 	}
 });
 

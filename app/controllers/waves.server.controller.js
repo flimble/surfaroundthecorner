@@ -28,6 +28,7 @@ exports.create = function(req, res) {
  * Show the current wave
  */
 exports.read = function(req, res) {
+
 	res.jsonp(req.wave);
 };
 
@@ -91,7 +92,7 @@ exports.waveByID = function(req, res, next, id) {
 	Wave.findById(id).populate('user', 'displayName').exec(function(err, wave) {
 		if (err) return next(err);
 		if (! wave) return next(new Error('Failed to load wave ' + id));
-		req.wave = wave ;
+		req.wave = wave;
 		next();
 	});
 };

@@ -3,16 +3,16 @@
 // Waves controller
 angular.module('waves')
 
-    .controller('WavesController', ['$scope', '$stateParams', '$location', 'Waves', 'lodash',
-        function ($scope, $stateParams, $location, Waves, lodash) {
+    .controller('WavesController', ['$scope', '$stateParams', '$location', 'Waves', 'lodash','googleApiProvider',
+        function ($scope, $stateParams, $location, Waves, lodash, googleApiProvider) {
+            $scope.map;
 
-
-            $scope.$on('mapInitialized', function (event, map) {
-                //map.setCenter( .... )
-
+            $scope.$on('mapInitialized', function (event, eventmap) {
+                console.log('loading map');
+                $scope.map = eventmap;
             });
 
-            $scope.wave = {};
+            //$scope.wave = {};
             $scope.swell = {};
             $scope.swell.availableCompassDirections = ['NorthEast', 'East', 'SouthEast', 'South'];
             $scope.swell.compassDirectionsSelected = [];
@@ -59,7 +59,6 @@ angular.module('waves')
                     WaveDirection: this.WaveDirection
                 });
 
-                $scope.map = {};
 
                 // Redirect after save
                 wave.$save(function (response) {
@@ -157,7 +156,29 @@ angular.module('waves')
                 Waves.get({
                     waveId: $stateParams.waveId
                 }).$promise.then(function (data) {
-                        $scope.wave = data;
+                        var wave = data;
+                        wave.LongitudeDecimal = googleApiProvider.coordinates.toDecimal(wave.Longitude);
+                        wave.LatitudeDecimal = googleApiProvider.coordinates.toDecimal(wave.Latitude);
+                        console.log("found a wave");
+                        if($scope.map) {
+                            var pos = new google.maps.LatLng(wave.LatitudeDecimal, wave.LongitudeDecimal);
+                            var marker = new google.maps.Marker({
+                                position: pos,
+                                map: $scope.map,
+                                title: wave.Name,
+                                draggable: true
+                            });
+                            google.maps.event.addListener(marker,'dragend',function(event) {
+                                $scope.$apply(function() {
+                                    $scope.wave.Latitude = event.latLng.lat();
+                                    $scope.wave.Longitude = event.latLng.lng();
+                                })
+                            });
+
+                            $scope.map.setCenter(pos);
+                        }
+
+                        $scope.wave = wave;
                     });
             };
 
