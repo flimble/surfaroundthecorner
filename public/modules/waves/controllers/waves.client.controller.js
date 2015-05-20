@@ -3,9 +3,8 @@
 // Waves controller
 angular.module('waves')
 
-    .controller('WavesController', ['$scope', '$stateParams', '$location', 'wavesQueryFactory', 'lodash', 'coordinateConversionFactory',
+    .controller('WavesController', ['$scope', '$stateParams', '$location', 'WavesRestClientService', 'lodash','coordinateConversionFactory',
         function ($scope, $stateParams, $location, Waves, lodash, coordinateSvc) {
-            $scope.map;
 
             $scope.$on('mapInitialized', function (event, eventmap) {
                 console.log('loading map');
@@ -116,16 +115,16 @@ angular.module('waves')
                         if (region.name.length > 0 && region.name !== item.Region) {
                             return;
                         }
-                        if (item.SwellDirection.length == 0 || item.SwellDirection.length == 0) {
+                        if (item.SwellDirection.length === 0 || item.SwellDirection.length === 0) {
                             return;
                         }
-                        if (swellDirection.length > 0 && (lodash.intersection(swellDirection, item.SwellDirection) == 0)) {
+                        if (swellDirection.length > 0 && (lodash.intersection(swellDirection, item.SwellDirection) === 0)) {
                             return;
                         }
-                        if (item.WindDirection.length == 0 || item.WindDirection[0].length == 0) {
+                        if (item.WindDirection.length === 0 || item.WindDirection[0].length === 0) {
                             return;
                         }
-                        if (windDirection.length > 0 && (lodash.intersection(windDirection, item.WindDirection) == 0)) {
+                        if (windDirection.length > 0 && (lodash.intersection(windDirection, item.WindDirection) === 0)) {
                             return;
                         }
                         selectedWaves.push(item);
@@ -174,7 +173,6 @@ angular.module('waves')
                             wave.Latitude = lat;
                         }
 
-                        console.log("found a wave");
                         if ($scope.map) {
                             var pos = new google.maps.LatLng(wave.Latitude, wave.Longitude);
 
@@ -189,7 +187,7 @@ angular.module('waves')
                                 $scope.$apply(function () {
                                     $scope.wave.Latitude = event.latLng.lat().toFixed(7);
                                     $scope.wave.Longitude = event.latLng.lng().toFixed(7);
-                                })
+                                });
                             });
 
                             $scope.map.setCenter(pos);

@@ -1,9 +1,0 @@
-{
-  "name": "decimaldegreecalculator",
-  "description": "Higher-order functions and common patterns for asynchronous code",
-  "main": "./decimaldegreecalulator",
-  "author": {
-    "name": "John FAttal"
-  },
-  "version": "0.0.1",
-}

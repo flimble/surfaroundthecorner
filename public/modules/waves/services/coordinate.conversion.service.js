@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('waves').factory('coordinateConversionFactory', 
-    function () {
+angular.module('waves').factory('coordinateConversionFactory',['lodash',
+    function (_) {
 
       
         function removeAt(s,i) {
@@ -30,7 +30,7 @@ angular.module('waves').factory('coordinateConversionFactory',
                     y = removeAt(y,i);
             }
             return y;
-        };
+        }
 
 
 
@@ -49,7 +49,7 @@ angular.module('waves').factory('coordinateConversionFactory',
 
             if (_.indexOf(negativeDirections, direction) !== -1) {
                 return y * -1;
-            };
+            }
             return y;
         };
 
@@ -72,5 +72,5 @@ angular.module('waves').factory('coordinateConversionFactory',
                 }
             }
         };
-    }
+    }]
 );

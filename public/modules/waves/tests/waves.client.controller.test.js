@@ -5,6 +5,7 @@
 	describe('Waves Controller Tests', function() {
 		// Initialize global variables
 		var WavesController,
+  		map,
 		scope,
 		$httpBackend,
 		$stateParams,
@@ -50,9 +51,9 @@
 			});
 		}));
 
-		it('$scope.find() should create an array with at least one Wave object fetched from XHR', inject(function(wavesQueryFactory) {
+		it('$scope.find() should create an array with at least one Wave object fetched from XHR', inject(function(WavesRestClientService) {
 			// Create sample Wave using the Waves service
-			var sampleWave = new wavesQueryFactory({
+			var sampleWave = new WavesRestClientService({
 				Name: 'New Wave'
 			});
 
@@ -70,9 +71,9 @@
 			expect(scope.waves).toEqualData(sampleWaves);
 		}));
 
-		it('$scope.findOne() should create an array with one Wave object fetched from XHR using a waveId URL parameter', inject(function(wavesQueryFactory) {
+		it('$scope.findOne() should create an array with one Wave object fetched from XHR using a waveId URL parameter', inject(function(WavesRestClientService) {
 			// Define a sample Wave object
-			var sampleWave = new wavesQueryFactory({
+			var sampleWave = new WavesRestClientService({
 				Name: 'New Wave'
 			});
 
@@ -90,16 +91,16 @@
 			expect(scope.wave).toEqualData(sampleWave);
 		}));
 
-		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(wavesQueryFactory) {
+		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(WavesRestClientService) {
 			// Create a sample Wave object
-			var expectedWavePostData = new wavesQueryFactory({
+			var expectedWavePostData = new WavesRestClientService({
 				Name: 'New Wave',
 				SwellDirection: ['South'],
 				WindDirection: ['SouthWest']
 			});
 
 			// Create a sample Wave response
-			var sampleWaveResponse = new wavesQueryFactory({
+			var sampleWaveResponse = new WavesRestClientService({
 				_id: '525cf20451979dea2c000001',
 				Name: 'New Wave'
 			});
@@ -125,9 +126,9 @@
 			expect($location.path()).toBe('/waves/' + sampleWaveResponse._id);
 		}));
 
-		it('$scope.update() should update a valid Wave', inject(function(wavesQueryFactory) {
+		it('$scope.update() should update a valid Wave', inject(function(WavesRestClientService) {
 			// Define a sample Wave put data
-			var sampleWavePutData = new wavesQueryFactory({
+			var sampleWavePutData = new WavesRestClientService({
 				_id: '525cf20451979dea2c000001',
 				Name: 'New Wave'
 			});
@@ -146,9 +147,9 @@
 			expect($location.path()).toBe('/waves/' + sampleWavePutData._id);
 		}));
 
-		it('$scope.remove() should send a DELETE request with a valid waveId and remove the Wave from the scope', inject(function(wavesQueryFactory) {
+		it('$scope.remove() should send a DELETE request with a valid waveId and remove the Wave from the scope', inject(function(WavesRestClientService) {
 			// Create new Wave object
-			var sampleWave = new wavesQueryFactory({
+			var sampleWave = new WavesRestClientService({
 				_id: '525a8422f6d0f87f0e407a33'
 			});
 
@@ -167,7 +168,7 @@
 		}));
 
 
-		it('single matching condition returns single result', inject(function (wavesQueryFactory) {
+		it('single matching condition returns single result', inject(function (WavesRestClientService) {
 
 			scope.waves = [];
 
@@ -189,7 +190,7 @@
 
 
 
-		it('findByConditions is filtered by region', inject(function (wavesQueryFactory) {
+		it('findByConditions is filtered by region', inject(function (WavesRestClientService) {
 
 			scope.waves = [];
 
@@ -209,7 +210,7 @@
 			expect(scope.waves.length).toBe(0);
 		}));
 
-		it('findByConditions is filtered by swelldirection', inject(function (wavesQueryFactory) {
+		it('findByConditions is filtered by swelldirection', inject(function (WavesRestClientService) {
 
 			scope.waves = [];
 
@@ -229,7 +230,7 @@
 			expect(scope.waves.length).toBe(0);
 		}));
 
-		it('findByConditions is filtered by winddirection', inject(function (wavesQueryFactory) {
+		it('findByConditions is filtered by winddirection', inject(function (WavesRestClientService) {
 
 			scope.waves = [];
 
@@ -249,7 +250,7 @@
 			expect(scope.waves.length).toBe(0);
 		}));
 
-		it('findByConditions complex scenario', inject(function (wavesQueryFactory) {
+		it('findByConditions complex scenario', inject(function (WavesRestClientService) {
 
 			scope.waves = [];
 
@@ -276,7 +277,7 @@
 			expect(scope.waves).toEqualData(mockedQueryData);
 		}));
 
-		it('first google api test', inject(function (wavesQueryFactory) {
+		it('first google api test', inject(function (WavesRestClientService) {
 
 			/*.expect('GET', 'https://maps.googleapis.com/maps/api/distancematrix/json?API_KEY=AIzaSyCSBGw0kiu_Nv3dPOBxxanMjuDyjEVA3aY&destinations=Vancouver+BC%7CSeattle&origins=San+Francisco', null)
 				.respond({

@@ -74,6 +74,9 @@ module.exports = function (grunt) {
                 src: watchFiles.clientCSS
             }
         },
+        lesslint: {
+            src: ['public/modules/**/*.less']
+        },
         uglify: {
             production: {
                 options: {
@@ -270,7 +273,7 @@ module.exports = function (grunt) {
     grunt.registerTask('secure', ['env:secure', 'lint', 'concurrent:default']);
 
     // Lint task(s).
-    grunt.registerTask('lint', ['jshint', 'csslint']);
+    grunt.registerTask('lint', ['jshint', 'lesslint','csslint']);
 
     // Build task(s).
     grunt.registerTask('build', ['david', 'lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin', 'less']);
