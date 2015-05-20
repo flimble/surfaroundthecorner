@@ -3,8 +3,8 @@
 // Waves controller
 angular.module('waves')
 
-    .controller('WavesController', ['$scope', '$stateParams', '$location', 'Waves', 'lodash', 'googleApiProvider',
-        function ($scope, $stateParams, $location, Waves, lodash, googleApiProvider) {
+    .controller('WavesController', ['$scope', '$stateParams', '$location', 'wavesQueryFactory', 'lodash', 'coordinateConversionFactory',
+        function ($scope, $stateParams, $location, Waves, lodash, coordinateSvc) {
             $scope.map;
 
             $scope.$on('mapInitialized', function (event, eventmap) {
@@ -168,8 +168,8 @@ angular.module('waves')
                         var wave = data;
 
                         if (wave.Longitude && wave.Longitude.indexOf('\'') > -1) {
-                            var lng = googleApiProvider.coordinates.toDecimal(wave.Longitude);
-                            var lat = googleApiProvider.coordinates.toDecimal(wave.Latitude);
+                            var lng = coordinateSvc.ddm.stringToDecimal(wave.Longitude);
+                            var lat = coordinateSvc.ddm.stringToDecimal(wave.Latitude);
                             wave.Longitude = lng;
                             wave.Latitude = lat;
                         }
@@ -187,8 +187,8 @@ angular.module('waves')
                             $scope.marker = marker;
                             google.maps.event.addListener(marker, 'dragend', function (event) {
                                 $scope.$apply(function () {
-                                    $scope.wave.Latitude = event.latLng.lat().toFixed(5);
-                                    $scope.wave.Longitude = event.latLng.lng().toFixed(5);
+                                    $scope.wave.Latitude = event.latLng.lat().toFixed(7);
+                                    $scope.wave.Longitude = event.latLng.lng().toFixed(7);
                                 })
                             });
 

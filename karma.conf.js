@@ -21,10 +21,12 @@ module.exports = function (config) {
         // Test results reporter to use
         // Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
         //reporters: ['progress'],
-        reporters: ['progress', 'coverage'],
+        reporters: ['dots','progress', 'coverage'],
 
         // Web server port
         port: 9876,
+
+        browserNoActivityTimeout: 100000,
 
         // Enable / disable colors in the output (reporters and logs)
         colors: true,
