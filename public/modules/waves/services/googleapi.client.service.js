@@ -24,6 +24,11 @@ angular.module('waves').factory('googleApiProvider', ['$resource', '$http',
             return false;
         };
 
+        function removeAt(s,i) {
+            s = s.substring(0,i)+s.substring(i+1,s.length);
+            return s;
+        }
+
         function roundnum(x,p) {
             var i;
             var n=parseFloat(x);
@@ -46,6 +51,8 @@ angular.module('waves').factory('googleApiProvider', ['$resource', '$http',
             }
             return y;
         };
+
+
 
         var degreesminutesdirection = function (degrees, minutes, direction) {
             var validDirections = ['N', 'E', 'S', 'W'],

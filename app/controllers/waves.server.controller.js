@@ -28,7 +28,6 @@ exports.create = function(req, res) {
  * Show the current wave
  */
 exports.read = function(req, res) {
-
 	res.jsonp(req.wave);
 };
 
@@ -37,7 +36,6 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var wave = req.wave ;
-
 	wave = _.extend(wave , req.body);
 
 	wave.save(function(err) {

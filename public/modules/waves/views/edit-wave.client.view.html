@@ -7,7 +7,7 @@
     <section class="col-sm-6">
         <div id="map_canvas" >
             <div map-lazy-load="http://maps.google.com/maps/api/js">
-                <map zoom="17"></map>
+                <map zoom="15"></map>
             </div>
         </div>
     </section>
@@ -23,14 +23,25 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Decimal</label>
-                    {{wave.LatitudeDecimal}} {{wave.LongitudeDecimal}}
+                    <label class="control-label col-sm-2" for="input-wave-region">Region</label>
+
+                    <div class="controls col-sm-10">
+                        <select class="form-control" id="input-wave-region" data-ng-model="wave.Region">
+                            <optgroup label="New South Wales">
+                                <option value="SydneyNorth">SydneyNorth</option>
+                                <option value="SydneySouth">SydneySouth</option>
+                            </optgroup>
+                            <optgroup label="Queensland">
+                                <option value="Other">Other</option>
+                            </optgroup>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="input-wave-latitude">Latitude</label>
 
                     <div class="controls col-sm-10">
-                        <input type="text" data-ng-model="wave.LatitudeDecimal" id="input-wave-latitude" class="form-control"
+                        <input type="text" data-ng-model="wave.Latitude" ng-change="refreshMapMarker()" id="input-wave-latitude" class="form-control"
                                placeholder="Latitude" required>
                     </div>
                 </div>
@@ -38,7 +49,7 @@
                     <label class="col-sm-2 control-label" for="input-wave-longitude">Longitude</label>
 
                     <div class="controls col-sm-10">
-                        <input type="text" data-ng-model="wave.Longitude" id="input-wave-longitude" class="form-control"
+                        <input type="text" data-ng-model="wave.Longitude" ng-change="refreshMapMarker()" id="input-wave-longitude" class="form-control"
                                placeholder="Longitude" required>
                     </div>
                 </div>
@@ -86,21 +97,7 @@
                                class="form-control" placeholder="Experience" required>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="input-wave-region">Region</label>
 
-                    <div class="controls col-sm-10">
-                        <select class="form-control" id="input-wave-region" data-ng-model="wave.Region">
-                            <optgroup label="New South Wales">
-                                <option value="SydneyNorth">SydneyNorth</option>
-                                <option value="SydneySouth">SydneySouth</option>
-                            </optgroup>
-                            <optgroup label="Queensland">
-                                <option value="Other">Other</option>
-                            </optgroup>
-                        </select>
-                    </div>
-                </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="input-wave-size">Swell Size</label>
 

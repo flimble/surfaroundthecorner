@@ -3,7 +3,7 @@
 // Waves controller
 angular.module('waves')
 
-    .controller('WavesController', ['$scope', '$stateParams', '$location', 'Waves', 'lodash','googleApiProvider',
+    .controller('WavesController', ['$scope', '$stateParams', '$location', 'Waves', 'lodash', 'googleApiProvider',
         function ($scope, $stateParams, $location, Waves, lodash, googleApiProvider) {
             $scope.map;
 
@@ -151,27 +151,44 @@ angular.module('waves')
                 }).join(' ');
             };
 
+            $scope.refreshMapMarker = function () {
+                var pos = new google.maps.LatLng($scope.wave.Latitude, $scope.wave.Longitude);
+
+                $scope.map.setCenter(pos);
+                $scope.marker.setMap(null);
+                $scope.marker.setMap($scope.map);
+                $scope.marker.position = pos;
+            };
+
             // Find existing Wave
             $scope.findOne = function () {
                 Waves.get({
                     waveId: $stateParams.waveId
                 }).$promise.then(function (data) {
                         var wave = data;
-                        wave.LongitudeDecimal = googleApiProvider.coordinates.toDecimal(wave.Longitude);
-                        wave.LatitudeDecimal = googleApiProvider.coordinates.toDecimal(wave.Latitude);
+
+                        if (wave.Longitude && wave.Longitude.indexOf('\'') > -1) {
+                            var lng = googleApiProvider.coordinates.toDecimal(wave.Longitude);
+                            var lat = googleApiProvider.coordinates.toDecimal(wave.Latitude);
+                            wave.Longitude = lng;
+                            wave.Latitude = lat;
+                        }
+
                         console.log("found a wave");
-                        if($scope.map) {
-                            var pos = new google.maps.LatLng(wave.LatitudeDecimal, wave.LongitudeDecimal);
+                        if ($scope.map) {
+                            var pos = new google.maps.LatLng(wave.Latitude, wave.Longitude);
+
                             var marker = new google.maps.Marker({
                                 position: pos,
                                 map: $scope.map,
                                 title: wave.Name,
                                 draggable: true
                             });
-                            google.maps.event.addListener(marker,'dragend',function(event) {
-                                $scope.$apply(function() {
-                                    $scope.wave.Latitude = event.latLng.lat();
-                                    $scope.wave.Longitude = event.latLng.lng();
+                            $scope.marker = marker;
+                            google.maps.event.addListener(marker, 'dragend', function (event) {
+                                $scope.$apply(function () {
+                                    $scope.wave.Latitude = event.latLng.lat().toFixed(5);
+                                    $scope.wave.Longitude = event.latLng.lng().toFixed(5);
                                 })
                             });
 
