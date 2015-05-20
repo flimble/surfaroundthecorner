@@ -62,6 +62,14 @@ var WaveSchema = new Schema({
 	WindDirection: {
 		type: Array,
 		default: []
+	},
+	Longitude: {
+		type: String,
+		default: ''
+	},
+	Latitude: {
+		type: String,
+		default: ''
 	}
 });
 

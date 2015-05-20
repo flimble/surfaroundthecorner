@@ -132,11 +132,16 @@ module.exports = function(db) {
 
 	app.use(seo({
 		cacheClient: 'disk', // Can be 'disk' or 'redis'
-    	cacheDuration: 2 * 60 * 60 * 24 * 1000, // In milliseconds for disk cache
+    	cacheDuration: 2 * 60 * 60 * 24 * 1000 // In milliseconds for disk cache
 	}));
 
 	// Setting the app router and static folder
 	app.use(express.static(path.resolve('./public')));
+
+	// Globbing utility files
+	/*config.getGlobbedFiles('./app/lib/*.js').forEach(function(routePath) {
+		require(path.resolve(routePath))(app);
+	});*/
 
 	// Globbing routing files
 	config.getGlobbedFiles('./app/routes/**/*.js').forEach(function(routePath) {

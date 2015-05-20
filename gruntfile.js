@@ -250,7 +250,7 @@ module.exports = function (grunt) {
         migrator.dispose(function(error){
             grunt.log.writeln('disposed');
         });
-    })
+    });
 
     //A Task for starting the web server for testing purposes
     grunt.registerTask('start:server', 'Start the web server', function () {

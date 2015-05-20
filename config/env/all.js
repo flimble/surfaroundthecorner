@@ -38,7 +38,11 @@ module.exports = {
 				'public/lib/angular-ui-select/dist/select.js',
 				'public/lib/ng-lodash/build/ng-lodash.js',
 				'public/lib/ng-backstretch/dist/ng-backstretch.js',
-				'public/lib/ngFitText/src/ng-FitText.js'
+				'public/lib/ngFitText/src/ng-FitText.js',
+				'public/lib/lodash/dist/lodash.js',
+				'http://maps.google.com/maps/api/js',
+				'public/lib/angular-google-maps/dist/angular-google-maps.js',
+				'public/lib/ngmap/build/scripts/ng-map.js'
 			]
 		},
 		css: [
@@ -50,6 +54,7 @@ module.exports = {
 			'public/config.js',
 			'public/application.js',
 			'public/modules/*/*.js',
+			'public/utils/*.js',
 			'public/modules/*/*[!tests]*/*.js'
 		],
 		tests: [

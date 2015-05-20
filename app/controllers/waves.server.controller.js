@@ -36,7 +36,6 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var wave = req.wave ;
-
 	wave = _.extend(wave , req.body);
 
 	wave.save(function(err) {
@@ -91,7 +90,7 @@ exports.waveByID = function(req, res, next, id) {
 	Wave.findById(id).populate('user', 'displayName').exec(function(err, wave) {
 		if (err) return next(err);
 		if (! wave) return next(new Error('Failed to load wave ' + id));
-		req.wave = wave ;
+		req.wave = wave;
 		next();
 	});
 };

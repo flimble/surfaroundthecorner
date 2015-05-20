@@ -1,53 +1,30 @@
-<section data-ng-controller="WavesController" data-ng-init="findOne()">
+<section>
     <div class="page-header">
         <h1>Edit Wave</h1>
     </div>
-    <div class="col-md-12">
+</section>
+<div class="container-fluid" data-ng-controller="WavesController" data-ng-init="findOne()">
+    <section class="col-sm-6">
+        <div id="map_canvas" >
+            <div map-lazy-load="http://maps.google.com/maps/api/js">
+                <map zoom="15"></map>
+            </div>
+        </div>
+    </section>
+    <section class="col-sm-6" >
         <form id="waveForm" class="form-horizontal" data-ng-submit="update(waveForm.$valid)" novalidate>
             <fieldset>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="input-wave-name">Name</label>
-                    <div class="controls col-sm-10">
-                        <input type="text" data-ng-model="wave.Name" id="input-wave-name" class="form-control" placeholder="Name" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="input-select-swelldirection">Swell Direction: </label>
-                    <div class="col-sm-10">
-                        <ui-select data-ng-model="wave.SwellDirection"  id="input-select-swelldirection" multiple theme="bootstrap">
-                            <ui-select-match placeholder="Select swell direction...">{{$item}}</ui-select-match>
-                            <ui-select-choices repeat="item in swell.availableCompassDirections | filter:$select.search">
-                                {{item}}
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="input-select-winddirection">Wind Direction:</label>
-                    <div class="col-sm-10">
-                        <ui-select data-ng-model="wave.WindDirection" id="input-select-winddirection" multiple theme="bootstrap">
-                            <ui-select-match placeholder="Select wind direction...">{{$item}}</ui-select-match>
-                            <ui-select-choices repeat="item in wind.availableCompassDirections | filter:$select.search">
-                                {{item}}
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="input-wave-quality">Quality</label>
                     <div class="controls col-sm-10">
-                        <input type="text" data-ng-model="wave.Quality" id="input-wave-quality" class="form-control" placeholder="Quality" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="input-wave-experience">Experience</label>
-                    <div class="controls col-sm-10">
-                        <input type="text" data-ng-model="wave.Experience" id="input-wave-experience" class="form-control" placeholder="Experience" required>
+                        <input type="text" data-ng-model="wave.Name" id="input-wave-name" class="form-control"
+                               placeholder="Name" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="input-wave-region">Region</label>
+
                     <div class="controls col-sm-10">
                         <select class="form-control" id="input-wave-region" data-ng-model="wave.Region">
                             <optgroup label="New South Wales">
@@ -61,33 +38,104 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input-wave-latitude">Latitude</label>
+
+                    <div class="controls col-sm-10">
+                        <input type="text" data-ng-model="wave.Latitude" ng-change="refreshMapMarker()" id="input-wave-latitude" class="form-control"
+                               placeholder="Latitude" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input-wave-longitude">Longitude</label>
+
+                    <div class="controls col-sm-10">
+                        <input type="text" data-ng-model="wave.Longitude" ng-change="refreshMapMarker()" id="input-wave-longitude" class="form-control"
+                               placeholder="Longitude" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input-select-swelldirection">Swell Direction: </label>
+
+                    <div class="col-sm-10">
+                        <ui-select data-ng-model="wave.SwellDirection" id="input-select-swelldirection" multiple
+                                   theme="bootstrap">
+                            <ui-select-match placeholder="Select swell direction...">{{$item}}</ui-select-match>
+                            <ui-select-choices
+                                    repeat="item in swell.availableCompassDirections | filter:$select.search">
+                                {{item}}
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input-select-winddirection">Wind Direction:</label>
+
+                    <div class="col-sm-10">
+                        <ui-select data-ng-model="wave.WindDirection" id="input-select-winddirection" multiple
+                                   theme="bootstrap">
+                            <ui-select-match placeholder="Select wind direction...">{{$item}}</ui-select-match>
+                            <ui-select-choices repeat="item in wind.availableCompassDirections | filter:$select.search">
+                                {{item}}
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="input-wave-quality">Quality</label>
+
+                    <div class="controls col-sm-10">
+                        <input type="text" data-ng-model="wave.Quality" id="input-wave-quality" class="form-control"
+                               placeholder="Quality" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="input-wave-experience">Experience</label>
+
+                    <div class="controls col-sm-10">
+                        <input type="text" data-ng-model="wave.Experience" id="input-wave-experience"
+                               class="form-control" placeholder="Experience" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="control-label col-sm-2" for="input-wave-size">Swell Size</label>
+
                     <div class="controls col-sm-10">
-                        <input type="text" data-ng-model="wave.SwellSize" id="input-wave-size" class="form-control" placeholder="Swell Size" required>
+                        <input type="text" data-ng-model="wave.SwellSize" id="input-wave-size" class="form-control"
+                               placeholder="Swell Size" required>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="input-wave-tidemovement">Tide Movement</label>
-                    <div class="controls col-sm-10">
-                        <input type="text" data-ng-model="wave.TideMovement" id="input-wave-tidemovement" class="form-control" placeholder="Tide Movement" required>
+                <div class="form-group col-sm-6">
+                    <label class="control-label col-sm-4" for="input-wave-tidemovement">Tide</label>
+
+                    <div class="controls col-sm-8">
+                        <input type="text" data-ng-model="wave.TideMovement" id="input-wave-tidemovement"
+                               class="form-control" placeholder="Tide Movement" required>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="input-wave-tideposition">Tide Position</label>
-                    <div class="controls col-sm-10">
-                        <input type="text" data-ng-model="wave.TidePosition" id="input-wave-tideposition" class="form-control" placeholder="Tide Position" required>
+                <div class="form-group col-sm-6">
+                    <label class="control-label col-sm-4" for="input-wave-tideposition">Tide</label>
+
+                    <div class="controls col-sm-8">
+                        <input type="text" data-ng-model="wave.TidePosition" id="input-wave-tideposition"
+                               class="form-control" placeholder="Tide Position" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="input-wave-wavedirection">Wave Direction</label>
+
                     <div class="controls col-sm-10">
-                        <input type="text" data-ng-model="wave.WaveDirection" id="input-wave-wavedirection" class="form-control" placeholder="Wave Direction" required>
+                        <input type="text" data-ng-model="wave.WaveDirection" id="input-wave-wavedirection"
+                               class="form-control" placeholder="Wave Direction" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="input-wave-wavetype">Wave Type</label>
+
                     <div class="controls col-sm-10">
-                        <input type="text" data-ng-model="wave.WaveType" id="input-wave-wavetype" class="form-control" placeholder="Wave Type" required>
+                        <input type="text" data-ng-model="wave.WaveType" id="input-wave-wavetype" class="form-control"
+                               placeholder="Wave Type" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -98,5 +146,6 @@
                 </div>
             </fieldset>
         </form>
-    </div>
-</section>
+    </section>
+
+</div>

@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'SurfAroundTheCorner';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils','ui.select','ngLodash','ngFitText'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils','ui.select','ngLodash','ngFitText','ngMap'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {
@@ -44,6 +44,7 @@ angular.element(document).ready(function() {
 	//Then init the app
 	angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
 });
+
 'use strict';
 
 // Use Applicaion configuration module to register a new module
@@ -649,7 +650,17 @@ angular.module('users').factory('Users', ['$resource',
 'use strict';
 
 // Configuring the Articles module
-angular.module('waves').run(['Menus',
+angular.module('waves')
+
+	/*, ['uiGmapgoogle-maps'])
+	.config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
+		GoogleMapApi.configure({
+			key: 'AIzaSyCSBGw0kiu_Nv3dPOBxxanMjuDyjEVA3aY',
+			v: '3.17',
+			libraries: 'places, weather, geometry'
+		})
+	}])*/
+	.run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
 		Menus.addMenuItem('topbar', 'Waves', 'waves', 'dropdown', '/waves(/create)?');
@@ -692,8 +703,16 @@ angular.module('waves').config(['$stateProvider',
 'use strict';
 
 // Waves controller
-angular.module('waves').controller('WavesController', ['$scope', '$stateParams', '$location', 'Waves', 'lodash', 'googleApiProvider',
-    function ($scope, $stateParams, $location, Waves, lodash, googleApiProvider) {
+angular.module('waves')
+
+    .controller('WavesController', ['$scope', '$stateParams', '$location', 'Waves', 'lodash','ngMap',
+    function ($scope, $stateParams, $location, Waves, lodash, GoogleMapsApi) {
+
+
+        $scope.$on('mapInitialized', function(event, map) {
+            //map.setCenter( .... )
+
+        });
 
         $scope.swell = {};
         $scope.swell.availableCompassDirections = ['NorthEast', 'East', 'SouthEast', 'South'];
@@ -740,6 +759,8 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
                 WaveType: this.WaveType,
                 WaveDirection: this.WaveDirection
             });
+
+            $scope.map = {};
 
             // Redirect after save
             wave.$save(function (response) {
@@ -823,10 +844,6 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
             var destinations = ['Vancouver BC','Seattle'];
             var destinationsToParam = destinations.join('|');
 
-            var response = googleApiProvider.distanceMatrix.bla();
-            /*var response = $.getJSON(result, function(data) {
-                console.log(data);
-            })*/
         };
 
 
@@ -843,6 +860,11 @@ angular.module('waves').controller('WavesController', ['$scope', '$stateParams',
                 waveId: $stateParams.waveId
             });
         };
+
+
+
+
+
     }
 ]);
 
