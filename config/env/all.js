@@ -37,7 +37,7 @@ module.exports = {
 				'public/vendor/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/vendor/angular-ui-select/dist/select.js',
 				'public/vendor/ngAutocomplete/src/ngAutocomplete.js',
-				'http://maps.google.com/maps/api/js',
+				'http://maps.google.com/maps/api/js?libraries=places&sensor=false',
 				'public/vendor/ng-lodash/build/ng-lodash.js',
 				'public/vendor/ng-backstretch/dist/ng-backstretch.js',
 				'public/vendor/ngFitText/src/ng-FitText.js',
