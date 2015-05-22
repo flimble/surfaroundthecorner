@@ -36,6 +36,7 @@ module.exports = {
 				'public/vendor/jquery/dist/jquery.js',
 				'public/vendor/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/vendor/angular-ui-select/dist/select.js',
+				'public/vendor/ngAutocomplete/src/ngAutocomplete.js',
 				'http://maps.google.com/maps/api/js',
 				'public/vendor/ng-lodash/build/ng-lodash.js',
 				'public/vendor/ng-backstretch/dist/ng-backstretch.js',
@@ -43,6 +44,7 @@ module.exports = {
 				'public/vendor/lodash/dist/lodash.js',
 				'public/vendor/ngmap/build/scripts/ng-map.js',
 				'public/dist/surfaroundthecorner-shared.js'
+				//'http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false'
 			]
 		},
 		css: [

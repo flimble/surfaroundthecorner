@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'SurfAroundTheCorner';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils','ui.select','ngLodash','ngFitText','ngAnimate','ngMap'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngTouch',  'ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.utils','ui.select','ngLodash','ngFitText','ngAnimate','ngMap','ngAutocomplete'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {
@@ -663,6 +663,7 @@ angular.module('waves')
 		Menus.addMenuItem('topbar', 'Waves', 'waves', 'dropdown', '/waves(/create)?');
 		Menus.addSubMenuItem('topbar', 'waves', 'All', 'waves');
 		Menus.addSubMenuItem('topbar', 'waves', 'By Region', 'waves-by-region');
+		Menus.addSubMenuItem('topbar', 'waves', 'Find Location', 'waves-by-location');
 		Menus.addSubMenuItem('topbar', 'waves', 'Create New', 'waves/create');
 	}
 ]);
@@ -693,6 +694,10 @@ angular.module('waves').config(['$stateProvider',
 		state('byregionWave', {
 				url: '/waves-by-region',
 				templateUrl: 'modules/waves/views/findmynearest-waves.client.view.html'
+		}).
+		state('bylocationWave', {
+			url: '/waves-by-location',
+			templateUrl: 'modules/waves/views/waves-home.client.view.html'
 		});
 	}
 ]);
@@ -701,19 +706,43 @@ angular.module('waves').config(['$stateProvider',
 
 // Location controller
 angular.module('waves')
-    .controller('LocationController', ['$scope', '$stateParams', '$location','lodash',
+    .controller('LocationController', ['$scope', '$stateParams', '$location', '$http', 'lodash','ngAutocomplete',
+        function ($scope, $stateParams, $location, $http, lodash, autoComplete) {
 
-
-        function ($scope, $stateParams, $location, lodash) {
+            var reverseGeoCodeUrl = 'http://nominatim.openstreetmap.org/reverse?format=json&lat=-33.8008057&lon=151.2892903&zoom=18&addressdetails=1';
 
             $scope.currentLocation = {};
 
-            $scope.init = $scope.getCurrentCoordinates = function() {
-              if(navigator.geolocation) {
-                  navigator.geolocation.getCurrentPosition(function(position){
-                      $scope.currentLocation = position.coords;
-                  });
-              }
+            $scope.setLocationFromCurrentPosition = function () {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                            $scope.currentLocation.Latitude = position.coords.latitude;
+                            $scope.currentLocation.Longitude = position.coords.longitude;
+                            reverseGeoCode();
+                            $scope.$apply();
+                        },
+                        function (error) {
+                            console.log(error);
+                        });
+                }
+            };
+
+        
+            $scope.setLocation = function (latitude, longitude) {
+                $scope.currentLocation.Latitude = latitude;
+                $scope.currentLocation.longitude = longitude;
+            }
+
+            var reverseGeoCode = function () {
+                $http.get(reverseGeoCodeUrl).
+                    success(function (data, status, headers, config) {
+                    $scope.currentLocation.Suburb = data.address.suburb;
+                    $scope.currentLocation.State = data.address.state;
+                    $scope.currentLocation.Country = data.address.country;
+                }).
+                    error(function(data, status, headers, config) {
+                        console.log(data);
+                    });
             };
         }
     ]);

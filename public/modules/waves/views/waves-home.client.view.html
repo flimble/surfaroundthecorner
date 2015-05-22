@@ -1,0 +1,11 @@
+<section data-ng-controller="LocationController" data-ng-init="setLocationFromCurrentPosition()">
+    <span>{{currentLocation.Latitude}},{{currentLocation.Longitude}}</span>
+    <span>{{currentLocation.Suburb}}, {{currentLocation.State}}, {{currentLocation.Country}}</span>
+
+    <div class="form-group">
+        <label class="control-label sr-only" for="input-location">Location</label>
+        <div class="controls col-sm-10">
+            <input type="text" ng-autocomplete ng-model="autocomplete" options="options" details="details" id="input-location" class="form-control" placeholder="Location" required>
+        </div>
+</section>
+

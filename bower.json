@@ -25,7 +25,8 @@
     "angular-backstretch": "*",
     "ng-backstretch": "~0.1.2-beta",
     "grunt-contrib-less": "~1.0.1",
-    "ngFitText": "~3.3.3"
+    "ngFitText": "~3.3.3",
+    "ng-autocomplete": "*"
   },
   "resolutions": {
     "jquery": ">= 1.9.1",

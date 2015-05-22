@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'SurfAroundTheCorner';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils','ui.select','ngLodash','ngFitText','ngAnimate','ngMap'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngTouch',  'ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.utils','ui.select','ngLodash','ngFitText','ngAnimate','ngMap','ngAutocomplete'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {

@@ -24,6 +24,10 @@ angular.module('waves').config(['$stateProvider',
 		state('byregionWave', {
 				url: '/waves-by-region',
 				templateUrl: 'modules/waves/views/findmynearest-waves.client.view.html'
+		}).
+		state('bylocationWave', {
+			url: '/waves-by-location',
+			templateUrl: 'modules/waves/views/waves-home.client.view.html'
 		});
 	}
 ]);
