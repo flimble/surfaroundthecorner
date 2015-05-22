@@ -211,6 +211,12 @@ module.exports = function (grunt) {
                 config: 'migrations/default-config.json',
                 dbPropName: 'mongoAppDb'
             }
+        },
+        browserify: {
+            dist: {
+                src: ["common/index.js"],
+                dest: "public/dist/surfaroundthecorner-shared.js"
+            }
         }
     });
 
@@ -276,7 +282,7 @@ module.exports = function (grunt) {
     grunt.registerTask('lint', ['jshint', 'lesslint','csslint']);
 
     // Build task(s).
-    grunt.registerTask('build', ['david', 'lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin', 'less']);
+    grunt.registerTask('build', ['browserify','david', 'lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin', 'less']);
 
     // Migrate database using mongo-migrate
     grunt.registerTask('migrate', ['env:test', 'migrate:database']);

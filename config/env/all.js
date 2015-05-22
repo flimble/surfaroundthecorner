@@ -13,8 +13,8 @@ module.exports = {
 	assets: {
 		lib: {
 			css: [
-				'public/lib/components-font-awesome/css/font-awesome.css',
-				'public/lib/angular-ui-select/dist/select.css',
+				'public/vendor/components-font-awesome/css/font-awesome.css',
+				'public/vendor/angular-ui-select/dist/select.css',
 				'http://fonts.googleapis.com/css?family=Bree+Serif',
 				'http://fonts.googleapis.com/css?family=Open+Sans',
 				'http://fonts.googleapis.com/css?family=Playfair+Display',
@@ -25,23 +25,24 @@ module.exports = {
 
 			],
 			js: [
-				'public/lib/angular/angular.js',
-				'public/lib/angular-resource/angular-resource.js', 
-				'public/lib/angular-cookies/angular-cookies.js', 
-				'public/lib/angular-animate/angular-animate.js', 
-				'public/lib/angular-touch/angular-touch.js', 
-				'public/lib/angular-sanitize/angular-sanitize.js', 
-				'public/lib/angular-ui-router/release/angular-ui-router.js',
-				'public/lib/angular-ui-utils/ui-utils.js',
-				'public/lib/jquery/dist/jquery.js',
-				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-				'public/lib/angular-ui-select/dist/select.js',
+				'public/vendor/angular/angular.js',
+				'public/vendor/angular-resource/angular-resource.js', 
+				'public/vendor/angular-cookies/angular-cookies.js', 
+				'public/vendor/angular-animate/angular-animate.js',
+				'public/vendor/angular-touch/angular-touch.js', 
+				'public/vendor/angular-sanitize/angular-sanitize.js', 
+				'public/vendor/angular-ui-router/release/angular-ui-router.js',
+				'public/vendor/angular-ui-utils/ui-utils.js',
+				'public/vendor/jquery/dist/jquery.js',
+				'public/vendor/angular-bootstrap/ui-bootstrap-tpls.js',
+				'public/vendor/angular-ui-select/dist/select.js',
 				'http://maps.google.com/maps/api/js',
-				'public/lib/ng-lodash/build/ng-lodash.js',
-				'public/lib/ng-backstretch/dist/ng-backstretch.js',
-				'public/lib/ngFitText/src/ng-FitText.js',
-				'public/lib/lodash/dist/lodash.js',
-				'public/lib/ngmap/build/scripts/ng-map.js'
+				'public/vendor/ng-lodash/build/ng-lodash.js',
+				'public/vendor/ng-backstretch/dist/ng-backstretch.js',
+				'public/vendor/ngFitText/src/ng-FitText.js',
+				'public/vendor/lodash/dist/lodash.js',
+				'public/vendor/ngmap/build/scripts/ng-map.js',
+				'public/dist/surfaroundthecorner-shared.js'
 			]
 		},
 		css: [
@@ -57,7 +58,7 @@ module.exports = {
 			'public/modules/*/*[!tests]*/*.js'
 		],
 		tests: [
-			'public/lib/angular-mocks/angular-mocks.js',
+			'public/vendor/angular-mocks/angular-mocks.js',
 			'public/modules/*/tests/*.js'
 		]
 	}

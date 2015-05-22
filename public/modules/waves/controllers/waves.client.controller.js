@@ -11,6 +11,8 @@ angular.module('waves')
                 $scope.map = eventmap;
             });
 
+
+
             //$scope.wave = {};
             $scope.swell = {};
             $scope.swell.availableCompassDirections = ['NorthEast', 'East', 'SouthEast', 'South'];
