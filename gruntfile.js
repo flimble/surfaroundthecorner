@@ -214,8 +214,8 @@ module.exports = function (grunt) {
         },
         browserify: {
             dist: {
-                src: ["common/index.js"],
-                dest: "public/dist/surfaroundthecorner-shared.js"
+                src: ['common/index.js','public/js/*.js', 'public/modules/**/*.js','public/*.js'],
+                dest: 'public/dist/surfaroundthecorner.js'
             }
         }
     });
@@ -280,6 +280,9 @@ module.exports = function (grunt) {
 
     // Lint task(s).
     grunt.registerTask('lint', ['jshint', 'lesslint','csslint']);
+
+      // Bundle task(s).
+    grunt.registerTask('bundle', ['loadConfig','browserify']);
 
     // Build task(s).
     grunt.registerTask('build', ['browserify','david', 'lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin', 'less']);

@@ -1,25 +1,18 @@
 'use strict';
 
+require('angular');
 // Init the application configuration module for AngularJS application
-var ApplicationConfiguration = (function() {
-	// Init module configuration options
-	var applicationModuleName = 'app';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngTouch',  'ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.utils','ui.select','ngLodash','ngFitText','ngMap'];
 
-	// Add a new vertical module
-	var registerModule = function(moduleName, dependencies) {
-		// Create angular module
-		angular.module(moduleName, dependencies || []);
+// Init module configuration options
+var appName = 'SurfAroundTheCorner';
+module.exports.applicationModuleVendorDependencies = ['ngResource', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.utils', 'ui.select', 'ngLodash', 'ngFitText', 'ngMap'];
 
-		// Add the module to the AngularJS configuration file
-		angular.module(applicationModuleName).requires.push(moduleName);
-	};
+module.exports.applicationModuleName = appName;
+// Add a new vertical module
+module.exports.registerModule = function(moduleName, dependencies) {
+	// Create angular module
+	angular.module(moduleName, dependencies || []);
 
-
-
-	return {
-		applicationModuleName: applicationModuleName,
-		applicationModuleVendorDependencies: applicationModuleVendorDependencies,
-		registerModule: registerModule
-	};
-})();
+	// Add the module to the AngularJS configuration file
+	angular.module(appName).requires.push(moduleName);
+};
