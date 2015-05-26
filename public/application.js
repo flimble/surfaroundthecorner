@@ -35,6 +35,7 @@ angular.element(document).ready(function() {
 	window.app = angular.module('app', requires);
 
 	angular.module('app').config(require('./routes.js'));
+	angular.module('app').run(require('./modules/interceptors'));
 
 	angular.bootstrap(document, ['app']);
 

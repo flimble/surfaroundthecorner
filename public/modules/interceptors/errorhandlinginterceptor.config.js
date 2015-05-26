@@ -1,4 +1,5 @@
 'use strict';
+var interceptorsModule = require('./index');
 // Config HTTP Error Handling
 
 /**

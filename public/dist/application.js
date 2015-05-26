@@ -31218,6 +31218,7 @@ angular.element(document).ready(function() {
 	window.app = angular.module('app', requires);
 
 	angular.module('app').config(require('./routes.js'));
+	angular.module('app').run(require('./modules/interceptors'));
 
 	angular.bootstrap(document, ['app']);
 
@@ -31227,7 +31228,7 @@ angular.element(document).ready(function() {
 });
 
 
-},{"./modules/controllers":16,"./modules/services":21,"./routes.js":25,"angular":11,"angular-bootstrap":1,"angular-cookies":3,"angular-resource":5,"angular-sanitize":7,"angular-touch":9,"ui-router":12}],14:[function(require,module,exports){
+},{"./modules/controllers":16,"./modules/interceptors":19,"./modules/services":24,"./routes.js":28,"angular":11,"angular-bootstrap":1,"angular-cookies":3,"angular-resource":5,"angular-sanitize":7,"angular-touch":9,"ui-router":12}],14:[function(require,module,exports){
 'use strict';
 var controllersModule = require('./index');
 /**
@@ -31290,6 +31291,65 @@ require('./header.client.controller');
 require('./home.client.controller');
 },{"./header.client.controller":14,"./home.client.controller":15,"angular":11}],17:[function(require,module,exports){
 'use strict';
+var interceptorsModule = require('./index');
+/**
+ * @ngInject
+ */
+function AuthenticationInterceptor($httpProvider) {
+
+	$httpProvider.defaults.useXDomain = true;
+	delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
+	// Set the httpProvider "not authorized" interceptor
+	$httpProvider.interceptors.push(['$q', '$location', 'Authentication',
+		function($q, $location, Authentication) {
+			return {
+				responseError: function(rejection) {
+					switch (rejection.status) {
+						case 401:
+							// Deauthenticate the global user
+							Authentication.user = null;
+
+							// Redirect to signin page
+							$location.path('signin');
+							break;
+						case 403:
+							// Add unauthorized behaviour 
+							break;
+					}
+
+					return $q.reject(rejection);
+				}
+			};
+		}
+	]);
+}
+AuthenticationInterceptor.$inject = ["$httpProvider"];
+module.exports = AuthenticationInterceptor;
+},{"./index":19}],18:[function(require,module,exports){
+'use strict';
+var interceptorsModule = require('./index');
+// Config HTTP Error Handling
+
+/**
+ * @ngInject
+ */
+function ErrorHandlingInterceptor($httpProvider) {
+	$httpProvider.defaults.useXDomain = true;
+	delete $httpProvider.defaults.headers.common['X-Requested-With'];
+}
+ErrorHandlingInterceptor.$inject = ["$httpProvider"];
+
+module.exports = ErrorHandlingInterceptor;
+},{"./index":19}],19:[function(require,module,exports){
+'use strict';
+var angular = require('angular');
+
+require('./authenticationinterceptor.config.js');
+require('./errorhandlinginterceptor.config.js');
+
+},{"./authenticationinterceptor.config.js":17,"./errorhandlinginterceptor.config.js":18,"angular":11}],20:[function(require,module,exports){
+'use strict';
 var servicesModule = require('./index');
 //Articles service used for communicating with the articles REST endpoints
 
@@ -31308,7 +31368,7 @@ function Articles($resource) {
 Articles.$inject = ["$resource"];
 
 servicesModule.factory('Articles', Articles);
-},{"./index":21}],18:[function(require,module,exports){
+},{"./index":24}],21:[function(require,module,exports){
 'use strict';
 
 var servicesModule = require('./index');
@@ -31327,7 +31387,7 @@ function Authentication() {
 }
 
 servicesModule.factory('Authentication', Authentication);
-},{"./index":21}],19:[function(require,module,exports){
+},{"./index":24}],22:[function(require,module,exports){
 'use strict';
 var servicesModule = require('./index');
 
@@ -31408,7 +31468,7 @@ function coordinateConversionFactory(lodash) {
 coordinateConversionFactory.$inject = ["lodash"];
 
 servicesModule.factory('coordinateConversionFactory', coordinateConversionFactory);
-},{"./index":21}],20:[function(require,module,exports){
+},{"./index":24}],23:[function(require,module,exports){
 'use strict';
 var servicesModule = require('./index');
 //Waves service used to communicate Waves REST endpoints
@@ -31477,7 +31537,7 @@ function googleApiProvider($resource, $http) {
 googleApiProvider.$inject = ["$resource", "$http"];
 
 servicesModule.factory('googleApiProvider', googleApiProvider);
-},{"./index":21}],21:[function(require,module,exports){
+},{"./index":24}],24:[function(require,module,exports){
 require('angular');
 
 module.exports = angular.module('app.services', []);
@@ -31493,7 +31553,7 @@ require('./waves.client.service');
 
 
 
-},{"./articles.client.service":17,"./authentication.client.service":18,"./coordinate.conversion.service":19,"./googleapi.client.service":20,"./menus.client.service":22,"./users.client.service":23,"./waves.client.service":24,"angular":11}],22:[function(require,module,exports){
+},{"./articles.client.service":20,"./authentication.client.service":21,"./coordinate.conversion.service":22,"./googleapi.client.service":23,"./menus.client.service":25,"./users.client.service":26,"./waves.client.service":27,"angular":11}],25:[function(require,module,exports){
 'use strict';
 var servicesModule = require('./index');
 //Menu service used for managing  menus
@@ -31663,7 +31723,7 @@ function Menus() {
 }
 
 servicesModule.service('Menus', Menus);
-},{"./index":21}],23:[function(require,module,exports){
+},{"./index":24}],26:[function(require,module,exports){
 'use strict';
 var servicesModule = require('./index');
 // Users service used for communicating with the users REST endpoint
@@ -31681,7 +31741,7 @@ function Users($resource) {
 Users.$inject = ["$resource"];
 
 servicesModule.factory('Users', Users);
-},{"./index":21}],24:[function(require,module,exports){
+},{"./index":24}],27:[function(require,module,exports){
 'use strict';
 var servicesModule = require('./index');
 //Waves service used to communicate Waves REST endpoints
@@ -31700,7 +31760,7 @@ function WavesRestClientService($resource) {
 }
 WavesRestClientService.$inject = ["$resource"];
 servicesModule.factory('WavesRestClientService', WavesRestClientService);
-},{"./index":21}],25:[function(require,module,exports){
+},{"./index":24}],28:[function(require,module,exports){
 'use strict';
 
 // Setting up route

@@ -1,5 +1,5 @@
 'use strict';
-
+var interceptorsModule = require('./index');
 /**
  * @ngInject
  */
