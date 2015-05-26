@@ -14,7 +14,16 @@ require('angular-bootstrap');
 
 // Init module configuration options
 var appName = 'surfaroundthecorner';
-module.exports.applicationModuleVendorDependencies = ['ngResource', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.utils', 'ui.select', 'ngLodash', 'ngFitText', 'ngMap'];
+module.exports.applicationModuleVendorDependencies = [
+'ngResource', 
+'ngCookies',  
+'ui.router', 
+'ui.bootstrap', 
+'ui.utils', 
+'ui.select', 
+'ngFitText', 
+'ngMap'
+];
 
 module.exports.applicationModuleName = appName;
 // Add a new vertical module
