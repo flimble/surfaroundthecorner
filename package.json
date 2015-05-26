@@ -125,7 +125,7 @@
     "twilio": "^2.2.0",
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0"
-  },
+  }/*,
   "browserify": {
     "transform": [
       "browserify-shim"
@@ -136,5 +136,5 @@
   },
   "browserify-shim": {
     "angular": "angular"
-  }
+  }*/
 }
