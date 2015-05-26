@@ -1,6 +1,5 @@
 'use strict';
 
-var controllersModule = require('./_index');
 
 /**
  * @ngInject
@@ -67,4 +66,4 @@ function LocationController($scope, $stateParams, $location, $http) {
     };
 }
 
-controllersModule.controller('LocationController', LocationController);
+angular.module('app.controllers', []).controller('LocationController', LocationController);

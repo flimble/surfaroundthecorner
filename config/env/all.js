@@ -53,7 +53,6 @@ module.exports = {
 
 		],
 		js: [
-			'public/config.js',
 			'public/application.js',
 			'public/modules/*/*.js',
 			'public/utils/*.js',

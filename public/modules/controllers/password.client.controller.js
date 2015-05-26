@@ -1,7 +1,5 @@
 'use strict';
 
-var controllersModule = require('./_index');
-
 /**
  * @ngInject
  */
@@ -45,4 +43,4 @@ var controllersModule = require('./_index');
 			});
 		};
 	}
-controllersModule.controller('PasswordController', PasswordController);
+angular.module('app.controllers', []).controller('PasswordController', PasswordController);

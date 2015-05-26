@@ -1,8 +1,6 @@
 'use strict';
 
-var controllersModule = require('./_index'),
-    lodash = require('lodash'),
-    coordinateConversionFactory = require('coordinateConversionFactory');
+var lodash = require('lodash');
 
 /**
  * @ngInject
@@ -214,4 +212,4 @@ function WavesController($scope, $stateParams, $location, WavesRestClientService
 
 }
 
-controllersModule.controller('WavesController', WavesController);
+angular.module('app.controllers', []).controller('WavesController', WavesController);

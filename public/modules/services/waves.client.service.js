@@ -1,13 +1,17 @@
 'use strict';
 
 //Waves service used to communicate Waves REST endpoints
-angular.module('waves').factory('WavesRestClientService', ['$resource',
-	function($resource) {
-		return $resource('waves/:waveId', { waveId: '@_id'
-		}, {
-			update: {
-				method: 'PUT'
-			}
-		});
-	}
-]);
+
+/**
+ * @ngInject
+ */
+function WavesRestClientService($resource) {
+	return $resource('waves/:waveId', {
+		waveId: '@_id'
+	}, {
+		update: {
+			method: 'PUT'
+		}
+	});
+}
+angular.module('app.services', []).factory('WavesRestClientService', WavesRestClientService);

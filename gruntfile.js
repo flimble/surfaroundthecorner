@@ -127,13 +127,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-        ngAnnotate: {
-            production: {
-                files: {
-                    'public/dist/application.js': '<%= applicationJavaScriptFiles %>'
-                }
-            }
-        },
         concurrent: {
             default: ['nodemon', 'watch'],
             debug: ['nodemon', 'watch', 'node-inspector'],
@@ -221,7 +214,7 @@ module.exports = function(grunt) {
                     transform: ['browserify-ngannotate']
                 },
                 src: ['public/application.js'],
-                dest: 'public/dist/surfaroundthecorner.js',    
+                dest: 'public/dist/application.js',    
 
             }
         }/*,
@@ -282,8 +275,7 @@ module.exports = function(grunt) {
 
 
     // Default task(s).
-    grunt.registerTask('default', ['lint', 'concurrent:default', 'less']);
-
+    grunt.registerTask('default', ['concurrent:default', 'less']);
 
     // Debug task.
     grunt.registerTask('debug', ['lint', 'concurrent:debug']);
@@ -295,10 +287,10 @@ module.exports = function(grunt) {
     grunt.registerTask('lint', ['jshint', 'lesslint', 'csslint']);
 
     // Bundle task(s).
-    grunt.registerTask('bundle', ['loadConfig', 'browserify:bundle', 'extract_sourcemap']);
+    grunt.registerTask('bundle', ['loadConfig', 'browserify:bundle']);
 
     // Build task(s).
-    grunt.registerTask('build', ['browserify:bundle', 'david', 'lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin', 'less']);
+    grunt.registerTask('build', ['browserify:bundle', 'david', 'lint', 'loadConfig', 'uglify', 'cssmin', 'less']);
 
     // Migrate database using mongo-migrate
     grunt.registerTask('migrate', ['env:test', 'migrate:database']);

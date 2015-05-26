@@ -1,7 +1,5 @@
 'use strict';
 
-var controllersModule = require('./_index');
-
 /**
  * @ngInject
  */
@@ -36,4 +34,4 @@ function AuthenticationController($scope, $http, $location, Authentication) {
 	};
 }
 
-controllersModule.controller('AuthenticationController', AuthenticationController);
+angular.module('app.controllers', []).controller('AuthenticationController', AuthenticationController);

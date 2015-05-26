@@ -1,7 +1,5 @@
 'use strict';
 
-var controllersModule = require('./_index');
-
 /**
  * @ngInject
  */
@@ -60,4 +58,4 @@ function ArticlesController($scope, $stateParams, $location, Authentication, Art
 	};
 }
 
-controllersModule.controller('ArticlesController', ArticlesController);
+angular.module('app.controllers', []).controller('ArticlesController', ArticlesController);

@@ -1,7 +1,5 @@
 'use strict';
 
-var controllersModule = require('./_index');
-
 /**
  * @ngInject
  */
@@ -15,4 +13,4 @@ function HomeController($scope, $location, Authentication) {
 	}
 }
 
-controllersModule.controller('HomeController', HomeController);
+angular.module('app.controllers', []).controller('HomeController', HomeController);
