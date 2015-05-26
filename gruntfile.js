@@ -37,7 +37,7 @@ module.exports = function (grunt) {
             },
             clientJS: {
                 files: watchFiles.clientJS,
-                tasks: ['jshint'],
+                tasks: ['jshint','browserify'],
                 options: {
                     livereload: true
                 }
