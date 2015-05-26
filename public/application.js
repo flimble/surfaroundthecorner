@@ -26,8 +26,9 @@ angular.element(document).ready(function() {
 		'ngCookies',
 		'ui.router',
 		'ui.bootstrap',
-		'app.controllers',
-		'app.services'
+		'app.services',
+		'app.controllers'
+		
 	];
 
 	// mount on window for testing

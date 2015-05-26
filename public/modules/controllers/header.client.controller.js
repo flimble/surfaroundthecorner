@@ -1,5 +1,5 @@
 'use strict';
-
+var controllersModule = require('./index');
 /**
  * @ngInject
  */
@@ -18,4 +18,4 @@ function HeaderController($scope, Authentication, Menus) {
 	});
 }
 
-angular.module('app.controllers', []).controller('HeaderController', HeaderController);
+controllersModule.controller('HeaderController', HeaderController);

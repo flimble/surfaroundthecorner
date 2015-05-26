@@ -1,5 +1,5 @@
 'use strict';
-
+var controllersModule = require('./index');
 var lodash = require('lodash');
 
 /**
@@ -212,4 +212,4 @@ function WavesController($scope, $stateParams, $location, WavesRestClientService
 
 }
 
-angular.module('app.controllers', []).controller('WavesController', WavesController);
+controllersModule.controller('WavesController', WavesController);

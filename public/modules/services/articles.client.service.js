@@ -1,5 +1,5 @@
 'use strict';
-
+var servicesModule = require('./index');
 //Articles service used for communicating with the articles REST endpoints
 
 /**
@@ -15,4 +15,4 @@ function Articles($resource) {
 	});
 }
 
-angular.module('app.services', []).factory('Articles', Articles);
+servicesModule.factory('Articles', Articles);

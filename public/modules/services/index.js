@@ -1,5 +1,7 @@
 require('angular');
 
+module.exports = angular.module('app.services', []);
+
 require('./articles.client.service');
 require('./authentication.client.service');
 require('./coordinate.conversion.service');
@@ -8,4 +10,5 @@ require('./menus.client.service');
 require('./users.client.service');
 require('./waves.client.service');
 
-module.exports = angular.module('app.services', []);
+
+

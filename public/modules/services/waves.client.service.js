@@ -1,5 +1,5 @@
 'use strict';
-
+var servicesModule = require('./index');
 //Waves service used to communicate Waves REST endpoints
 
 /**
@@ -14,4 +14,4 @@ function WavesRestClientService($resource) {
 		}
 	});
 }
-angular.module('app.services', []).factory('WavesRestClientService', WavesRestClientService);
+servicesModule.factory('WavesRestClientService', WavesRestClientService);

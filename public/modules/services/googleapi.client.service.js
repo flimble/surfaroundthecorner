@@ -1,5 +1,5 @@
 'use strict';
-
+var servicesModule = require('./index');
 //Waves service used to communicate Waves REST endpoints
 /**
  * @ngInject
@@ -64,4 +64,4 @@ function googleApiProvider($resource, $http) {
     };
 }
 
-angular.module('app.services', []).factory('googleApiProvider', googleApiProvider);
+servicesModule.factory('googleApiProvider', googleApiProvider);

@@ -1,5 +1,5 @@
 'use strict';
-
+var servicesModule = require('./index');
 //Menu service used for managing  menus
 
 /**
@@ -166,4 +166,4 @@ function Menus() {
 	this.addMenu('topbar');
 }
 
-angular.module('app.services', []).service('Menus', Menus);
+servicesModule.service('Menus', Menus);

@@ -1,5 +1,5 @@
 'use strict';
-
+var servicesModule = require('./index');
 
 // Authentication service for user variables
 /**
@@ -76,4 +76,4 @@ function coordinateConversionFactory(lodash) {
     };
 }
 
-angular.module('app.services', []).factory('coordinateConversionFactory', coordinateConversionFactory);
+servicesModule.factory('coordinateConversionFactory', coordinateConversionFactory);

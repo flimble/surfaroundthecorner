@@ -1,6 +1,6 @@
 'use strict';
 
-
+var servicesModule = require('./index');
 // Authentication service for user variables
 /**
  * @ngInject
@@ -15,4 +15,4 @@ function Authentication() {
 	return _this._data;
 }
 
-angular.module('app.services', []).factory('Authentication', Authentication);
+servicesModule.factory('Authentication', Authentication);

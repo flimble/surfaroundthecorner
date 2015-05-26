@@ -1,5 +1,5 @@
 'use strict';
-
+var controllersModule = require('./index');
 /**
  * @ngInject
  */
@@ -71,4 +71,4 @@ function SettingsController($scope, $http, $location, Users, Authentication) {
 	};
 }
 
-angular.module('app.controllers', []).controller('SettingsController', SettingsController);
+controllersModule.controller('SettingsController', SettingsController);

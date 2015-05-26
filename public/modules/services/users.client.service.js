@@ -1,5 +1,5 @@
 'use strict';
-
+var servicesModule = require('./index');
 // Users service used for communicating with the users REST endpoint
 
 /**
@@ -13,4 +13,4 @@ function Users($resource) {
 	});
 }
 
-angular.module('app.services', []).factory('Users', Users);
+servicesModule.factory('Users', Users);
