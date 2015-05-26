@@ -1,10 +1,19 @@
 'use strict';
 
-require('angular');
+var angular = require('angular');
+require('angular-resource');
+require('angular-cookies');
+require('angular-touch');
+require('angular-sanitize');
+require('ui-router');
+require('angular-bootstrap');
+
+
+
 // Init the application configuration module for AngularJS application
 
 // Init module configuration options
-var appName = 'SurfAroundTheCorner';
+var appName = 'surfaroundthecorner';
 module.exports.applicationModuleVendorDependencies = ['ngResource', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.utils', 'ui.select', 'ngLodash', 'ngFitText', 'ngMap'];
 
 module.exports.applicationModuleName = appName;

@@ -40,14 +40,14 @@ angular.module('waves')
                 $scope.currentLocation.Latitude = latitude;
                 $scope.currentLocation.longitude = longitude;
                 $scope.autocomplete = null;
-            }
+            };
 
             $scope.currentLocation.Address.Format = function() {
                 var address = $scope.currentLocation.Address;
                 var addressArray = [address.Suburb, address.State, address.Country];
                 return addressArray.filter(function (val) {return val;}).join(', ');
                 
-            }
+            };
 
             var reverseGeoCode = function (latitude, longitude) {
                 var reverseGeoCodeUrl = 'http://nominatim.openstreetmap.org/reverse?format=json&lat='+latitude+'&lon='+longitude+'&zoom=18&addressdetails=1';

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
     // Unified Watch Object
     var watchFiles = {
         serverViews: ['app/views/**/*.*'],
@@ -37,7 +37,7 @@ module.exports = function (grunt) {
             },
             clientJS: {
                 files: watchFiles.clientJS,
-                tasks: ['jshint','browserify'],
+                tasks: ['jshint', 'browserify'],
                 options: {
                     livereload: true
                 }
@@ -213,11 +213,21 @@ module.exports = function (grunt) {
             }
         },
         browserify: {
-            dist: {
-                src: ['common/index.js','public/js/*.js', 'public/modules/**/*.js','public/*.js'],
-                dest: 'public/dist/surfaroundthecorner.js'
+            bundle: {
+                options: {
+                    browserifyOptions: {
+                        debug: false
+                    }
+                },
+                src: ['common/index.js', 'public/js/*.js', 'public/modules/**/*.js', 'public/*.js'],
+                dest: 'public/dist/surfaroundthecorner.js',                
             }
-        }
+        }/*,
+        extract_sourcemap: {
+            files: {
+                'public/build/surfaroundthecorner.js': ['public/dist/surfaroundthecorner.js'],
+            },
+        }*/
     });
 
     // Load NPM tasks
@@ -227,7 +237,7 @@ module.exports = function (grunt) {
     grunt.option('force', true);
 
     // A Task for loading the configuration object
-    grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', function () {
+    grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', function() {
         var init = require('./config/init')();
         var config = require('./config/config');
 
@@ -236,7 +246,7 @@ module.exports = function (grunt) {
         grunt.config.set('applicationLESSFiles', config.assets.less);
     });
 
-    grunt.registerTask('migrate:database', 'Start the database migration', function () {
+    grunt.registerTask('migrate:database', 'Start the database migration', function() {
         var mm = require('mongodb-migrations');
         var migrator = new mm.Migrator({
             host: 'localhost',
@@ -248,21 +258,22 @@ module.exports = function (grunt) {
         });
 
         migrator.runFromDir('migrations',
-            function (error, results) {
+            function(error, results) {
                 grunt.log.writeln('something');
                 this.log('error: ' + error + ' results: ' + results);
-            }, function (id, result) {
+            },
+            function(id, result) {
                 grunt.log.writeln('something');
                 this.log('id: ' + id + ' result: ' + result);
             }
         );
-        migrator.dispose(function(error){
+        migrator.dispose(function(error) {
             grunt.log.writeln('disposed');
         });
     });
 
     //A Task for starting the web server for testing purposes
-    grunt.registerTask('start:server', 'Start the web server', function () {
+    grunt.registerTask('start:server', 'Start the web server', function() {
         grunt.log.writeln('Starting web server on port 9001.');
         require('./server.js').listen(9001);
     });
@@ -279,13 +290,13 @@ module.exports = function (grunt) {
     grunt.registerTask('secure', ['env:secure', 'lint', 'concurrent:default']);
 
     // Lint task(s).
-    grunt.registerTask('lint', ['jshint', 'lesslint','csslint']);
+    grunt.registerTask('lint', ['jshint', 'lesslint', 'csslint']);
 
-      // Bundle task(s).
-    grunt.registerTask('bundle', ['loadConfig','browserify']);
+    // Bundle task(s).
+    grunt.registerTask('bundle', ['loadConfig', 'browserify:bundle', 'extract_sourcemap']);
 
     // Build task(s).
-    grunt.registerTask('build', ['browserify','david', 'lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin', 'less']);
+    grunt.registerTask('build', ['browserify:bundle', 'david', 'lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin', 'less']);
 
     // Migrate database using mongo-migrate
     grunt.registerTask('migrate', ['env:test', 'migrate:database']);
