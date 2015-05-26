@@ -38,6 +38,7 @@
     "body-parser": "^1.12.4",
     "bower": "^1.4.1",
     "browserify": "^10.2.1",
+    "browserify-ngannotate": "^0.7.3",
     "chalk": "^1.0.0",
     "compression": "^1.4.4",
     "connect-flash": "~0.1.1",
@@ -125,7 +126,7 @@
     "twilio": "^2.2.0",
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0"
-  }/*,
+  },
   "browserify": {
     "transform": [
       "browserify-shim"
@@ -136,5 +137,5 @@
   },
   "browserify-shim": {
     "angular": "angular"
-  }*/
+  }
 }

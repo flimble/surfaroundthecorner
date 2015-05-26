@@ -1,5 +1,6 @@
 'use strict';
 
+
 // Configuring the Articles module
 angular.module('waves')
 	.run(['Menus',

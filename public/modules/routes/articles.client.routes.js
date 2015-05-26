@@ -1,5 +1,11 @@
 'use strict';
 
+var configModule = require('./_index');
+
+/**
+ * @ngInject
+ */
+
 // Setting up route
 angular.module('articles').config(['$stateProvider',
 	function($stateProvider) {

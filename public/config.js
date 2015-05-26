@@ -13,7 +13,7 @@ require('angular-bootstrap');
 // Init the application configuration module for AngularJS application
 
 // Init module configuration options
-var appName = 'surfaroundthecorner';
+var appName = 'app';
 module.exports.applicationModuleVendorDependencies = [
 'ngResource', 
 'ngCookies',  

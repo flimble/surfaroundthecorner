@@ -217,10 +217,12 @@ module.exports = function(grunt) {
                 options: {
                     browserifyOptions: {
                         debug: false
-                    }
+                    },
+                    transform: ['browserify-ngannotate']
                 },
-                src: ['common/index.js', 'public/js/*.js', 'public/modules/**/*.js', 'public/*.js'],
-                dest: 'public/dist/surfaroundthecorner.js',                
+                src: ['public/application.js'],
+                dest: 'public/dist/surfaroundthecorner.js',    
+
             }
         }/*,
         extract_sourcemap: {
