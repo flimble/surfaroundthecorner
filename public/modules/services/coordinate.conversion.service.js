@@ -5,7 +5,7 @@ var servicesModule = require('./index');
 /**
  * @ngInject
  */
-function coordinateConversionFactory(lodash) {
+function coordinateConversionFactory(_) {
 
 
     function removeAt(s, i) {
@@ -40,7 +40,7 @@ function coordinateConversionFactory(lodash) {
         var validDirections = ['N', 'E', 'S', 'W'],
             negativeDirections = ['W', 'S'];
 
-        if (lodash.indexOf(validDirections, direction) === -1) throw 'invalid direction';
+        if (_.indexOf(validDirections, direction) === -1) throw 'invalid direction';
 
         degrees = degrees || 0;
         minutes = minutes || 0;
@@ -49,7 +49,7 @@ function coordinateConversionFactory(lodash) {
         y = roundnum(y, 6);
 
 
-        if (lodash.indexOf(negativeDirections, direction) !== -1) {
+        if (_.indexOf(negativeDirections, direction) !== -1) {
             return y * -1;
         }
         return y;

@@ -1,0 +1,1 @@
+require('./wavesmenu.config.js');

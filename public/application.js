@@ -7,6 +7,7 @@ require('angular-touch');
 require('angular-sanitize');
 require('ui-router');
 require('angular-bootstrap');
+var _ = require('lodash');
 require('./modules/controllers');
 require('./modules/services');
 
@@ -28,14 +29,24 @@ angular.element(document).ready(function() {
 		'ui.bootstrap',
 		'app.services',
 		'app.controllers'
-		
+
 	];
 
 	// mount on window for testing
 	window.app = angular.module('app', requires);
+	angular.module('app').constant('_', _);
 
 	angular.module('app').config(require('./routes.js'));
-	angular.module('app').run(require('./modules/interceptors'));
+	angular.module('app').config(require('./modules/config/authenticationinterceptor.config.js'));
+	angular.module('app').config(require('./modules/config/errorhandlinginterceptor.config.js'));
+	/*angular.module('app').run(
+		require('./modules/interceptors/authenticationinterceptor.config.js')
+	);*/
+	/*angular.module('app').run(
+		require('./modules/interceptors/errorhandlinginterceptor.config.js')
+	);*/
+
+
 
 	angular.bootstrap(document, ['app']);
 
@@ -43,4 +54,3 @@ angular.element(document).ready(function() {
 	if (window.location.hash === '#_=_') window.location.hash = '#!';
 
 });
-

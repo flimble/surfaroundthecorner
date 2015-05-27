@@ -1,5 +1,5 @@
 'use strict';
-var interceptorsModule = require('./index');
+
 /**
  * @ngInject
  */
@@ -32,4 +32,5 @@ function AuthenticationInterceptor($httpProvider) {
 		}
 	]);
 }
+
 module.exports = AuthenticationInterceptor;

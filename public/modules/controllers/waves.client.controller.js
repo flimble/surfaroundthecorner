@@ -1,11 +1,10 @@
 'use strict';
 var controllersModule = require('./index');
-var lodash = require('lodash');
 
 /**
  * @ngInject
  */
-function WavesController($scope, $stateParams, $location, WavesRestClientService, lodash, coordinateConversionFactory) {
+function WavesController($scope, $stateParams, $location, WavesRestClientService, _, coordinateConversionFactory) {
 
     $scope.$on('mapInitialized', function(event, eventmap) {
         console.log('loading map');
@@ -130,13 +129,13 @@ function WavesController($scope, $stateParams, $location, WavesRestClientService
                 if (item.SwellDirection.length === 0 || item.SwellDirection.length === 0) {
                     return;
                 }
-                if (swellDirection.length > 0 && (lodash.intersection(swellDirection, item.SwellDirection) === 0)) {
+                if (swellDirection.length > 0 && (_.intersection(swellDirection, item.SwellDirection) === 0)) {
                     return;
                 }
                 if (item.WindDirection.length === 0 || item.WindDirection[0].length === 0) {
                     return;
                 }
-                if (windDirection.length > 0 && (lodash.intersection(windDirection, item.WindDirection) === 0)) {
+                if (windDirection.length > 0 && (_.intersection(windDirection, item.WindDirection) === 0)) {
                     return;
                 }
                 selectedWaves.push(item);

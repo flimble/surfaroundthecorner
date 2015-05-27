@@ -1,14 +1,12 @@
 require('angular');
+var bulk = require('bulk-require');
 
 module.exports = angular.module('app.services', []);
 
-require('./articles.client.service');
-require('./authentication.client.service');
-require('./coordinate.conversion.service');
-require('./googleapi.client.service');
-require('./menus.client.service');
-require('./users.client.service');
-require('./waves.client.service');
+//bulk require services to save maintaining this files
+//note: browserify bulkify transform required
+bulk(__dirname, ['./**/!(*index|*.spec).js']); 
+
 
 
 
