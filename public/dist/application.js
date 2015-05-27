@@ -43375,11 +43375,7 @@ require('./modules/services');
 
 
 // Setting HTML5 Location Mode
-/*.config(['$locationProvider',
-	function($locationProvider) {
-		$locationProvider.hashPrefix('!');
-	}
-]);*/
+
 // create and bootstrap application
 angular.element(document).ready(function() {
 
@@ -43398,6 +43394,11 @@ angular.element(document).ready(function() {
 	window.app = angular.module('app', requires);
 	angular.module('app').constant('_', _);
 
+	angular.module('app').config(['$locationProvider',
+		function($locationProvider) {
+			$locationProvider.hashPrefix('!');
+		}
+	]);
 	angular.module('app').config(require('./routes.js'));
 	angular.module('app').config(require('./modules/config/authenticationinterceptor.config.js'));
 	angular.module('app').config(require('./modules/config/errorhandlinginterceptor.config.js'));
