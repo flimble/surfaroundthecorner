@@ -13,7 +13,6 @@ module.exports = {
 	assets: {
 		lib: {
 			css: [
-				'public/vendor/components-font-awesome/css/font-awesome.css',
 				'public/vendor/angular-ui-select/dist/select.css',
 				'http://fonts.googleapis.com/css?family=Bree+Serif',
 				'http://fonts.googleapis.com/css?family=Open+Sans',
@@ -49,7 +48,7 @@ module.exports = {
 		},
 		css: [
 			'public/less/*.css',
-			'public/modules/**/css/*.css'
+			'public/css/*.css'
 
 		],
 		js: [

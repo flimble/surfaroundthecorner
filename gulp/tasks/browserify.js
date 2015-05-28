@@ -16,6 +16,8 @@ var handleErrors = require('../util/handleErrors');
 var browserSync  = require('browser-sync');
 var debowerify   = require('debowerify');
 var ngAnnotate   = require('browserify-ngannotate');
+var bulkify      = require('bulkify');
+var brfs      = require('brfs');
 
 // Based on: http://blog.avisi.nl/2014/04/25/how-to-keep-a-fast-build-with-browserify-and-reactjs/
 function buildScript(file) {
@@ -39,8 +41,8 @@ function buildScript(file) {
     babelify,
     debowerify,
     ngAnnotate,
-    'brfs',
-    'bulkify'
+    brfs,
+    bulkify
   ];
 
   transforms.forEach(function(transform) {

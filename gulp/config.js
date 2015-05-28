@@ -5,34 +5,38 @@ module.exports = {
   'serverport': 3000,
 
   'styles': {
-    'src' : 'app/styles/**/*.scss',
+    'src' : 'client/styles/*.less',
     'dest': 'build/css'
   },
 
   'scripts': {
-    'src' : 'app/js/**/*.js',
+    'src' : ['client/*.js','client/modules/**/*.js'] ,
     'dest': 'build/js'
   },
 
   'images': {
-    'src' : 'app/images/**/*',
+    'src' : 'client/images/**/*',
     'dest': 'build/images'
   },
 
   'fonts': {
-    'src' : ['app/fonts/**/*'],
+    'src' : ['client/fonts/**/*'],
     'dest': 'build/fonts'
   },
-
-  'views': {
-    'watch': [
-      'app/index.html',
-      'app/views/**/*.html'
+  'clientViews': {
+    'watch': [      
+      'client/views/**/*.html'
     ],
-    'src': 'app/views/**/*.html',
+    'src': 'client/views/**/*.html',
     'dest': 'app/js'
   },
-
+  'serverViews': {
+    'watch': [      
+      'server/views/**/*.html'
+    ],
+    'src': 'server/views/**/*.html',
+    'dest': 'app/js'
+  },
   'gzip': {
     'src': 'build/**/*.{html,xml,json,css,js,js.map}',
     'dest': 'build/',

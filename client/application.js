@@ -30,22 +30,13 @@ angular.element(document).ready(function() {
 
 	// mount on window for testing
 	window.app = angular.module('app', requires);
+	
 	angular.module('app').constant('_', _);
 
-	angular.module('app').config(['$locationProvider',
-		function($locationProvider) {
-			$locationProvider.hashPrefix('!');
-		}
-	]);
-	angular.module('app').config(require('./routes.js'));
-	angular.module('app').config(require('./modules/config/authenticationinterceptor.config.js'));
-	angular.module('app').config(require('./modules/config/errorhandlinginterceptor.config.js'));
-	/*angular.module('app').run(
-		require('./modules/interceptors/authenticationinterceptor.config.js')
-	);*/
-	/*angular.module('app').run(
-		require('./modules/interceptors/errorhandlinginterceptor.config.js')
-	);*/
+	angular.module('app').config(require('./js/config/html5location.config.js'));
+	angular.module('app').config(require('./js/config/routes.config.js'));
+	angular.module('app').config(require('./js/config/authentication.interceptor.js'));
+	angular.module('app').config(require('./js/config/errorhandling.interceptor.js'));
 
 
 
