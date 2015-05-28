@@ -32,7 +32,7 @@ module.exports = function(db) {
 	var app = express();
 
 	// Globbing model files
-	config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {
+	config.getGlobbedFiles('./server/models/**/*.js').forEach(function(modelPath) {
 		require(path.resolve(modelPath));
 	});
 
@@ -82,7 +82,7 @@ module.exports = function(db) {
 
 	// Set views path and view engine
 	app.set('view engine', 'server.view.html');
-	app.set('views', './app/views');
+	app.set('views', './server/views');
 
 	// Environment dependent middleware
 	if (process.env.NODE_ENV === 'development') {
@@ -136,7 +136,7 @@ module.exports = function(db) {
 	}));
 
 	// Setting the app router and static folder
-	app.use(express.static(path.resolve('./public')));
+	app.use(express.static(path.resolve('./client')));
 
 	// Globbing utility files
 	/*config.getGlobbedFiles('./app/lib/*.js').forEach(function(routePath) {
@@ -144,7 +144,7 @@ module.exports = function(db) {
 	});*/
 
 	// Globbing routing files
-	config.getGlobbedFiles('./app/routes/**/*.js').forEach(function(routePath) {
+	config.getGlobbedFiles('./server/routes/**/*.js').forEach(function(routePath) {
 		require(path.resolve(routePath))(app);
 	});
 

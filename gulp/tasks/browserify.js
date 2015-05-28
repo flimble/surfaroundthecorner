@@ -73,6 +73,6 @@ function buildScript(file) {
 
 gulp.task('browserify', function() {
 
-  return buildScript('main.js');
+  return buildScript(config.browserify.bundleName);
 
 });

@@ -1,61 +1,54 @@
 'use strict';
 
 module.exports = {
-
   'serverport': 3000,
 
   'styles': {
-    'src' : 'client/styles/*.less',
-    'dest': 'build/css'
+    'src': 'client/styles/*.less',
+    'dest': 'build/css',
+    'sourcemap': true
   },
-
   'scripts': {
-    'src' : ['client/*.js','client/modules/**/*.js'] ,
+    'src': ['client/js/*.js', 'client/js/**/*.js'],
     'dest': 'build/js'
   },
-
   'images': {
-    'src' : 'client/images/**/*',
+    'src': 'client/images/**/*',
     'dest': 'build/images'
   },
-
   'fonts': {
-    'src' : ['client/fonts/**/*'],
+    'src': ['client/fonts/**/*'],
     'dest': 'build/fonts'
   },
   'clientViews': {
-    'watch': [      
+    'watch': [
       'client/views/**/*.html'
     ],
     'src': 'client/views/**/*.html',
-    'dest': 'app/js'
+    'dest': 'client/js'
   },
   'serverViews': {
-    'watch': [      
+    'watch': [
       'server/views/**/*.html'
     ],
     'src': 'server/views/**/*.html',
-    'dest': 'app/js'
+    'dest': 'client/js'
   },
   'gzip': {
     'src': 'build/**/*.{html,xml,json,css,js,js.map}',
     'dest': 'build/',
     'options': {}
   },
-
   'dist': {
-    'root'  : 'build'
+    'root': 'build'
   },
-
   'browserify': {
-    'entries'   : ['./app/js/main.js'],
-    'bundleName': 'main.js',
-    'sourcemap' : true
+    'entries': ['./client/js/application.js'],
+    'bundleName': 'app.js',
+    'sourcemap': true
   },
-
   'test': {
     'karma': 'test/karma.conf.js',
     'protractor': 'test/protractor.conf.js'
   }
-
 };

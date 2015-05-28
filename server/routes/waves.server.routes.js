@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = function(app) {
-	var users = require('../../app/controllers/users.server.controller');
-	var waves = require('../../app/controllers/waves.server.controller');
-	var geolocation = require('../../app/controllers/geolocation.server.controller');
+	var users = require('../../server/controllers/users.server.controller');
+	var waves = require('../../server/controllers/waves.server.controller');
+	var geolocation = require('../../server/controllers/geolocation.server.controller');
 
 	// Waves Routes
 	app.route('/waves')

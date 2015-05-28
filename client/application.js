@@ -8,8 +8,8 @@ require('angular-sanitize');
 require('ui-router');
 require('angular-bootstrap');
 var _ = require('lodash');
-require('./modules/controllers');
-require('./modules/services');
+require('./js/controllers');
+require('./js/services');
 
 
 // Setting HTML5 Location Mode
