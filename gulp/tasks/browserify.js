@@ -39,6 +39,7 @@ function buildScript(file) {
   }
 
   var transforms = [
+    debowerify,
     ngAnnotate,
     bulkify
   ];

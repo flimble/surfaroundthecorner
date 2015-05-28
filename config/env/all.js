@@ -18,13 +18,17 @@ module.exports = {
 				'http://fonts.googleapis.com/css?family=Playfair+Display',
 				'http://fonts.googleapis.com/css?family=Dancing+Script',
 				'http://fonts.googleapis.com/css?family=Nunito',
+				'client/vendor/angular-ui-select/dist/select.css',
 				'client/build/css/main.css',
 				'client/build/css/mixins.css',
 				'client/build/css/variables.css'
 			],
 			js: [
 				'http://maps.google.com/maps/api/js?libraries=places&sensor=false',
-				'public/vendor/angular/angular.js',
+				'client/vendor/jquery/dist/jquery.js',
+				'client/build/app.js'
+				//'client/vendor/angular-ui-select/dist/select.js'
+				/*'public/vendor/angular/angular.js',
 				'public/vendor/angular-resource/angular-resource.js', 
 				'public/vendor/angular-cookies/angular-cookies.js', 
 				'public/vendor/angular-animate/angular-animate.js',
@@ -40,8 +44,8 @@ module.exports = {
 				'public/vendor/ng-backstretch/dist/ng-backstretch.js',
 				'public/vendor/ngFitText/src/ng-FitText.js',
 				'public/vendor/lodash/dist/lodash.js',
-				'public/vendor/ngmap/build/scripts/ng-map.js',
-				'build/app.js'
+				'public/vendor/ngmap/build/scripts/ng-map.js',*/
+				
 				//'http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false'
 			]
 		},

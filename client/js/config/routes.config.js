@@ -12,7 +12,7 @@ function Routes($stateProvider, $urlRouterProvider) {
 	$stateProvider.
 	state('home', {
 		url: '/',
-		templateUrl: 'views/home.client.view.html'
+		templateUrl: 'views/core/home.client.view.html'
 	}).
 	state('profile', {
 		url: '/settings/profile',
@@ -52,27 +52,27 @@ function Routes($stateProvider, $urlRouterProvider) {
 	}).
 	state('listWaves', {
 		url: '/waves',
-		templateUrl: 'views/list-waves.client.view.html'
+		templateUrl: 'views/waves/list-waves.client.view.html'
 	}).
 	state('createWave', {
 		url: '/waves/create',
-		templateUrl: 'views/create-wave.client.view.html'
+		templateUrl: 'views/waves/create-wave.client.view.html'
 	}).
 	state('viewWave', {
 		url: '/waves/:waveId',
-		templateUrl: 'views/view-wave.client.view.html'
+		templateUrl: 'views/waves/view-wave.client.view.html'
 	}).
 	state('editWave', {
 		url: '/waves/:waveId/edit',
-		templateUrl: 'views/edit-wave.client.view.html'
+		templateUrl: 'views/waves/edit-wave.client.view.html'
 	}).
 	state('byregionWave', {
 		url: '/waves-by-region',
-		templateUrl: 'views/findmynearest-waves.client.view.html'
+		templateUrl: 'views/waves/findmynearest-waves.client.view.html'
 	}).
 	state('bylocationWave', {
 		url: '/waves-by-location',
-		templateUrl: 'views/waves-home.client.view.html'
+		templateUrl: 'views/waves/waves-home.client.view.html'
 	});
 }
 

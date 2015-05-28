@@ -6,6 +6,7 @@ require('angular-cookies');
 require('angular-touch');
 require('angular-sanitize');
 require('ui-router');
+require('ng-FitText');
 require('angular-bootstrap');
 var _ = require('lodash');
 require('./js/controllers');
@@ -23,6 +24,7 @@ angular.element(document).ready(function() {
 		'ngCookies',
 		'ui.router',
 		'ui.bootstrap',
+		'ngFitText',
 		'app.services',
 		'app.controllers'
 
