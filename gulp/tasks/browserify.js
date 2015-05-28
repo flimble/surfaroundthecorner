@@ -17,7 +17,8 @@ var browserSync  = require('browser-sync');
 var debowerify   = require('debowerify');
 var ngAnnotate   = require('browserify-ngannotate');
 var bulkify      = require('bulkify');
-var brfs      = require('brfs');
+var livereload   = require('gulp-livereload');
+var brfs         = require('brfs');
 
 // Based on: http://blog.avisi.nl/2014/04/25/how-to-keep-a-fast-build-with-browserify-and-reactjs/
 function buildScript(file) {
@@ -38,10 +39,7 @@ function buildScript(file) {
   }
 
   var transforms = [
-    babelify,
-    debowerify,
     ngAnnotate,
-    brfs,
     bulkify
   ];
 
@@ -63,7 +61,7 @@ function buildScript(file) {
         compress: { drop_console: true }
       }))))
       .pipe(gulpif(createSourcemap, sourcemaps.write('./')))
-      .pipe(gulp.dest(config.scripts.dest))
+      .pipe(gulp.dest(config.browserify.dest))
       .pipe(gulpif(browserSync.active, browserSync.reload({ stream: true, once: true })));
   }
 

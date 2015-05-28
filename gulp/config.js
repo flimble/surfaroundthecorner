@@ -5,20 +5,19 @@ module.exports = {
 
   'styles': {
     'src': 'client/styles/*.less',
-    'dest': 'build/css',
+    'dest': 'client/build/css',
     'sourcemap': true
   },
-  'scripts': {
-    'src': ['client/js/*.js', 'client/js/**/*.js'],
-    'dest': 'build/js'
+  'clientScripts': {
+    'src': ['client/js/*.js', 'client/js/**/*.js']
   },
   'images': {
     'src': 'client/images/**/*',
-    'dest': 'build/images'
+    'dest': 'client/build/images'
   },
   'fonts': {
-    'src': ['client/fonts/**/*'],
-    'dest': 'build/fonts'
+    'src': ['client/fonts/**/*','client/vendor/bootstrap/fonts/*', 'client/vendor/font-awesome/fonts/*'],
+    'dest': 'client/build/fonts'
   },
   'clientViews': {
     'watch': [
@@ -44,6 +43,7 @@ module.exports = {
   },
   'browserify': {
     'entries': ['./client/js/application.js'],
+    'dest': 'client/build/js',
     'bundleName': 'app.js',
     'sourcemap': true
   },

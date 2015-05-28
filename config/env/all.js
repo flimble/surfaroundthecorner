@@ -13,15 +13,14 @@ module.exports = {
 	assets: {
 		lib: {
 			css: [
-				'public/vendor/angular-ui-select/dist/select.css',
 				'http://fonts.googleapis.com/css?family=Bree+Serif',
 				'http://fonts.googleapis.com/css?family=Open+Sans',
 				'http://fonts.googleapis.com/css?family=Playfair+Display',
 				'http://fonts.googleapis.com/css?family=Dancing+Script',
-				'http://fonts.googleapis.com/css?family=Nunito'
-
-				//'http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css'
-
+				'http://fonts.googleapis.com/css?family=Nunito',
+				'client/build/css/main.css',
+				'client/build/css/mixins.css',
+				'client/build/css/variables.css'
 			],
 			js: [
 				'http://maps.google.com/maps/api/js?libraries=places&sensor=false',
@@ -42,13 +41,12 @@ module.exports = {
 				'public/vendor/ngFitText/src/ng-FitText.js',
 				'public/vendor/lodash/dist/lodash.js',
 				'public/vendor/ngmap/build/scripts/ng-map.js',
-				'public/dist/surfaroundthecorner-shared.js'
+				'build/app.js'
 				//'http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false'
 			]
 		},
 		css: [
-			'public/less/*.css',
-			'public/css/*.css'
+			'build/**/*.css'
 
 		],
 		js: [
