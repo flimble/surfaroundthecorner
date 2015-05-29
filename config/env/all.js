@@ -26,7 +26,7 @@ module.exports = {
 			js: [
 				'http://maps.google.com/maps/api/js?libraries=places&sensor=false',
 				'client/vendor/jquery/dist/jquery.js',
-				'client/build/app.js'
+				'client/build/js/app.js'
 				//'client/vendor/angular-ui-select/dist/select.js'
 				/*'public/vendor/angular/angular.js',
 				'public/vendor/angular-resource/angular-resource.js', 

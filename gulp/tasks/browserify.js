@@ -17,7 +17,6 @@ var browserSync  = require('browser-sync');
 var debowerify   = require('debowerify');
 var ngAnnotate   = require('browserify-ngannotate');
 var bulkify      = require('bulkify');
-var livereload   = require('gulp-livereload');
 var brfs         = require('brfs');
 
 // Based on: http://blog.avisi.nl/2014/04/25/how-to-keep-a-fast-build-with-browserify-and-reactjs/
