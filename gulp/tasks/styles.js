@@ -13,10 +13,10 @@ gulp.task('styles', function () {
 
   var createSourcemap = global.isProd && config.styles.sourcemap;
 
-  return gulp.src(config.styles.src)
-    //.pipe(gulpif(createSourcemap, sourcemaps.init())) //generate source maps to original less file
+  return gulp.src(config.clientLESS.src)
+    .pipe(gulpif(createSourcemap, sourcemaps.init())) //generate source maps to original less file
     .pipe(less()) //compile less to css
-    //.pipe(gulpif(createSourcemap, sourcemaps.write())) //write the map file
+    .pipe(gulpif(createSourcemap, sourcemaps.write())) //write the map file
     .pipe(autoprefixer('last 2 versions', '> 1%', 'ie 8')) //adjust css for older to behave as per W3C specs
     .on('error', handleErrors)
     .pipe(gulp.dest(config.styles.dest))

@@ -1,10 +1,12 @@
 'use strict';
-var controllersModule = require('./index');
+var controllersModule = require('./index'),
+    GoogleMapsLoader = require('google-maps');
 
+/* global google */
 /**
  * @ngInject
  */
-function WavesController($scope, $stateParams, $location, WavesRestClientService, _, coordinateConversionFactory) {
+function WavesController($scope, $stateParams, $location, WavesRestClientService, _, coordinateConversionFactory, GoogleMapsLoader) {
 
     $scope.$on('mapInitialized', function(event, eventmap) {
         console.log('loading map');
@@ -162,12 +164,15 @@ function WavesController($scope, $stateParams, $location, WavesRestClientService
     };
 
     $scope.refreshMapMarker = function() {
-        var pos = new google.maps.LatLng($scope.wave.Latitude, $scope.wave.Longitude);
+        GoogleMapsLoader.load(function(google) {
+            var pos = new google.maps.LatLng($scope.wave.Latitude, $scope.wave.Longitude);
 
-        $scope.map.setCenter(pos);
-        $scope.marker.setMap(null);
-        $scope.marker.setMap($scope.map);
-        $scope.marker.position = pos;
+            $scope.map.setCenter(pos);
+            $scope.marker.setMap(null);
+            $scope.marker.setMap($scope.map);
+            $scope.marker.position = pos;
+        });
+
     };
 
     // Find existing Wave
@@ -185,23 +190,25 @@ function WavesController($scope, $stateParams, $location, WavesRestClientService
             }
 
             if ($scope.map) {
-                var pos = new google.maps.LatLng(wave.Latitude, wave.Longitude);
+                GoogleMapsLoader.load(function(google) {
+                    var pos = new google.maps.LatLng(wave.Latitude, wave.Longitude);
 
-                var marker = new google.maps.Marker({
-                    position: pos,
-                    map: $scope.map,
-                    title: wave.Name,
-                    draggable: true
-                });
-                $scope.marker = marker;
-                google.maps.event.addListener(marker, 'dragend', function(event) {
-                    $scope.$apply(function() {
-                        $scope.wave.Latitude = event.latLng.lat().toFixed(7);
-                        $scope.wave.Longitude = event.latLng.lng().toFixed(7);
+                    var marker = new google.maps.Marker({
+                        position: pos,
+                        map: $scope.map,
+                        title: wave.Name,
+                        draggable: true
                     });
-                });
+                    $scope.marker = marker;
+                    google.maps.event.addListener(marker, 'dragend', function(event) {
+                        $scope.$apply(function() {
+                            $scope.wave.Latitude = event.latLng.lat().toFixed(7);
+                            $scope.wave.Longitude = event.latLng.lng().toFixed(7);
+                        });
+                    });
 
-                $scope.map.setCenter(pos);
+                    $scope.map.setCenter(pos);
+                });
             }
 
             $scope.wave = wave;

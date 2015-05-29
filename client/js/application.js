@@ -7,7 +7,8 @@ require('angular-touch');
 require('angular-sanitize');
 require('ui-router');
 require('angular-bootstrap');
-var _ = require('lodash');
+var _ = require('lodash'),
+GoogleMapsLoader = require('google-maps');
 require('./controllers');
 require('./services');
 
@@ -32,6 +33,7 @@ angular.element(document).ready(function() {
 	window.app = angular.module('app', requires);
 	
 	angular.module('app').constant('_', _);
+	angular.module('app').constant('GoogleMapsLoader', GoogleMapsLoader);
 
 	angular.module('app').config(require('./config/html5location.config.js'));
 	angular.module('app').config(require('./config/routes.config.js'));

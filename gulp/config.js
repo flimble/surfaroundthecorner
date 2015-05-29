@@ -3,20 +3,23 @@
 module.exports = {
   'serverport': 3000,
 
-  'styles': {
-    'src': 'client/styles/*.less',
+  'clientLESS': {
+    'src': 'client/styles/**/*.less',
     'dest': 'client/build/css',
     'sourcemap': true
   },
-  'clientScripts': {
+  'clientJS': {
     'src': ['client/js/*.js', 'client/js/**/*.js']
+  },
+  'serverJS': {
+    'src': ['gulpfile.js', 'server.js', 'gulp/**/*.js', 'config/**/*.js', 'server/**/*.js']
   },
   'images': {
     'src': 'client/images/**/*',
     'dest': 'client/build/images'
   },
   'fonts': {
-    'src': ['client/fonts/**/*','client/vendor/bootstrap/fonts/*', 'client/vendor/font-awesome/fonts/*'],
+    'src': ['client/fonts/**/*', 'client/vendor/bootstrap/fonts/*', 'client/vendor/font-awesome/fonts/*'],
     'dest': 'client/build/fonts'
   },
   'clientViews': {
