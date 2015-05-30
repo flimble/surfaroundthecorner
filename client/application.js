@@ -9,6 +9,7 @@ require('ui-router');
 require('ng-FitText');
 require('angular-bootstrap');
 var _ = require('lodash');
+require('./js/directives');
 require('./js/controllers');
 require('./js/services');
 
@@ -25,6 +26,7 @@ angular.element(document).ready(function() {
 		'ui.router',
 		'ui.bootstrap',
 		'ngFitText',
+		'app.directives',
 		'app.services',
 		'app.controllers'
 

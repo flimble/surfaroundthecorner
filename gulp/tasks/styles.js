@@ -19,6 +19,6 @@ gulp.task('styles', function () {
     .pipe(gulpif(createSourcemap, sourcemaps.write())) //write the map file
     .pipe(autoprefixer('last 2 versions', '> 1%', 'ie 8')) //adjust css for older to behave as per W3C specs
     .on('error', handleErrors)
-    .pipe(gulp.dest(config.styles.dest))
+    .pipe(gulp.dest(config.clientLESS.dest))
     .pipe(gulpif(browserSync.active, browserSync.reload({ stream: true })));
 });

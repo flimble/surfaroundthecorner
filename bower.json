@@ -9,10 +9,11 @@
     "bootstrap": "~3",
     "jquery": "~2.1.4",
     "simple-line-icons": "~1.0.0",
-    "animate.css": "~3.2.6",    
-    "grunt-contrib-less": "~1.0.1",   
+    "animate.css": "~3.2.6",
+    "grunt-contrib-less": "~1.0.1",
     "fontawesome": "~4.3.0",
-    "font-awesome": "~4.3.0"
+    "font-awesome": "~4.3.0",
+    "selectize": "~0.12.1"
   },
   "resolutions": {
     "jquery": ">= 1.9.1"
