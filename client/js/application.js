@@ -8,9 +8,9 @@ require('ui-router');
 require('angular-bootstrap');
 
 
-
 var _ = require('lodash'),
 GoogleMapsLoader = require('google-maps');
+require('./uiselect');
 require('./directives');
 require('./controllers');
 require('./services');
@@ -25,6 +25,7 @@ angular.element(document).ready(function() {
 		'ngCookies',
 		'ui.router',
 		'ui.bootstrap',
+		'ui.select',
 		'app.directives',
 		'app.services',
 		'app.controllers'

@@ -9,7 +9,7 @@ var browserSync  = require('browser-sync');
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 
-gulp.task('styles', function () {
+gulp.task('styles', ['css'], function () {
 
   var createSourcemap = global.isProd && config.styles.sourcemap;
 
