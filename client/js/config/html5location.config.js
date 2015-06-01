@@ -1,5 +1,6 @@
 'use strict';
 
+// Setting HTML5 Location Mode
 /**
  * @ngInject
  */

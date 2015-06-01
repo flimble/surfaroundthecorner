@@ -8,6 +8,11 @@ module.exports = {
     'dest': 'client/build/css',
     'sourcemap': true
   },
+  'clientCSS': {
+    'src': 'client/styles/**/*.css',
+    'dest': 'client/build/css',
+    'sourcemap': true
+  },
   'clientJS': {
     'src': ['client/js/*.js', 'client/js/**/*.js']
   },

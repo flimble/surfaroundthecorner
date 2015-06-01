@@ -51,6 +51,7 @@
     "forever": "^0.14.1",
     "glob": "^5.0.10",
     "google-distance": "^1.0.1",
+    "google-maps": "^2.1.1",
     "grunt": "^0.4.5",
     "grunt-browserify": "^3.8.0",
     "grunt-cli": "~0.1.13",
@@ -87,6 +88,7 @@
     "ui-router": "0.0.1"
   },
   "devDependencies": {
+    "angular-sanitize": "^1.4.0",
     "babelify": "^6.1.2",
     "blanket": "^1.1.7",
     "brfs": "^1.4.0",
@@ -131,6 +133,7 @@
     "gulp-karma": "0.0.4",
     "gulp-less": "^3.0.3",
     "gulp-livereload": "^3.8.0",
+    "gulp-node-inspector": "0.0.3",
     "gulp-nodemon": "^2.0.3",
     "gulp-notify": "^2.2.0",
     "gulp-protractor": "^1.0.0",

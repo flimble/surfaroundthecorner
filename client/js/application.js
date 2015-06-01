@@ -4,16 +4,17 @@ var angular = require('angular');
 require('angular-resource');
 require('angular-cookies');
 require('angular-touch');
-require('angular-sanitize');
 require('ui-router');
 require('angular-bootstrap');
+
+
 var _ = require('lodash'),
 GoogleMapsLoader = require('google-maps');
+require('./uiselect');
+require('./directives');
 require('./controllers');
 require('./services');
 
-
-// Setting HTML5 Location Mode
 
 // create and bootstrap application
 angular.element(document).ready(function() {
@@ -24,9 +25,10 @@ angular.element(document).ready(function() {
 		'ngCookies',
 		'ui.router',
 		'ui.bootstrap',
+		'ui.select',
+		'app.directives',
 		'app.services',
 		'app.controllers'
-
 	];
 
 	// mount on window for testing
@@ -34,6 +36,8 @@ angular.element(document).ready(function() {
 	
 	angular.module('app').constant('_', _);
 	angular.module('app').constant('GoogleMapsLoader', GoogleMapsLoader);
+	//angular.module('app').constant('jQuery', jQuery);
+
 
 	angular.module('app').config(require('./config/html5location.config.js'));
 	angular.module('app').config(require('./config/routes.config.js'));

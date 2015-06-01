@@ -1,0 +1,58 @@
+/*@media (min-width: 992px) {
+	.nav-users {
+		position: fixed;
+	}
+}
+.remove-account-container {
+	display: inline-block;
+	position: relative;
+}
+.btn-remove-account {
+	top: 10px;
+	right: 10px;
+	position: absolute;
+}
+
+.has-feedback .form-control-feedback {
+	position: absolute;
+	top: 3px;
+	left: 15px;
+	display: block;
+	width: 34px;
+	height: 34px;
+	line-height: 34px;
+	text-align: center;
+}
+
+
+
+.fa.form-control-feedback {
+	line-height: 34px;
+}
+.input-sm ~ .fa.form-control-feedback {
+	line-height: 30px;
+}
+.input-lg ~ .fa.form-control-feedback {
+	line-height: 46px;
+}
+
+.has-feedback-left input.form-control {
+	padding-left: 38px;
+	padding-right: 12px;
+}
+
+.has-feedback-left .form-control-feedback {
+	left: 0;
+}
+.form-horizontal .has-feedback-left .form-control-feedback {
+	left: 8px;
+}
+
+.has-feedback-left input.input-sm {
+	padding-left: 30px;  @input-height-small;
+}
+.has-feedback-left input.input-lg {
+	padding-left: 46px;  @input-height-large;
+}*/
+
+

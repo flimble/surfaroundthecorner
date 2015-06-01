@@ -18,16 +18,17 @@ module.exports = {
 				'http://fonts.googleapis.com/css?family=Playfair+Display',
 				'http://fonts.googleapis.com/css?family=Dancing+Script',
 				'http://fonts.googleapis.com/css?family=Nunito',
-				'client/vendor/angular-ui-select/dist/select.css',
-				'client/build/css/main.css',
+				//'client/vendor/angular-ui-select/dist/select.css',
+				/*'client/build/css/main.css',
 				'client/build/css/mixins.css',
-				'client/build/css/variables.css'
+				'client/build/css/variables.css',*/
+				'client/build/css/select.css',
+				'client/vendor/bootstrap/dist/css/bootstrap.css'
 			],
 			js: [
 				'http://maps.google.com/maps/api/js?libraries=places&sensor=false',
 				'client/vendor/jquery/dist/jquery.js',
 				'client/build/js/app.js'
-				//'client/vendor/angular-ui-select/dist/select.js'
 				/*'public/vendor/angular/angular.js',
 				'public/vendor/angular-resource/angular-resource.js', 
 				'public/vendor/angular-cookies/angular-cookies.js', 
