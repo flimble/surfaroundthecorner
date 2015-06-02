@@ -56,7 +56,7 @@ module.exports = {
     'sourcemap': true
   },
   'test': {
-    'karma': 'test/karma.conf.js',
-    'protractor': 'test/protractor.conf.js'
+    'karma': 'karma.conf.js',
+    'protractor': 'protractor.conf.js'
   }
 };

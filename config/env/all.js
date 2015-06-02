@@ -46,7 +46,7 @@ module.exports = {
 				'public/vendor/ngFitText/src/ng-FitText.js',
 				'public/vendor/lodash/dist/lodash.js',
 				'public/vendor/ngmap/build/scripts/ng-map.js',*/
-				
+
 				//'http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false'
 			]
 		},
@@ -55,14 +55,12 @@ module.exports = {
 
 		],
 		js: [
-			'public/application.js',
-			'public/modules/*/*.js',
-			'public/utils/*.js',
-			'public/modules/*/*[!tests]*/*.js'
+			'node_modules/angular/angular.min.js',
+			'node_modules/angular-mocks/angular-mocks.js',
+			'client/build/js/app.js',
 		],
 		tests: [
-			'public/vendor/angular-mocks/angular-mocks.js',
-			'public/modules/*/tests/*.js'
+			'test/client/home.client.controller.test.js'
 		]
 	}
 };

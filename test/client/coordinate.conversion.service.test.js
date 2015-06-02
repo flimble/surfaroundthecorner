@@ -4,7 +4,7 @@
     describe('Coordinate Conversion Factory Tests', function () {
 
 
-        beforeEach(module(ApplicationConfiguration.applicationModuleName));
+        beforeEach(module('app'));
 
         var UnderTest;
 

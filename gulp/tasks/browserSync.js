@@ -15,6 +15,7 @@ gulp.task('browserSync', function() {
     //what files to monitor
     files: ['client/build/**/*.{js,css}','client/views/**/*.html'],
 
-    port: 4000
+    //port to use for running application
+    port: 3001
   });
 });
