@@ -7,6 +7,7 @@ var controllersModule = require('./index');
 function AuthenticationController($scope, $http, $location, Authentication) {
 	$scope.authentication = Authentication;
 
+
 	// If user is signed in then redirect back home
 	if ($scope.authentication.user) $location.path('/');
 

@@ -42,12 +42,12 @@ module.exports = {
     'dest': 'client/js'
   },
   'gzip': {
-    'src': 'build/**/*.{html,xml,json,css,js,js.map}',
-    'dest': 'build/',
+    'src': 'client/build/**/*.{html,xml,json,css,js,js.map}',
+    'dest': 'client/build/',
     'options': {}
   },
   'dist': {
-    'root': 'build'
+    'root': 'client/build'
   },
   'browserify': {
     'entries': ['./client/js/application.js'],

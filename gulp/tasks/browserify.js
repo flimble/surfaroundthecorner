@@ -69,7 +69,7 @@ function buildScript(file) {
 
 }
 
-gulp.task('browserify', function() {
+gulp.task('browserify', ['lint'], function() {
 
   return buildScript(config.browserify.bundleName);
 

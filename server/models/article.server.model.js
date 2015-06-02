@@ -14,6 +14,7 @@ var ArticleSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+	
 	title: {
 		type: String,
 		default: '',

@@ -86,8 +86,9 @@ function WavesController($scope, $stateParams, $location, WavesRestClientService
     };
 
 
+
     // Remove existing Wave
-    $scope.remove = function(wave) {
+    $scope.remove  = function(wave) {
         if (wave) {
             wave.$remove();
 

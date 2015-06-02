@@ -12,7 +12,7 @@ function Articles($resource) {
 		update: {
 			method: 'PUT'
 		}
-	});
+	}); 
 }
 
 servicesModule.factory('Articles', Articles);

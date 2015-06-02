@@ -10,7 +10,7 @@ gulp.task('debug', function() {
       webHost: 'localhost',
       webPort: 1337,
       saveLiveEdit: false,
-      preload: true,
+      preload: false,
       inject: true,
       hidden: [],
       stackTraceLimit: 50
