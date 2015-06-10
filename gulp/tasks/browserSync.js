@@ -10,7 +10,7 @@ gulp.task('browserSync', function() {
     proxy: 'localhost:3000',
 
     //open the proxied app in chrome
-    browser: 'google-chrome',
+    browser: 'google chrome',
     
     //what files to monitor
     files: ['client/build/**/*.{js,css}','client/views/**/*.html'],

@@ -55,9 +55,7 @@ module.exports = {
 
 		],
 		js: [
-			'node_modules/angular/angular.min.js',
-			'node_modules/angular-mocks/angular-mocks.js',
-			'client/build/js/app.js',
+			'client/build/js/app.js'
 		],
 		tests: [
 			'test/client/home.client.controller.test.js'
