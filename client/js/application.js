@@ -6,6 +6,7 @@ require('angular-cookies');
 require('angular-touch');
 require('ui-router');
 require('angular-bootstrap');
+require('ng-autocomplete');
 
 
 var _ = require('lodash'),
@@ -25,7 +26,8 @@ angular.element(document).ready(function() {
 		'ngCookies',
 		'ui.router',
 		'ui.bootstrap',
-		'ui.select',
+		'ui.select',		
+		'ngAutocomplete',
 		'app.directives',
 		'app.services',
 		'app.controllers'

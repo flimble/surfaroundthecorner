@@ -1,5 +1,9 @@
 
-
+.input-group-btn: {
+	border-width: 0;
+	padding: 0;
+	margin: 0;
+}
 
 /*div.container-fluid {
 	background: url('/modules/core/img/background/background-pattern-1.png') repeat  rgba(54, 25, 25, .00004);

@@ -4,11 +4,21 @@ var controllersModule = require('./index');
 /**
  * @ngInject
  */
-function LocationController($scope, $stateParams, $location, $http) {
+function LocationController($scope, $stateParams, $location, $http, _, WeatherRestClientService) {
 
 
-    $scope.currentLocation = {};
+    $scope.currentLocation = {};    
     $scope.currentLocation.Address = {};
+    $scope.currentLocation.Weather = {};
+
+
+    $scope.currentLocationIsSet = function() { 
+       return !($scope.currentLocation.Latitude === undefined || $scope.currentLocation.Longitude === undefined);
+    };
+
+    /*$scope.autocompleteOptions = {
+        types: '(regions)'
+    };*/
 
     $scope.setLocationFromCurrentPosition = function() {
         if (navigator.geolocation) {
@@ -17,7 +27,8 @@ function LocationController($scope, $stateParams, $location, $http) {
                     var longitude = position.coords.longitude;
                     $scope.currentLocation.Latitude = latitude;
                     $scope.currentLocation.Longitude = longitude;
-                    reverseGeoCode(latitude, longitude);
+                    reverseGeoCode(latitude, longitude);         
+                    getWeatherInformation(latitude, longitude);           
                     $scope.$apply();
                 },
                 function(error) {
@@ -33,6 +44,7 @@ function LocationController($scope, $stateParams, $location, $http) {
             var longitude = latlng.F;
             $scope.setLocation(latitude, longitude);
             reverseGeoCode(latitude, longitude);
+            getWeatherInformation(latitude, longitude);
         }
     });
 
@@ -64,6 +76,16 @@ function LocationController($scope, $stateParams, $location, $http) {
             console.log(data);
         });
     };
+
+    var getWeatherInformation = function(latitude, longitude) {
+        WeatherRestClientService.get({
+            lat: latitude,
+            lng: longitude
+        }).$promise.then(function(data) {            
+            $scope.currentLocation.Weather = data.current_observation;
+        });
+    };
+
 }
 
 controllersModule.controller('LocationController', LocationController);

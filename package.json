@@ -85,7 +85,8 @@
     "passport-twitter": "~1.0.2",
     "request": "^2.55.0",
     "swig": "~1.4.1",
-    "ui-router": "0.0.1"
+    "ui-router": "0.0.1",
+    "wunderground": "0.0.0"
   },
   "devDependencies": {
     "angular-sanitize": "^1.4.0",

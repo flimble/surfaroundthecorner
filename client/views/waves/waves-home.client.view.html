@@ -1,22 +1,27 @@
 <section data-ng-controller="LocationController">
-
-    <div class="form-horizontal">
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="">
+        <div class="input-group">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" ng-click="setLocationFromCurrentPosition()">Locate Me</button>
+            </span>
+            <input type="text" ng-autocomplete ng-model="autocomplete" options="autocompleteOptions" details="details" id="input-location" class="form-control" placeholder="Enter your suburb or postcode" required />
+        </div>
+        <br />
         <div class="form-group">
-            <button type="button" class="btn btn-primary" ng-click="setLocationFromCurrentPosition()">
+            <button type="button" class="btn btn-primary">
                 <!--<i class="fa-location-arrow" aria-hidden="true"></i>-->
-                <span>Locate Me</span>
+                <span>Find Waves</span>
             </button>
         </div>
-        <div class="form-group">
-            <label class="control-label sr-only" for="input-location">Location</label>
-            <div class="controls">
-                <input type="text" ng-autocomplete ng-model="autocomplete" options="options" details="details"
-                       id="input-location" class="form-control" placeholder="Find Location" required>
-            </div>
-        </div>
     </div>
-
-    <div>Latitude: {{currentLocation.Latitude}}, Longitude: {{currentLocation.Longitude}}</div>
-    <div>{{currentLocation.Address.Format()}}</div>
+    <div ng-if="currentLocationIsSet()">
+        <div>Latitude: {{currentLocation.Latitude}}, Longitude: {{currentLocation.Longitude}}</div>
+        <div>{{currentLocation.Address.Format()}}</div>
+        <div>Wind {{currentLocation.Weather.wind_dir}} {{currentLocation.Weather.wind_kph}} KPH</div>
+        <div>Measured at {{currentLocation.Weather.observation_location.full}}</div>
+    </div>
 </section>
-
