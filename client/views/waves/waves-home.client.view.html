@@ -21,7 +21,7 @@
     <div ng-if="currentLocationIsSet()">
         <div>Latitude: {{currentLocation.Latitude}}, Longitude: {{currentLocation.Longitude}}</div>
         <div>{{currentLocation.Address.Format()}}</div>
-        <div>Wind {{currentLocation.Weather.wind_dir}} {{currentLocation.Weather.wind_kph}} KPH</div>
+        <div>Wind {{currentLocation.Weather.wind_dir}} {{currentLocation.Weather.wind_kph}} KPH Gust {{currentLocation.Weather.wind_gust_kph}}</div>
         <div>Measured at {{currentLocation.Weather.observation_location.full}}</div>
     </div>
 </section>

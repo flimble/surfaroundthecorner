@@ -6,6 +6,9 @@ module.exports = function(app) {
 
 	app.route('/weather')
 		.get(weather.conditions);	
+
+	app.route('/swell')
+		.get(weather.swell);	
 		
 };
 
