@@ -10,7 +10,8 @@ require('ng-autocomplete');
 
 
 var _ = require('lodash'),
-GoogleMapsLoader = require('google-maps');
+GoogleMapsLoader = require('google-maps'),
+async = require('async');
 require('./uiselect');
 require('./directives');
 require('./controllers');
@@ -37,6 +38,7 @@ angular.element(document).ready(function() {
 	window.app = angular.module('app', requires);
 	
 	angular.module('app').constant('_', _);
+	angular.module('app').constant('async', async);
 	angular.module('app').constant('GoogleMapsLoader', GoogleMapsLoader);
 	//angular.module('app').constant('jQuery', jQuery);
 

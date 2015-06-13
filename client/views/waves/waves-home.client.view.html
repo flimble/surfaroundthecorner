@@ -6,9 +6,12 @@
     <div class="">
         <div class="input-group">
             <span class="input-group-btn">
-                <button type="button" class="btn btn-default dropdown-toggle" ng-click="setLocationFromCurrentPosition()">Locate Me</button>
+                <button type="button" class="btn btn-default" ng-click="setLocationFromCurrentPosition()">Locate Me</button>
             </span>
             <input type="text" ng-autocomplete ng-model="autocomplete" options="autocompleteOptions" details="details" id="input-location" class="form-control" placeholder="Enter your suburb or postcode" required />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="clearLocationInformation()">x</button>
+            </span>
         </div>
         <br />
         <div class="form-group">
@@ -19,9 +22,12 @@
         </div>
     </div>
     <div ng-if="currentLocationIsSet()">
-        <div>Latitude: {{currentLocation.Latitude}}, Longitude: {{currentLocation.Longitude}}</div>
-        <div>{{currentLocation.Address.Format()}}</div>
-        <div>Wind {{currentLocation.Weather.wind_dir}} {{currentLocation.Weather.wind_kph}} KPH Gust {{currentLocation.Weather.wind_gust_kph}}</div>
-        <div>Measured at {{currentLocation.Weather.observation_location.full}}</div>
-    </div>
+        <!--<div>Latitude: {{currentLocation.Latitude}}, Longitude: {{currentLocation.Longitude}}</div>-->
+        <!--<div>{{currentLocation.Address.string}}</div>-->
+        <div ng-repeat="forecast in currentLocation.Swell.three_hourly_forecasts">
+            <div>
+                <div>{{forecast.local_day}} {{forecast.local_hour}} / Wind {{forecast.wind_direction_compass_point}} {{forecast.wind_speed_knots}} / Swell Direction {{forecast.swell_direction_compass_point}} Height {{forecast.swell_height_metres}}m, Period {{forecast.swell_period_seconds}}s, 
+                </div>
+            </div>
+        </div>
 </section>

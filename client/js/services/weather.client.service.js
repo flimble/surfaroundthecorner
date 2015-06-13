@@ -6,7 +6,7 @@ var servicesModule = require('./index');
  * @ngInject
  */
 function WeatherRestClientService($resource) {
-	return $resource('weather', {}, {
+	return $resource('swell', {}, {
 		update: {
 			method: 'PUT'
 		}
@@ -14,3 +14,5 @@ function WeatherRestClientService($resource) {
 }
 
 servicesModule.factory('WeatherRestClientService', WeatherRestClientService);
+
+
