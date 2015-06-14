@@ -3,30 +3,54 @@
     <br />
     <br />
     <br />
-    <div class="">
+    <div class="container">
         <div class="input-group">
             <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="setLocationFromCurrentPosition()">Locate Me</button>
-            </span>
-            <input type="text" ng-autocomplete ng-model="autocomplete" options="autocompleteOptions" details="details" id="input-location" class="form-control" placeholder="Enter your suburb or postcode" required />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="clearLocationInformation()">x</button>
-            </span>
+                    <button type="button" class="btn btn-default btn-lg" ng-click="setLocationFromCurrentPosition()">Locate Me</button>
+                 </span>
+            <input type="text" ng-autocomplete ng-model="autocomplete" options="autocompleteOptions" details="details" id="input-location" style="min-width:30em;" class="form-control input-lg" placeholder="Enter your suburb or postcode..." required />
+            <span class="input-group-btn">
+                    <!--<button type="button" class="btn btn-default btn-lg" ng-click="clearLocationInformation()">x</button>-->
+        
+                    <span>x</span>
+                    <button type="button" class="btn btn-primary btn-lg" ng-click="clearLocationInformation()">
+                        <i class="fa fa-lg fa-search"></i>
+                    </button>
+                    
+                </span>
         </div>
         <br />
+        <div class="container">
+            <div class="form-group">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                        Distance
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">15 mins</a></li>
+                        <li><a href="#">30 mins</a></li>
+                        <li><a href="#">45 mins</a></li>
+                        <li><a href="#">1 hour</a></li>
+                        <li><a href="#">2 hours</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--
         <div class="form-group">
-            <button type="button" class="btn btn-primary">
-                <!--<i class="fa-location-arrow" aria-hidden="true"></i>-->
+            <button type="button" class="btn btn-primary btn-xlarge">
+           
                 <span>Find Waves</span>
             </button>
-        </div>
+        </div>-->
     </div>
     <div ng-if="currentLocationIsSet()">
         <!--<div>Latitude: {{currentLocation.Latitude}}, Longitude: {{currentLocation.Longitude}}</div>-->
         <!--<div>{{currentLocation.Address.string}}</div>-->
         <div ng-repeat="forecast in currentLocation.Swell.three_hourly_forecasts">
             <div>
-                <div>{{forecast.local_day}} {{forecast.local_hour}} / Wind {{forecast.wind_direction_compass_point}} {{forecast.wind_speed_knots}} / Swell Direction {{forecast.swell_direction_compass_point}} Height {{forecast.swell_height_metres}}m, Period {{forecast.swell_period_seconds}}s, 
+                <div>{{forecast.local_day}} {{forecast.local_hour}} / Wind {{forecast.wind_direction_compass_point}} {{forecast.wind_speed_knots}} / Swell Direction {{forecast.swell_direction_compass_point}} Height {{forecast.swell_height_metres}}m, Period {{forecast.swell_period_seconds}}s,
                 </div>
             </div>
         </div>

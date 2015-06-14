@@ -22,12 +22,15 @@ module.exports = {
 				/*'client/build/css/main.css',
 				'client/build/css/mixins.css',
 				'client/build/css/variables.css',*/
+				'client/build/css/main.css',
 				'client/build/css/select.css',
 				'client/vendor/bootstrap/dist/css/bootstrap.css'
 			],
 			js: [
+
 				'http://maps.google.com/maps/api/js?libraries=places&sensor=false',
 				'client/vendor/jquery/dist/jquery.js',
+				'client/vendor/bootstrap/dist/js/bootstrap.js',
 				'client/build/js/app.js'
 				/*'public/vendor/angular/angular.js',
 				'public/vendor/angular-resource/angular-resource.js', 
